@@ -21,27 +21,42 @@ package com.github.aushacker.eagle2nc.xml;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
 
 /**
  * @author Stephen Davies
  * @since October 2018
  */
-public class Drawing {
+public class Package {
 
-	@XmlElementWrapper(name="layers")
-	@XmlElement(name="layer")
-	private List<Layer> layers;
+	// ID
+	@XmlAttribute
+	private String name;
 
 	@XmlElement
-	private Board board;
+	private String description;
+	
+	@XmlElements({
+		@XmlElement(name="circle", type=Circle.class),
+		@XmlElement(name="pad", type=Pad.class),
+		@XmlElement(name="polygon", type=Polygon.class),
+		@XmlElement(name="rectangle", type=Rectangle.class),
+		@XmlElement(name="smd", type=Smd.class),
+		@XmlElement(name="wire", type=Wire.class)
+	})
+	private List<GraphicElement> elements;
 
-	public Board getBoard() {
-		return board;
+	public String getDescription() {
+		return description;
 	}
 
-	public List<Layer> getLayers() {
-		return layers;
+	public List<GraphicElement> getElements() {
+		return elements;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

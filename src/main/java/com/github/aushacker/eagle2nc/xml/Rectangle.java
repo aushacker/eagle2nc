@@ -19,29 +19,53 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import java.util.List;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  * @author Stephen Davies
  * @since October 2018
  */
-public class Drawing {
+public class Rectangle extends LayeredElement {
 
-	@XmlElementWrapper(name="layers")
-	@XmlElement(name="layer")
-	private List<Layer> layers;
+	@XmlAttribute
+	private double x1;
+	
+	@XmlAttribute
+	private double y1;
 
-	@XmlElement
-	private Board board;
-
-	public Board getBoard() {
-		return board;
+	@XmlAttribute
+	private double x2;
+	
+	@XmlAttribute
+	private double y2;
+	
+	public double getX1() {
+		return x1;
 	}
 
-	public List<Layer> getLayers() {
-		return layers;
+	public double getX2() {
+		return x2;
+	}
+
+	public double getY1() {
+		return y1;
+	}
+
+	public double getY2() {
+		return y2;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder("Rectangle( (");
+		result.append(x1);
+		result.append(",");
+		result.append(y1);
+		result.append(") to (");
+		result.append(x2);
+		result.append(",");
+		result.append(y2);
+		result.append(") )");
+		return result.toString();
 	}
 }

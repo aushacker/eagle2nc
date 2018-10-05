@@ -21,27 +21,29 @@ package com.github.aushacker.eagle2nc.xml;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
 
 /**
  * @author Stephen Davies
  * @since October 2018
  */
-public class Drawing {
+public class Polygon extends LayeredElement {
 
-	@XmlElementWrapper(name="layers")
-	@XmlElement(name="layer")
-	private List<Layer> layers;
+	@XmlElements({
+		@XmlElement(name="vertex", type=Vertex.class)
+	})
+	private List<Vertex> vertices;
 
-	@XmlElement
-	private Board board;
+	@XmlAttribute
+	private double width;
 
-	public Board getBoard() {
-		return board;
+	public List<Vertex> getVertices() {
+		return vertices;
 	}
 
-	public List<Layer> getLayers() {
-		return layers;
+	public double getWidth() {
+		return width;
 	}
 }

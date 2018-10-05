@@ -23,25 +23,24 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
 
 /**
  * @author Stephen Davies
  * @since October 2018
  */
-public class Drawing {
+public class Board {
 
-	@XmlElementWrapper(name="layers")
-	@XmlElement(name="layer")
-	private List<Layer> layers;
+	@XmlElementWrapper(name="plain")
+	@XmlElements({
+		@XmlElement(name="circle", type=Circle.class),
+		@XmlElement(name="hole", type=Hole.class),
+		@XmlElement(name="rectangle", type=Rectangle.class),
+		@XmlElement(name="wire", type=Wire.class)
+	})
+	private List<GraphicElement> plain;
 
-	@XmlElement
-	private Board board;
-
-	public Board getBoard() {
-		return board;
-	}
-
-	public List<Layer> getLayers() {
-		return layers;
-	}
+	@XmlElementWrapper(name="libraries")
+	@XmlElement(name="library")
+	private List<Library> libraries;
 }

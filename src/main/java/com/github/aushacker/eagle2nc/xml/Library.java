@@ -21,6 +21,7 @@ package com.github.aushacker.eagle2nc.xml;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
@@ -28,20 +29,29 @@ import javax.xml.bind.annotation.XmlElementWrapper;
  * @author Stephen Davies
  * @since October 2018
  */
-public class Drawing {
+public class Library {
 
-	@XmlElementWrapper(name="layers")
-	@XmlElement(name="layer")
-	private List<Layer> layers;
+	@XmlAttribute
+	private String name;
 
-	@XmlElement
-	private Board board;
+	// FQ name required because java.lang.Package exists
+	@XmlElementWrapper(name="packages")
+	@XmlElement(name="package")
+	private List<com.github.aushacker.eagle2nc.xml.Package> packages;
 
-	public Board getBoard() {
-		return board;
+	public String getName() {
+		return name;
 	}
 
-	public List<Layer> getLayers() {
-		return layers;
+	public List<com.github.aushacker.eagle2nc.xml.Package> getPackages() {
+		return packages;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder("Library(");
+		result.append(name);
+		result.append(")");
+		return result.toString();
 	}
 }

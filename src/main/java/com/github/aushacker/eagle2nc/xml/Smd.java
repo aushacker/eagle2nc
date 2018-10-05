@@ -19,29 +19,47 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import java.util.List;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  * @author Stephen Davies
  * @since October 2018
  */
-public class Drawing {
+public class Smd extends LayeredElement {
 
-	@XmlElementWrapper(name="layers")
-	@XmlElement(name="layer")
-	private List<Layer> layers;
+	// ID
+	@XmlAttribute
+	private String name;
 
-	@XmlElement
-	private Board board;
+	@XmlAttribute
+	private double dx;
+	
+	@XmlAttribute
+	private double dy;
 
-	public Board getBoard() {
-		return board;
+	@XmlAttribute
+	private double x;
+	
+	@XmlAttribute
+	private double y;
+
+	public double getDx() {
+		return dx;
 	}
 
-	public List<Layer> getLayers() {
-		return layers;
+	public double getDy() {
+		return dy;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
 	}
 }

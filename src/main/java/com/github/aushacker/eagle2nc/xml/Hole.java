@@ -19,29 +19,42 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import java.util.List;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  * @author Stephen Davies
  * @since October 2018
  */
-public class Drawing {
+public class Hole extends LayeredElement {
 
-	@XmlElementWrapper(name="layers")
-	@XmlElement(name="layer")
-	private List<Layer> layers;
+	@XmlAttribute
+	private double drill;
 
-	@XmlElement
-	private Board board;
+	@XmlAttribute
+	private double x;
+	
+	@XmlAttribute
+	private double y;
 
-	public Board getBoard() {
-		return board;
+	public double getDrill() {
+		return drill;
 	}
 
-	public List<Layer> getLayers() {
-		return layers;
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder("Hole( (");
+		result.append(x);
+		result.append(",");
+		result.append(y);
+		result.append(") )");
+		return result.toString();
 	}
 }
