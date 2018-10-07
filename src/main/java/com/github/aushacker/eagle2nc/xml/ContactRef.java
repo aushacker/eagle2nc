@@ -25,43 +25,19 @@ import javax.xml.bind.annotation.XmlAttribute;
  * @author Stephen Davies
  * @since October 2018
  */
-public class Circle extends LayeredElement {
+public class ContactRef {
 
 	@XmlAttribute
-	private double radius;
+	private String element;
 
 	@XmlAttribute
-	private double x;
+	private String pad;
 
-	@XmlAttribute
-	private double y;
-
-	@XmlAttribute
-	private double width;
-
-	public double getRadius() {
-		return radius;
+	public String getElement() {
+		return element;
 	}
 
-	public double getWidth() {
-		return width;
-	}
-
-	public double getX() {
-		return x;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder result = new StringBuilder("Circle(");
-		result.append(x);
-		result.append(",");
-		result.append(y);
-		result.append(")");
-		return result.toString();
+	public String getPad() {
+		return pad;
 	}
 }

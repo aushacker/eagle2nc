@@ -25,10 +25,16 @@ import javax.xml.bind.annotation.XmlAttribute;
  * @author Stephen Davies
  * @since October 2018
  */
-public class Circle extends LayeredElement {
+public class Via extends GraphicElement {
 
 	@XmlAttribute
-	private double radius;
+	private double drill;
+
+	@XmlAttribute
+	private String extent;
+
+	@XmlAttribute
+	private ViaShape shape;
 
 	@XmlAttribute
 	private double x;
@@ -36,15 +42,19 @@ public class Circle extends LayeredElement {
 	@XmlAttribute
 	private double y;
 
-	@XmlAttribute
-	private double width;
-
-	public double getRadius() {
-		return radius;
+	public double getDrill() {
+		return drill;
 	}
 
-	public double getWidth() {
-		return width;
+	public String getExtent() {
+		return extent;
+	}
+
+	public ViaShape getShape() {
+		if (shape == null) {
+			shape = ViaShape.ROUND;
+		}
+		return shape;
 	}
 
 	public double getX() {
@@ -53,15 +63,5 @@ public class Circle extends LayeredElement {
 
 	public double getY() {
 		return y;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder result = new StringBuilder("Circle(");
-		result.append(x);
-		result.append(",");
-		result.append(y);
-		result.append(")");
-		return result.toString();
 	}
 }

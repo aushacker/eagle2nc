@@ -27,19 +27,24 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public class Pad extends GraphicElement {
 
+	private static final String DEFAULT_ROTATION = "R0";
+
 	// ID
 	@XmlAttribute
 	private String name;
 
 	@XmlAttribute
 	private double drill;
-	
+
+	@XmlAttribute(name="rot")
+	private String rotation;
+
 	@XmlAttribute
-	private String shape;
+	private PadShape shape;
 
 	@XmlAttribute
 	private double x;
-	
+
 	@XmlAttribute
 	private double y;
 
@@ -51,8 +56,18 @@ public class Pad extends GraphicElement {
 		return name;
 	}
 
-	public String getShape() {
-		return name;
+	public String getRotation() {
+		if (rotation == null) {
+			rotation = DEFAULT_ROTATION;
+		}
+		return rotation;
+	}
+
+	public PadShape getShape() {
+		if (shape == null) {
+			shape = PadShape.ROUND;
+		}
+		return shape;
 	}
 
 	public double getX() {

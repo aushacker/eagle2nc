@@ -19,49 +19,37 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
 
 /**
  * @author Stephen Davies
  * @since October 2018
  */
-public class Circle extends LayeredElement {
+public class Signal {
 
 	@XmlAttribute
-	private double radius;
+	private String name;
 
-	@XmlAttribute
-	private double x;
+	@XmlElements({
+		@XmlElement(name="contactref", type=ContactRef.class)
+	})
+	private List<ContactRef> contactReferences;
 
-	@XmlAttribute
-	private double y;
+	@XmlElements({
+		@XmlElement(name="wire", type=Wire.class)
+	})
+	private List<Wire> wires;
 
-	@XmlAttribute
-	private double width;
+	@XmlElements({
+		@XmlElement(name="via", type=Via.class)
+	})
+	private List<Via> vias;
 
-	public double getRadius() {
-		return radius;
-	}
-
-	public double getWidth() {
-		return width;
-	}
-
-	public double getX() {
-		return x;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder result = new StringBuilder("Circle(");
-		result.append(x);
-		result.append(",");
-		result.append(y);
-		result.append(")");
-		return result.toString();
+	public String getName() {
+		return name;
 	}
 }

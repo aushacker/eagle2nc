@@ -25,26 +25,55 @@ import javax.xml.bind.annotation.XmlAttribute;
  * @author Stephen Davies
  * @since October 2018
  */
-public class Circle extends LayeredElement {
+public class Element {
 
 	@XmlAttribute
-	private double radius;
+	private String library;
 
+	@XmlAttribute
+	private String name;
+
+	// package is Java reserved word
+	@XmlAttribute(name="package")
+	private String pkg;
+
+	@XmlAttribute(name="rot")
+	private String rotation;
+	
+	@XmlAttribute
+	private boolean smashed;
+
+	@XmlAttribute
+	private String value;
+	
 	@XmlAttribute
 	private double x;
 
 	@XmlAttribute
 	private double y;
 
-	@XmlAttribute
-	private double width;
-
-	public double getRadius() {
-		return radius;
+	public String getLibrary() {
+		return library;
 	}
 
-	public double getWidth() {
-		return width;
+	public String getName() {
+		return name;
+	}
+
+	public String getPkg() {
+		return pkg;
+	}
+
+	public String getRotation() {
+		return rotation;
+	}
+
+	public boolean getSmashed() {
+		return smashed;
+	}
+
+	public String getValue() {
+		return value;
 	}
 
 	public double getX() {
@@ -57,10 +86,8 @@ public class Circle extends LayeredElement {
 
 	@Override
 	public String toString() {
-		StringBuilder result = new StringBuilder("Circle(");
-		result.append(x);
-		result.append(",");
-		result.append(y);
+		StringBuilder result = new StringBuilder("Element(");
+		result.append(name);
 		result.append(")");
 		return result.toString();
 	}

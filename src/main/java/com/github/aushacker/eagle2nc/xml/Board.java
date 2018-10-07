@@ -31,6 +31,12 @@ import javax.xml.bind.annotation.XmlElements;
  */
 public class Board {
 
+	/**
+	 * GraphicElements that have been placed directly on the board itself, rather than
+	 * nested within a Package.
+	 *
+	 * Examples include PCB Dimension layer and top level text (silkscreen).
+	 */
 	@XmlElementWrapper(name="plain")
 	@XmlElements({
 		@XmlElement(name="circle", type=Circle.class),
@@ -40,7 +46,24 @@ public class Board {
 	})
 	private List<GraphicElement> plain;
 
+	/**
+	 * Fragments (Packages) copied from the component libraries.
+	 */
 	@XmlElementWrapper(name="libraries")
 	@XmlElement(name="library")
 	private List<Library> libraries;
+
+	/**
+	 * Design elements i.e. components placed on the board.
+	 */
+	@XmlElementWrapper(name="elements")
+	@XmlElement(name="element")
+	private List<Element> elements;
+
+	/**
+	 * Traces and their pad connections.
+	 */
+	@XmlElementWrapper(name="signals")
+	@XmlElement(name="signal")
+	private List<Signal> signals;
 }

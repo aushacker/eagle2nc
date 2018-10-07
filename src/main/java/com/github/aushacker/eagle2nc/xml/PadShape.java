@@ -19,49 +19,34 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
 
 /**
  * @author Stephen Davies
  * @since October 2018
  */
-public class Circle extends LayeredElement {
+@XmlEnum
+public enum PadShape {
 
-	@XmlAttribute
-	private double radius;
+	@XmlEnumValue("long")
+	LONG("long"),
+	@XmlEnumValue("octagon")
+	OCTAGON("octagon"),
+	@XmlEnumValue("offset")
+	OFFSET("offset"),
+	@XmlEnumValue("round")
+	ROUND("round"),
+	@XmlEnumValue("square")
+	SQUARE("square");
 
-	@XmlAttribute
-	private double x;
+	private final String value;
 
-	@XmlAttribute
-	private double y;
-
-	@XmlAttribute
-	private double width;
-
-	public double getRadius() {
-		return radius;
+	private PadShape(String value) {
+		this.value = value;
 	}
 
-	public double getWidth() {
-		return width;
-	}
-
-	public double getX() {
-		return x;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder result = new StringBuilder("Circle(");
-		result.append(x);
-		result.append(",");
-		result.append(y);
-		result.append(")");
-		return result.toString();
+	public String value() {
+		return value;
 	}
 }
