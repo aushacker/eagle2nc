@@ -43,9 +43,11 @@ import com.github.aushacker.eagle2nc.xml.Eagle;
 public class ParserTest {
 
 	private static final String TEST_FILE = "data/Arduino_MEGA2560_ref.brd";
-	
+
+	private static final double THRESHOLD = 0.0000001;
+
 	private static Eagle eagle;
-	
+
 	@BeforeClass
 	public static void setupClass() throws Exception {
 		// Allow loading of eagle.dtd from file
@@ -58,7 +60,7 @@ public class ParserTest {
 	    Unmarshaller u = jc.createUnmarshaller();
 	    eagle = (Eagle) u.unmarshal(new File(TEST_FILE));
 	}
-	
+
 	@AfterClass
 	public static void afterClass() {
 		eagle = null;
@@ -92,10 +94,28 @@ public class ParserTest {
 		assertEquals("1", layers.get(0).getNumber());
 		assertEquals("Top", layers.get(0).getName());
 	}
-	
+
 	@Test
 	public void testBoard() {
 		Board board = eagle.getDrawing().getBoard();
 		assertNotNull(board);
+		assertEquals(53, board.getPlain().size());
+	}
+
+	/**
+	 * First wire element occurs in the boards &lt;plain&gt; section.
+	 * It represents the boards dimension layer.
+	 */
+	@Test
+	public void testWire() {
+		Board board = eagle.getDrawing().getBoard();
+		Wire wire = (Wire) board.getPlain().get(0);
+
+		assertEquals("20", wire.getLayer());
+		assertEquals(0, wire.getX1(), THRESHOLD);
+		assertEquals(53.34, wire.getY1(), THRESHOLD);
+		assertEquals(96.52, wire.getX2(), THRESHOLD);
+		assertEquals(53.34, wire.getY2(), THRESHOLD);
+		assertEquals(0.254, wire.getWidth(), THRESHOLD);
 	}
 }

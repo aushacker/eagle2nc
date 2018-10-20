@@ -19,53 +19,37 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import static org.junit.Assert.assertSame;
+
+import org.junit.Before;
+import org.junit.Test;
 
 /**
+ * Unit test Via, not that there is much to actually test.
+ *
  * @author Stephen Davies
  * @since October 2018
  */
-public class Via extends GraphicElement {
+public class ViaTest {
 
-	@XmlAttribute
-	private double drill;
+	/**
+	 * Object under test.
+	 */
+	private Via via;
 
-	@XmlAttribute
-	private String extent;
-
-	@XmlAttribute
-	private ViaShape shape;
-
-	@XmlAttribute
-	private double x;
-
-	@XmlAttribute
-	private double y;
-
-	public double getDrill() {
-		return drill;
+	@Before
+	public void setUp() {
+		via = new Via();
 	}
 
-	public String getExtent() {
-		return extent;
+	@Test
+	public void testGetShapeLazyInitialisation() {
+		assertSame(ViaShape.ROUND, via.getShape());
 	}
 
-	public ViaShape getShape() {
-		if (shape == null) {
-			shape = ViaShape.ROUND;
-		}
-		return shape;
-	}
-
-	public double getX() {
-		return x;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	public void setShape(ViaShape shape) {
-		this.shape = shape;
+	@Test
+	public void testGetShapeWhenExplicitlySet() {
+		via.setShape(ViaShape.SQUARE);
+		assertSame(ViaShape.SQUARE, via.getShape());
 	}
 }

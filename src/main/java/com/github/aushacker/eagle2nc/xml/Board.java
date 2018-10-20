@@ -66,4 +66,8 @@ public class Board {
 	@XmlElementWrapper(name="signals")
 	@XmlElement(name="signal")
 	private List<Signal> signals;
+
+	public List<GraphicElement> getPlain() {
+		return plain;
+	}
 }

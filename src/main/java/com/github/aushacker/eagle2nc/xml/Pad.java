@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public class Pad extends GraphicElement {
 
-	private static final String DEFAULT_ROTATION = "R0";
+	static final String DEFAULT_ROTATION = "R0";
 
 	// ID
 	@XmlAttribute
@@ -76,5 +76,13 @@ public class Pad extends GraphicElement {
 
 	public double getY() {
 		return y;
+	}
+
+    public void setRotation(String rotation) {
+    	this.rotation = rotation;
+    }
+
+	public void setShape(PadShape shape) {
+		this.shape = shape;
 	}
 }
