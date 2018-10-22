@@ -89,10 +89,21 @@ public class ParserTest {
 	public void testLayers() {
 		List<Layer> layers = eagle.getDrawing().getLayers();
 		assertEquals("Layer count invalid -", 60, layers.size());
+	}
+
+	/**
+	 * Check that the first layer deserialises correctly. 
+	 */
+	@Test
+	public void testLayer() {
+		Layer layer = eagle.getDrawing().getLayers().get(0);
 		
-		// layers[0] should be the top layer
-		assertEquals("1", layers.get(0).getNumber());
-		assertEquals("Top", layers.get(0).getName());
+		assertEquals("1", layer.getNumber());
+		assertEquals("Top", layer.getName());
+		assertEquals("4", layer.getColor());
+		assertEquals("1", layer.getFill());
+		assertEquals("yes", layer.getActive());
+		assertEquals("yes", layer.getVisible());
 	}
 
 	@Test
@@ -100,6 +111,63 @@ public class ParserTest {
 		Board board = eagle.getDrawing().getBoard();
 		assertNotNull(board);
 		assertEquals(53, board.getPlain().size());
+	}
+
+	/**
+	 * Checking second library as this also includes a circle element.
+	 */
+	@Test
+	public void testLibrary() {
+		List<Library> libraries = eagle.getDrawing().getBoard().getLibraries();
+		Library lib = libraries.get(1);
+		
+		assertEquals("rcl", lib.getName());
+		assertEquals(3, lib.getPackages().size());
+	}
+
+	/**
+	 * Package element within previous Library.
+	 */
+	@Test
+	public void testPackage() {
+		List<Library> libraries = eagle.getDrawing().getBoard().getLibraries();
+		Package pkg = libraries.get(1).getPackages().get(1);
+		
+		assertEquals("C0603", pkg.getName());
+		assertEquals("<b>CAPACITOR</b>", pkg.getDescription());
+		assertEquals(11, pkg.getElements().size());
+	}
+
+	/**
+	 * Plenty to choose from, using the boards second library element.
+	 */
+	@Test
+	public void testCircle() {
+		List<Library> libraries = eagle.getDrawing().getBoard().getLibraries();
+		Library lib = libraries.get(1);
+		Circle circle = (Circle) lib.getPackages().get(0).getElements().get(17);
+		
+		assertEquals("51", circle.getLayer());
+		assertEquals(0, circle.getX(), THRESHOLD);
+		assertEquals(0, circle.getY(), THRESHOLD);
+		assertEquals(3.1, circle.getRadius(), THRESHOLD);
+		assertEquals(0.1016, circle.getWidth(), THRESHOLD);
+	}
+
+	/**
+	 * Plenty to choose from, using the boards second library element.
+	 */
+	@Test
+	public void testRectangle() {
+		List<Library> libraries = eagle.getDrawing().getBoard().getLibraries();
+		Library lib = libraries.get(1);
+		Rectangle rect = (Rectangle) lib.getPackages().get(1).getElements().get(8);
+		
+		assertEquals("51", rect.getLayer());
+		assertEquals(-0.8382, rect.getX1(), THRESHOLD);
+		assertEquals(-0.4699, rect.getY1(), THRESHOLD);
+		assertEquals(-0.3381, rect.getX2(), THRESHOLD);
+		assertEquals(0.4801, rect.getY2(), THRESHOLD);
 	}
 
 	/**

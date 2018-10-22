@@ -42,12 +42,12 @@ public class Layer {
 	private String fill;
 	
 	@XmlAttribute
-	private boolean visible;
+	private String visible;
 	
 	@XmlAttribute
-	private boolean active;
+	private String active;
 	
-	public boolean getActive() {
+	public String getActive() {
 		return active;
 	}
 	
@@ -67,7 +67,7 @@ public class Layer {
 		return number;
 	}
 
-	public boolean getVisible() {
+	public String getVisible() {
 		return visible;
 	}
 	
