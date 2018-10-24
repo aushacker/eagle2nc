@@ -277,4 +277,36 @@ public class ParserTest {
 		assertEquals("yes", e.getSmashed());
 		assertEquals("R270", e.getRotation());
 	}
+
+	@Test
+	public void testSignalElement() {
+		List<Signal> signals = eagle.getDrawing().getBoard().getSignals();
+		Signal s = signals.get(0);
+
+		assertEquals("+5V", s.getName());
+		assertEquals(32, s.getContactReferences().size());
+		assertEquals(163, s.getWires().size());
+		assertEquals(24, s.getVias().size());
+	}
+
+	@Test
+	public void testContactRefElement() {
+		List<Signal> signals = eagle.getDrawing().getBoard().getSignals();
+		ContactRef ref = signals.get(0).getContactReferences().get(0);
+
+		assertEquals("ICSP", ref.getElement());
+		assertEquals("2", ref.getPad());
+	}
+
+	@Test
+	public void testViaElement() {
+		List<Signal> signals = eagle.getDrawing().getBoard().getSignals();
+		Via via = signals.get(0).getVias().get(0);
+
+		assertEquals(30.353, via.getX(), THRESHOLD);
+		assertEquals(4.953, via.getY(), THRESHOLD);
+		assertEquals("1-16", via.getExtent());
+		assertEquals(0.4064, via.getDrill(), THRESHOLD);
+		assertEquals(ViaShape.OCTAGON, via.getShape());
+	}
 }

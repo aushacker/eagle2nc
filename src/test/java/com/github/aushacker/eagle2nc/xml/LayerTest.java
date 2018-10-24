@@ -19,49 +19,31 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import java.util.List;
+import static org.junit.Assert.assertEquals;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
+ * Unit test Layer, not that there is much to actually test.
+ *
  * @author Stephen Davies
  * @since October 2018
  */
-public class Signal {
+public class LayerTest {
 
-	@XmlAttribute
-	private String name;
+	/**
+	 * Object under test.
+	 */
+	private Layer layer;
 
-	@XmlElements({
-		@XmlElement(name="contactref", type=ContactRef.class)
-	})
-	private List<ContactRef> contactReferences;
-
-	@XmlElements({
-		@XmlElement(name="wire", type=Wire.class)
-	})
-	private List<Wire> wires;
-
-	@XmlElements({
-		@XmlElement(name="via", type=Via.class)
-	})
-	private List<Via> vias;
-
-	public List<ContactRef> getContactReferences() {
-		return contactReferences;
+	@Before
+	public void setUp() {
+		layer = new Layer();
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public List<Via> getVias() {
-		return vias;
-	}
-
-	public List<Wire> getWires() {
-		return wires;
+	@Test
+	public void testToString() {
+		assertEquals("Layer(null, null)", layer.toString());
 	}
 }
