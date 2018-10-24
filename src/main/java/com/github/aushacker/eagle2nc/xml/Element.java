@@ -22,6 +22,8 @@ package com.github.aushacker.eagle2nc.xml;
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
+ * In Eagle terms Elements represent components mounted on the PCB.
+ *
  * @author Stephen Davies
  * @since October 2018
  */
@@ -41,7 +43,7 @@ public class Element {
 	private String rotation;
 	
 	@XmlAttribute
-	private boolean smashed;
+	private String smashed;
 
 	@XmlAttribute
 	private String value;
@@ -68,7 +70,7 @@ public class Element {
 		return rotation;
 	}
 
-	public boolean getSmashed() {
+	public String getSmashed() {
 		return smashed;
 	}
 

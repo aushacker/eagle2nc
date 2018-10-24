@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlAttribute;
  * @author Stephen Davies
  * @since October 2018
  */
-public class Hole extends LayeredElement {
+public class Hole extends GraphicElement {
 
 	@XmlAttribute
 	private double drill;

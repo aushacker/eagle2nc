@@ -67,11 +67,19 @@ public class Board {
 	@XmlElement(name="signal")
 	private List<Signal> signals;
 
+	public List<Element> getElements() {
+		return elements;
+	}
+
 	public List<Library> getLibraries() {
 		return libraries;
 	}
 
 	public List<GraphicElement> getPlain() {
 		return plain;
+	}
+
+	public List<Signal> getSignals() {
+		return signals;
 	}
 }

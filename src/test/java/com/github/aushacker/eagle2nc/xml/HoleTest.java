@@ -17,16 +17,33 @@
  * along with Eagle2nc. If not, see <https://www.gnu.org/licenses/>.
  */
 
+package com.github.aushacker.eagle2nc.xml;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Before;
+import org.junit.Test;
+
 /**
- * A bunch of JAXB annotated types to deserialise an Eagle board file. Types
- * declared here correspond 1 to 1 with the XML structure within the Eagle
- * board file.
+ * Unit test Hole, not that there is much to actually test.
  *
  * @author Stephen Davies
  * @since October 2018
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-package com.github.aushacker.eagle2nc.xml;
+public class HoleTest {
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+	/**
+	 * Object under test.
+	 */
+	private Hole hole;
+
+	@Before
+	public void setUp() {
+		hole = new Hole();
+	}
+
+	@Test
+	public void testToString() {
+		assertEquals("Hole( (0.0,0.0) )", hole.toString());
+	}
+}
