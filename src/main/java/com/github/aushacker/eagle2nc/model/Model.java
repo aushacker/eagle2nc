@@ -17,39 +17,42 @@
  * along with Eagle2nc. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.aushacker.eagle2nc.xml;
+package com.github.aushacker.eagle2nc.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import com.github.aushacker.eagle2nc.xml.GraphicElement;
+import com.github.aushacker.eagle2nc.xml.Wire;
 
 /**
- * Unit test Wire, not that there is much to actually test.
- *
  * @author Stephen Davies
  * @since October 2018
  */
-public class WireTest {
+public abstract class Model {
 
-	/**
-	 * Object under test.
-	 */
-	private Wire wire;
+	private Board board;
 
-	@Before
-	public void setUp() {
-		wire = new Wire();
+	public Model(Board board) {
+		this.board = board;
 	}
 
-	@Test
-	public void testIsWire() {
-		assertTrue(wire.isWire());
+	public Board getBoard() {
+		return board;
 	}
 
-	@Test
-	public void testToString() {
-		assertEquals("Wire( (0.0,0.0) to (0.0,0.0) )", wire.toString());
+	protected List<Wire> extractDimensions() {
+		List<Wire> wires = new ArrayList<Wire>();
+		
+		for (GraphicElement e : getDrawingBoard().getPlain()) {
+			if (e.isWire() && ((Wire)e).getLayer().equals(Layer.DIMENSION.getId())) {
+				wires.add((Wire)e);
+			}
+		}
+		return wires;
+	}
+
+	protected com.github.aushacker.eagle2nc.xml.Board getDrawingBoard() {
+		return board.getXmlModel().getDrawing().getBoard();
 	}
 }

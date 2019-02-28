@@ -17,39 +17,15 @@
  * along with Eagle2nc. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.aushacker.eagle2nc.xml;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Before;
-import org.junit.Test;
+package com.github.aushacker.eagle2nc.model;
 
 /**
- * Unit test Wire, not that there is much to actually test.
- *
  * @author Stephen Davies
  * @since October 2018
  */
-public class WireTest {
+public class Dimensions extends Model {
 
-	/**
-	 * Object under test.
-	 */
-	private Wire wire;
-
-	@Before
-	public void setUp() {
-		wire = new Wire();
-	}
-
-	@Test
-	public void testIsWire() {
-		assertTrue(wire.isWire());
-	}
-
-	@Test
-	public void testToString() {
-		assertEquals("Wire( (0.0,0.0) to (0.0,0.0) )", wire.toString());
+	public Dimensions(Board board) {
+		super(board);
 	}
 }

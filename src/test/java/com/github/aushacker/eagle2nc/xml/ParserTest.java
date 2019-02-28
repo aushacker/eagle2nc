@@ -34,7 +34,7 @@ import org.junit.Test;
 import com.github.aushacker.eagle2nc.xml.Eagle;
 
 /**
- * Integration test for all of the model package.
+ * Integration test for all of the xml package.
  * Attempts to load the entire Arduino Mega board example.
  *
  * @author Stephen Davies
@@ -254,7 +254,7 @@ public class ParserTest {
 	 * Library rcl contains the first vertex element.
 	 */
 	@Test
-	public void testVirtexElement() {
+	public void testVertexElement() {
 		List<Library> libraries = eagle.getDrawing().getBoard().getLibraries();
 		Package pkg = libraries.get(1).getPackages().get(0); // package PANASONIC_D
 		Vertex v = ((Polygon) pkg.getElements().get(22)).getVertices().get(0);

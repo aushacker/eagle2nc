@@ -28,4 +28,7 @@ package com.github.aushacker.eagle2nc.xml;
  */
 public abstract class GraphicElement {
 
+	public boolean isWire() {
+		return false;
+	}
 }

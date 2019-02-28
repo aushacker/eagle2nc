@@ -63,6 +63,11 @@ public class Wire extends LayeredElement {
 	}
 
 	@Override
+	public boolean isWire() {
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder("Wire( (");
 		result.append(x1);
