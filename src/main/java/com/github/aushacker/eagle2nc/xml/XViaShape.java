@@ -17,19 +17,32 @@
  * along with Eagle2nc. If not, see <https://www.gnu.org/licenses/>.
  */
 
+package com.github.aushacker.eagle2nc.xml;
+
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+
 /**
- * A bunch of JAXB annotated types to deserialise an Eagle board file. Types
- * declared here correspond 1 to 1 with the XML structure within the Eagle
- * board file.
- * <p>
- * Types are prefixed with an 'X' to prevent name clashes with those
- * in the model package.
- *
  * @author Stephen Davies
  * @since October 2018
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-package com.github.aushacker.eagle2nc.xml;
+@XmlEnum
+public enum XViaShape {
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+	@XmlEnumValue("octagon")
+	OCTAGON("octagon"),
+	@XmlEnumValue("round")
+	ROUND("round"),
+	@XmlEnumValue("square")
+	SQUARE("square");
+
+	private final String value;
+
+	private XViaShape(String value) {
+		this.value = value;
+	}
+
+	public String value() {
+		return value;
+	}
+}

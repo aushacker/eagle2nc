@@ -19,30 +19,53 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  * @author Stephen Davies
  * @since October 2018
  */
-@XmlEnum
-public enum ViaShape {
+public class XRectangle extends XLayeredElement {
 
-	@XmlEnumValue("octagon")
-	OCTAGON("octagon"),
-	@XmlEnumValue("round")
-	ROUND("round"),
-	@XmlEnumValue("square")
-	SQUARE("square");
+	@XmlAttribute
+	private double x1;
+	
+	@XmlAttribute
+	private double y1;
 
-	private final String value;
-
-	private ViaShape(String value) {
-		this.value = value;
+	@XmlAttribute
+	private double x2;
+	
+	@XmlAttribute
+	private double y2;
+	
+	public double getX1() {
+		return x1;
 	}
 
-	public String value() {
-		return value;
+	public double getX2() {
+		return x2;
+	}
+
+	public double getY1() {
+		return y1;
+	}
+
+	public double getY2() {
+		return y2;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder("XRectangle( (");
+		result.append(x1);
+		result.append(",");
+		result.append(y1);
+		result.append(") to (");
+		result.append(x2);
+		result.append(",");
+		result.append(y2);
+		result.append(") )");
+		return result.toString();
 	}
 }

@@ -19,34 +19,37 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
+import static org.junit.Assert.assertSame;
+
+import org.junit.Before;
+import org.junit.Test;
 
 /**
+ * Unit test XVia, not that there is much to actually test.
+ *
  * @author Stephen Davies
  * @since October 2018
  */
-@XmlEnum
-public enum PadShape {
+public class XViaTest {
 
-	@XmlEnumValue("long")
-	LONG("long"),
-	@XmlEnumValue("octagon")
-	OCTAGON("octagon"),
-	@XmlEnumValue("offset")
-	OFFSET("offset"),
-	@XmlEnumValue("round")
-	ROUND("round"),
-	@XmlEnumValue("square")
-	SQUARE("square");
+	/**
+	 * Object under test.
+	 */
+	private XVia via;
 
-	private final String value;
-
-	private PadShape(String value) {
-		this.value = value;
+	@Before
+	public void setUp() {
+		via = new XVia();
 	}
 
-	public String value() {
-		return value;
+	@Test
+	public void testGetShapeLazyInitialisation() {
+		assertSame(XViaShape.ROUND, via.getShape());
+	}
+
+	@Test
+	public void testGetShapeWhenExplicitlySet() {
+		via.setShape(XViaShape.SQUARE);
+		assertSame(XViaShape.SQUARE, via.getShape());
 	}
 }

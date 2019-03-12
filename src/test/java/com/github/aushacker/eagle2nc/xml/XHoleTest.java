@@ -25,25 +25,25 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Unit test Element, not that there is much to actually test.
+ * Unit test XHole, not that there is much to actually test.
  *
  * @author Stephen Davies
  * @since October 2018
  */
-public class ElementTest {
+public class XHoleTest {
 
 	/**
 	 * Object under test.
 	 */
-	private Element element;
+	private XHole hole;
 
 	@Before
 	public void setUp() {
-		element = new Element();
+		hole = new XHole();
 	}
 
 	@Test
 	public void testToString() {
-		assertEquals("Element(null)", element.toString());
+		assertEquals("XHole( (0.0,0.0) )", hole.toString());
 	}
 }

@@ -25,43 +25,12 @@ import javax.xml.bind.annotation.XmlAttribute;
  * @author Stephen Davies
  * @since October 2018
  */
-public class Circle extends LayeredElement {
+public abstract class XLayeredElement extends XGraphicElement {
 
 	@XmlAttribute
-	private double radius;
-
-	@XmlAttribute
-	private double x;
-
-	@XmlAttribute
-	private double y;
-
-	@XmlAttribute
-	private double width;
-
-	public double getRadius() {
-		return radius;
-	}
-
-	public double getWidth() {
-		return width;
-	}
-
-	public double getX() {
-		return x;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder result = new StringBuilder("Circle(");
-		result.append(x);
-		result.append(",");
-		result.append(y);
-		result.append(")");
-		return result.toString();
+	private String layer;
+	
+	public String getLayer() {
+		return layer;
 	}
 }

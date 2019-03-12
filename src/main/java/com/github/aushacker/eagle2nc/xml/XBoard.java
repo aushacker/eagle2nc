@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlElements;
  * @author Stephen Davies
  * @since October 2018
  */
-public class Board {
+public class XBoard {
 
 	/**
 	 * GraphicElements that have been placed directly on the board itself, rather than
@@ -39,47 +39,47 @@ public class Board {
 	 */
 	@XmlElementWrapper(name="plain")
 	@XmlElements({
-		@XmlElement(name="circle", type=Circle.class),
-		@XmlElement(name="hole", type=Hole.class),
-		@XmlElement(name="rectangle", type=Rectangle.class),
-		@XmlElement(name="wire", type=Wire.class)
+		@XmlElement(name="circle", type=XCircle.class),
+		@XmlElement(name="hole", type=XHole.class),
+		@XmlElement(name="rectangle", type=XRectangle.class),
+		@XmlElement(name="wire", type=XWire.class)
 	})
-	private List<GraphicElement> plain;
+	private List<XGraphicElement> plain;
 
 	/**
 	 * Fragments (Packages) copied from the component libraries.
 	 */
 	@XmlElementWrapper(name="libraries")
 	@XmlElement(name="library")
-	private List<Library> libraries;
+	private List<XLibrary> libraries;
 
 	/**
 	 * Design elements i.e. components placed on the board.
 	 */
 	@XmlElementWrapper(name="elements")
 	@XmlElement(name="element")
-	private List<Element> elements;
+	private List<XElement> elements;
 
 	/**
 	 * Traces and their pad connections.
 	 */
 	@XmlElementWrapper(name="signals")
 	@XmlElement(name="signal")
-	private List<Signal> signals;
+	private List<XSignal> signals;
 
-	public List<Element> getElements() {
+	public List<XElement> getElements() {
 		return elements;
 	}
 
-	public List<Library> getLibraries() {
+	public List<XLibrary> getLibraries() {
 		return libraries;
 	}
 
-	public List<GraphicElement> getPlain() {
+	public List<XGraphicElement> getPlain() {
 		return plain;
 	}
 
-	public List<Signal> getSignals() {
+	public List<XSignal> getSignals() {
 		return signals;
 	}
 }

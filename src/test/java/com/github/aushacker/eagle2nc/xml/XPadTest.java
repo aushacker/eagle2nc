@@ -19,53 +19,49 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+
+import org.junit.Before;
+import org.junit.Test;
 
 /**
+ * Unit test XPad, not that there is much to actually test.
+ *
  * @author Stephen Davies
  * @since October 2018
  */
-public class Via extends GraphicElement {
+public class XPadTest {
 
-	@XmlAttribute
-	private double drill;
+	/**
+	 * Object under test.
+	 */
+	private XPad pad;
 
-	@XmlAttribute
-	private String extent;
-
-	@XmlAttribute
-	private ViaShape shape;
-
-	@XmlAttribute
-	private double x;
-
-	@XmlAttribute
-	private double y;
-
-	public double getDrill() {
-		return drill;
+	@Before
+	public void setUp() {
+		pad = new XPad();
 	}
 
-	public String getExtent() {
-		return extent;
+	@Test
+	public void testGetRotationLazyInitialisation() {
+		assertSame(XPad.DEFAULT_ROTATION, pad.getRotation());
 	}
 
-	public ViaShape getShape() {
-		if (shape == null) {
-			shape = ViaShape.ROUND;
-		}
-		return shape;
+	@Test
+	public void testGetRotationWhenExplicitlySet() {
+		pad.setRotation("R90");
+		assertEquals("R90", pad.getRotation());
 	}
 
-	public double getX() {
-		return x;
+	@Test
+	public void testGetShapeLazyInitialisation() {
+		assertSame(XPadShape.ROUND, pad.getShape());
 	}
 
-	public double getY() {
-		return y;
-	}
-
-	public void setShape(ViaShape shape) {
-		this.shape = shape;
+	@Test
+	public void testGetShapeWhenExplicitlySet() {
+		pad.setShape(XPadShape.OCTAGON);
+		assertSame(XPadShape.OCTAGON, pad.getShape());
 	}
 }

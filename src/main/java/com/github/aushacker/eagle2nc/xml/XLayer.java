@@ -16,52 +16,68 @@
  * You should have received a copy of the GNU General Public License
  * along with Eagle2nc. If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.github.aushacker.eagle2nc.xml;
 
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
 
 /**
+ * Represents a layer in the Eagle board.
+ * For example: dimension (20), top (1), bottom (16) etc.
+ *
  * @author Stephen Davies
  * @since October 2018
  */
-public class Signal {
+public class XLayer {
 
 	@XmlAttribute
+	private String number;
+	
+	@XmlAttribute
 	private String name;
+	
+	@XmlAttribute
+	private String color;
+	
+	@XmlAttribute
+	private String fill;
+	
+	@XmlAttribute
+	private String visible;
+	
+	@XmlAttribute
+	private String active;
+	
+	public String getActive() {
+		return active;
+	}
+	
+	public String getColor() {
+		return color;
+	}
 
-	@XmlElements({
-		@XmlElement(name="contactref", type=ContactRef.class)
-	})
-	private List<ContactRef> contactReferences;
-
-	@XmlElements({
-		@XmlElement(name="wire", type=Wire.class)
-	})
-	private List<Wire> wires;
-
-	@XmlElements({
-		@XmlElement(name="via", type=Via.class)
-	})
-	private List<Via> vias;
-
-	public List<ContactRef> getContactReferences() {
-		return contactReferences;
+	public String getFill() {
+		return fill;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public List<Via> getVias() {
-		return vias;
+	public String getNumber() {
+		return number;
 	}
 
-	public List<Wire> getWires() {
-		return wires;
+	public String getVisible() {
+		return visible;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder("XLayer(");
+		result.append(number);
+		result.append(", ");
+		result.append(name);
+		result.append(")");
+		return result.toString();
 	}
 }

@@ -19,31 +19,25 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Before;
-import org.junit.Test;
+import javax.xml.bind.annotation.XmlAttribute;
 
 /**
- * Unit test Layer, not that there is much to actually test.
- *
  * @author Stephen Davies
  * @since October 2018
  */
-public class LayerTest {
+public class XVertex {
 
-	/**
-	 * Object under test.
-	 */
-	private Layer layer;
+	@XmlAttribute
+	private double x;
+	
+	@XmlAttribute
+	private double y;
 
-	@Before
-	public void setUp() {
-		layer = new Layer();
+	public double getX() {
+		return x;
 	}
 
-	@Test
-	public void testToString() {
-		assertEquals("Layer(null, null)", layer.toString());
+	public double getY() {
+		return y;
 	}
 }

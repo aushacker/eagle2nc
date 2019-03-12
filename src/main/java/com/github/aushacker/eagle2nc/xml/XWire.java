@@ -20,30 +20,66 @@
 package com.github.aushacker.eagle2nc.xml;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Top-level XML element in the Eagle board file.
- *
  * @author Stephen Davies
  * @since October 2018
  */
-@XmlRootElement
-public class Eagle {
+public class XWire extends XLayeredElement {
+
+	// TODO add attr for curve (package CAT16, BOURNS)
+	
+	@XmlAttribute
+	private double x1;
+	
+	@XmlAttribute
+	private double y1;
 
 	@XmlAttribute
-	private String version;
-
-	@XmlElement
-	private Drawing drawing;
+	private double x2;
 	
-	public Drawing getDrawing() {
-		return drawing;
+	@XmlAttribute
+	private double y2;
+	
+	@XmlAttribute
+	private double width;
+
+	public double getWidth() {
+		return width;
 	}
 
-	public String getVersion() {
-		return version;
+	public double getX1() {
+		return x1;
 	}
 
+	public double getX2() {
+		return x2;
+	}
+
+	public double getY1() {
+		return y1;
+	}
+
+	public double getY2() {
+		return y2;
+	}
+
+	@Override
+	public boolean isWire() {
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder("XWire( (");
+		result.append(x1);
+		result.append(",");
+		result.append(y1);
+		result.append(") to (");
+		result.append(x2);
+		result.append(",");
+		result.append(y2);
+		result.append(") )");
+		return result.toString();
+	}
 }

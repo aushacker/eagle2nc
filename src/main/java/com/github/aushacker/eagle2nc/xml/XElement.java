@@ -19,37 +19,76 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 
 /**
+ * In Eagle terms XElements represent components mounted on the PCB.
+ *
  * @author Stephen Davies
  * @since October 2018
  */
-public class Library {
+public class XElement {
+
+	@XmlAttribute
+	private String library;
 
 	@XmlAttribute
 	private String name;
 
-	// FQ name required because java.lang.Package exists
-	@XmlElementWrapper(name="packages")
-	@XmlElement(name="package")
-	private List<com.github.aushacker.eagle2nc.xml.Package> packages;
+	// package is Java reserved word
+	@XmlAttribute(name="package")
+	private String pkg;
+
+	@XmlAttribute(name="rot")
+	private String rotation;
+	
+	@XmlAttribute
+	private String smashed;
+
+	@XmlAttribute
+	private String value;
+	
+	@XmlAttribute
+	private double x;
+
+	@XmlAttribute
+	private double y;
+
+	public String getLibrary() {
+		return library;
+	}
 
 	public String getName() {
 		return name;
 	}
 
-	public List<com.github.aushacker.eagle2nc.xml.Package> getPackages() {
-		return packages;
+	public String getPkg() {
+		return pkg;
+	}
+
+	public String getRotation() {
+		return rotation;
+	}
+
+	public String getSmashed() {
+		return smashed;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder result = new StringBuilder("Library(");
+		StringBuilder result = new StringBuilder("XElement(");
 		result.append(name);
 		result.append(")");
 		return result.toString();

@@ -22,8 +22,8 @@ package com.github.aushacker.eagle2nc.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.aushacker.eagle2nc.xml.GraphicElement;
-import com.github.aushacker.eagle2nc.xml.Wire;
+import com.github.aushacker.eagle2nc.xml.XGraphicElement;
+import com.github.aushacker.eagle2nc.xml.XWire;
 
 /**
  * @author Stephen Davies
@@ -41,18 +41,18 @@ public abstract class Model {
 		return board;
 	}
 
-	protected List<Wire> extractDimensions() {
-		List<Wire> wires = new ArrayList<Wire>();
+	protected List<XWire> extractDimensions() {
+		List<XWire> wires = new ArrayList<XWire>();
 		
-		for (GraphicElement e : getDrawingBoard().getPlain()) {
-			if (e.isWire() && ((Wire)e).getLayer().equals(Layer.DIMENSION.getId())) {
-				wires.add((Wire)e);
+		for (XGraphicElement e : getDrawingBoard().getPlain()) {
+			if (e.isWire() && ((XWire)e).getLayer().equals(Layer.DIMENSION.getId())) {
+				wires.add((XWire)e);
 			}
 		}
 		return wires;
 	}
 
-	protected com.github.aushacker.eagle2nc.xml.Board getDrawingBoard() {
+	protected com.github.aushacker.eagle2nc.xml.XBoard getDrawingBoard() {
 		return board.getXmlModel().getDrawing().getBoard();
 	}
 }

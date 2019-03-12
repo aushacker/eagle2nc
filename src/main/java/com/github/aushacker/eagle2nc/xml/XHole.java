@@ -16,68 +16,45 @@
  * You should have received a copy of the GNU General Public License
  * along with Eagle2nc. If not, see <https://www.gnu.org/licenses/>.
  */
+
 package com.github.aushacker.eagle2nc.xml;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
- * Represents a layer in the Eagle board.
- * For example: dimension (20), top (1), bottom (16) etc.
- *
  * @author Stephen Davies
  * @since October 2018
  */
-public class Layer {
+public class XHole extends XGraphicElement {
 
 	@XmlAttribute
-	private String number;
+	private double drill;
+
+	@XmlAttribute
+	private double x;
 	
 	@XmlAttribute
-	private String name;
-	
-	@XmlAttribute
-	private String color;
-	
-	@XmlAttribute
-	private String fill;
-	
-	@XmlAttribute
-	private String visible;
-	
-	@XmlAttribute
-	private String active;
-	
-	public String getActive() {
-		return active;
-	}
-	
-	public String getColor() {
-		return color;
+	private double y;
+
+	public double getDrill() {
+		return drill;
 	}
 
-	public String getFill() {
-		return fill;
+	public double getX() {
+		return x;
 	}
 
-	public String getName() {
-		return name;
+	public double getY() {
+		return y;
 	}
 
-	public String getNumber() {
-		return number;
-	}
-
-	public String getVisible() {
-		return visible;
-	}
-	
 	@Override
 	public String toString() {
-		StringBuilder result = new StringBuilder("Layer(");
-		result.append(number);
-		result.append(", ");
-		result.append(name);
-		result.append(")");
+		StringBuilder result = new StringBuilder("XHole( (");
+		result.append(x);
+		result.append(",");
+		result.append(y);
+		result.append(") )");
 		return result.toString();
 	}
 }

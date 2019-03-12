@@ -19,47 +19,16 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import javax.xml.bind.annotation.XmlAttribute;
-
 /**
+ * Abstract superclass for XML elements that represent physical parts of
+ * the board design e.g. wires and pads.
+ *
  * @author Stephen Davies
  * @since October 2018
  */
-public class Smd extends LayeredElement {
+public abstract class XGraphicElement {
 
-	// ID
-	@XmlAttribute
-	private String name;
-
-	@XmlAttribute
-	private double dx;
-	
-	@XmlAttribute
-	private double dy;
-
-	@XmlAttribute
-	private double x;
-	
-	@XmlAttribute
-	private double y;
-
-	public double getDx() {
-		return dx;
-	}
-
-	public double getDy() {
-		return dy;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public double getX() {
-		return x;
-	}
-
-	public double getY() {
-		return y;
+	public boolean isWire() {
+		return false;
 	}
 }

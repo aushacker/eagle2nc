@@ -19,37 +19,53 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Before;
-import org.junit.Test;
+import javax.xml.bind.annotation.XmlAttribute;
 
 /**
- * Unit test Wire, not that there is much to actually test.
- *
  * @author Stephen Davies
  * @since October 2018
  */
-public class WireTest {
+public class XVia extends XGraphicElement {
 
-	/**
-	 * Object under test.
-	 */
-	private Wire wire;
+	@XmlAttribute
+	private double drill;
 
-	@Before
-	public void setUp() {
-		wire = new Wire();
+	@XmlAttribute
+	private String extent;
+
+	@XmlAttribute
+	private XViaShape shape;
+
+	@XmlAttribute
+	private double x;
+
+	@XmlAttribute
+	private double y;
+
+	public double getDrill() {
+		return drill;
 	}
 
-	@Test
-	public void testIsWire() {
-		assertTrue(wire.isWire());
+	public String getExtent() {
+		return extent;
 	}
 
-	@Test
-	public void testToString() {
-		assertEquals("Wire( (0.0,0.0) to (0.0,0.0) )", wire.toString());
+	public XViaShape getShape() {
+		if (shape == null) {
+			shape = XViaShape.ROUND;
+		}
+		return shape;
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public void setShape(XViaShape shape) {
+		this.shape = shape;
 	}
 }

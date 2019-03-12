@@ -25,25 +25,25 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Unit test Circle, not that there is much to actually test.
+ * Unit test XLayer, not that there is much to actually test.
  *
  * @author Stephen Davies
  * @since October 2018
  */
-public class CircleTest {
+public class XLayerTest {
 
 	/**
 	 * Object under test.
 	 */
-	private Circle circle;
+	private XLayer layer;
 
 	@Before
 	public void setUp() {
-		circle = new Circle();
+		layer = new XLayer();
 	}
 
 	@Test
 	public void testToString() {
-		assertEquals("Circle(0.0,0.0)", circle.toString());
+		assertEquals("XLayer(null, null)", layer.toString());
 	}
 }

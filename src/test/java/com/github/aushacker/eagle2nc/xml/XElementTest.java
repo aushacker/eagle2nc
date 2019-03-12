@@ -19,31 +19,31 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import java.util.List;
+import static org.junit.Assert.assertEquals;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
+ * Unit test XElement, not that there is much to actually test.
+ *
  * @author Stephen Davies
  * @since October 2018
  */
-public class Polygon extends LayeredElement {
+public class XElementTest {
 
-	@XmlElements({
-		@XmlElement(name="vertex", type=Vertex.class)
-	})
-	private List<Vertex> vertices;
+	/**
+	 * Object under test.
+	 */
+	private XElement element;
 
-	@XmlAttribute
-	private double width;
-
-	public List<Vertex> getVertices() {
-		return vertices;
+	@Before
+	public void setUp() {
+		element = new XElement();
 	}
 
-	public double getWidth() {
-		return width;
+	@Test
+	public void testToString() {
+		assertEquals("XElement(null)", element.toString());
 	}
 }

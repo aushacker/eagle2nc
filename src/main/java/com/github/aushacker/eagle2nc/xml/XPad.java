@@ -22,60 +22,52 @@ package com.github.aushacker.eagle2nc.xml;
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
- * In Eagle terms Elements represent components mounted on the PCB.
- *
  * @author Stephen Davies
  * @since October 2018
  */
-public class Element {
+public class XPad extends XGraphicElement {
 
-	@XmlAttribute
-	private String library;
+	static final String DEFAULT_ROTATION = "R0";
 
+	// ID
 	@XmlAttribute
 	private String name;
 
-	// package is Java reserved word
-	@XmlAttribute(name="package")
-	private String pkg;
+	@XmlAttribute
+	private double drill;
 
 	@XmlAttribute(name="rot")
 	private String rotation;
-	
-	@XmlAttribute
-	private String smashed;
 
 	@XmlAttribute
-	private String value;
-	
+	private XPadShape shape;
+
 	@XmlAttribute
 	private double x;
 
 	@XmlAttribute
 	private double y;
 
-	public String getLibrary() {
-		return library;
+	public double getDrill() {
+		return drill;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public String getPkg() {
-		return pkg;
-	}
-
 	public String getRotation() {
+		if (rotation == null) {
+			rotation = DEFAULT_ROTATION;
+		}
 		return rotation;
 	}
 
-	public String getSmashed() {
-		return smashed;
-	}
-
-	public String getValue() {
-		return value;
+	public XPadShape getShape() {
+		if (shape == null) {
+			shape = XPadShape.ROUND;
+		}
+		return shape;
 	}
 
 	public double getX() {
@@ -86,11 +78,11 @@ public class Element {
 		return y;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder result = new StringBuilder("Element(");
-		result.append(name);
-		result.append(")");
-		return result.toString();
+    public void setRotation(String rotation) {
+    	this.rotation = rotation;
+    }
+
+	public void setShape(XPadShape shape) {
+		this.shape = shape;
 	}
 }

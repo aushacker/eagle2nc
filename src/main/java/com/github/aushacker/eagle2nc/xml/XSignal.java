@@ -19,25 +19,49 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
 
 /**
  * @author Stephen Davies
  * @since October 2018
  */
-public class Vertex {
+public class XSignal {
 
 	@XmlAttribute
-	private double x;
-	
-	@XmlAttribute
-	private double y;
+	private String name;
 
-	public double getX() {
-		return x;
+	@XmlElements({
+		@XmlElement(name="contactref", type=XContactRef.class)
+	})
+	private List<XContactRef> contactReferences;
+
+	@XmlElements({
+		@XmlElement(name="wire", type=XWire.class)
+	})
+	private List<XWire> wires;
+
+	@XmlElements({
+		@XmlElement(name="via", type=XVia.class)
+	})
+	private List<XVia> vias;
+
+	public List<XContactRef> getContactReferences() {
+		return contactReferences;
 	}
 
-	public double getY() {
-		return y;
+	public String getName() {
+		return name;
+	}
+
+	public List<XVia> getVias() {
+		return vias;
+	}
+
+	public List<XWire> getWires() {
+		return wires;
 	}
 }

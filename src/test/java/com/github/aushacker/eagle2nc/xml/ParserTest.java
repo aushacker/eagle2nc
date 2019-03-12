@@ -31,7 +31,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.github.aushacker.eagle2nc.xml.Eagle;
+import com.github.aushacker.eagle2nc.xml.XEagle;
 
 /**
  * Integration test for all of the xml package.
@@ -44,9 +44,10 @@ public class ParserTest {
 
 	private static final String TEST_FILE = "data/Arduino_MEGA2560_ref.brd";
 
-	private static final double THRESHOLD = 0.0000001;
+	// Comparison threshold for JUnit assertEquals (double version)
+	private static final double DELTA = 0.0000001;
 
-	private static Eagle eagle;
+	private static XEagle eagle;
 
 	@BeforeClass
 	public static void setupClass() throws Exception {
@@ -56,9 +57,9 @@ public class ParserTest {
 		//dbf.setFeature("http://xml.org/sax/features/validation", false);
 		//dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 		//dbf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
-		JAXBContext jc = JAXBContext.newInstance(Eagle.class);
+		JAXBContext jc = JAXBContext.newInstance(XEagle.class);
 	    Unmarshaller u = jc.createUnmarshaller();
-	    eagle = (Eagle) u.unmarshal(new File(TEST_FILE));
+	    eagle = (XEagle) u.unmarshal(new File(TEST_FILE));
 	}
 
 	@AfterClass
@@ -72,6 +73,7 @@ public class ParserTest {
 	@Test
 	public void testEagleElement() {
 		assertEquals("6.2", eagle.getVersion());
+		assertEquals(17, eagle.getLibraries().size());
 	}
 
 	/**
@@ -87,7 +89,7 @@ public class ParserTest {
 	 */
 	@Test
 	public void testLayers() {
-		List<Layer> layers = eagle.getDrawing().getLayers();
+		List<XLayer> layers = eagle.getDrawing().getLayers();
 		assertEquals(60, layers.size());
 	}
 
@@ -96,7 +98,7 @@ public class ParserTest {
 	 */
 	@Test
 	public void testLayerElement() {
-		Layer layer = eagle.getDrawing().getLayers().get(0);
+		XLayer layer = eagle.getDrawing().getLayers().get(0);
 		
 		assertEquals("1", layer.getNumber());
 		assertEquals("Top", layer.getName());
@@ -108,7 +110,7 @@ public class ParserTest {
 
 	@Test
 	public void testBoardElement() {
-		Board board = eagle.getDrawing().getBoard();
+		XBoard board = eagle.getDrawing().getBoard();
 		assertNotNull(board);
 		assertEquals(53, board.getPlain().size());
 		assertEquals(17, board.getLibraries().size());
@@ -122,15 +124,15 @@ public class ParserTest {
 	 */
 	@Test
 	public void testWireElement() {
-		Board board = eagle.getDrawing().getBoard();
-		Wire wire = (Wire) board.getPlain().get(0);
+		XBoard board = eagle.getDrawing().getBoard();
+		XWire wire = (XWire) board.getPlain().get(0);
 	
 		assertEquals("20", wire.getLayer());
-		assertEquals(0, wire.getX1(), THRESHOLD);
-		assertEquals(53.34, wire.getY1(), THRESHOLD);
-		assertEquals(96.52, wire.getX2(), THRESHOLD);
-		assertEquals(53.34, wire.getY2(), THRESHOLD);
-		assertEquals(0.254, wire.getWidth(), THRESHOLD);
+		assertEquals(0, wire.getX1(), DELTA);
+		assertEquals(53.34, wire.getY1(), DELTA);
+		assertEquals(96.52, wire.getX2(), DELTA);
+		assertEquals(53.34, wire.getY2(), DELTA);
+		assertEquals(0.254, wire.getWidth(), DELTA);
 	}
 
 	/**
@@ -138,14 +140,14 @@ public class ParserTest {
 	 */
 	@Test
 	public void testCircleElement() {
-		Board board = eagle.getDrawing().getBoard();
-		Circle circle = (Circle) board.getPlain().get(45);
+		XBoard board = eagle.getDrawing().getBoard();
+		XCircle circle = (XCircle) board.getPlain().get(45);
 		
 		assertEquals("21", circle.getLayer());
-		assertEquals(22.225, circle.getX(), THRESHOLD);
-		assertEquals(48.514, circle.getY(), THRESHOLD);
-		assertEquals(0.1796, circle.getRadius(), THRESHOLD);
-		assertEquals(0.3048, circle.getWidth(), THRESHOLD);
+		assertEquals(22.225, circle.getX(), DELTA);
+		assertEquals(48.514, circle.getY(), DELTA);
+		assertEquals(0.1796, circle.getRadius(), DELTA);
+		assertEquals(0.3048, circle.getWidth(), DELTA);
 	}
 
 	/**
@@ -153,14 +155,14 @@ public class ParserTest {
 	 */
 	@Test
 	public void testRectangleElement() {
-		Board board = eagle.getDrawing().getBoard();
-		Rectangle rect = (Rectangle) board.getPlain().get(46);
+		XBoard board = eagle.getDrawing().getBoard();
+		XRectangle rect = (XRectangle) board.getPlain().get(46);
 		
 		assertEquals("1", rect.getLayer());
-		assertEquals(1, rect.getX1(), THRESHOLD);
-		assertEquals(47, rect.getY1(), THRESHOLD);
-		assertEquals(13, rect.getX2(), THRESHOLD);
-		assertEquals(52, rect.getY2(), THRESHOLD);
+		assertEquals(1, rect.getX1(), DELTA);
+		assertEquals(47, rect.getY1(), DELTA);
+		assertEquals(13, rect.getX2(), DELTA);
+		assertEquals(52, rect.getY2(), DELTA);
 	}
 
 	/**
@@ -168,12 +170,12 @@ public class ParserTest {
 	 */
 	@Test
 	public void testHoleElement() {
-		Board board = eagle.getDrawing().getBoard();
-		Hole hole = (Hole) board.getPlain().get(47);
+		XBoard board = eagle.getDrawing().getBoard();
+		XHole hole = (XHole) board.getPlain().get(47);
 		
-		assertEquals(96.52, hole.getX(), THRESHOLD);
-		assertEquals(2.54, hole.getY(), THRESHOLD);
-		assertEquals(3.2, hole.getDrill(), THRESHOLD);
+		assertEquals(96.52, hole.getX(), DELTA);
+		assertEquals(2.54, hole.getY(), DELTA);
+		assertEquals(3.2, hole.getDrill(), DELTA);
 	}
 
 	/**
@@ -181,8 +183,8 @@ public class ParserTest {
 	 */
 	@Test
 	public void testLibraryElement() {
-		List<Library> libraries = eagle.getDrawing().getBoard().getLibraries();
-		Library lib = libraries.get(0);
+		List<XLibrary> libraries = eagle.getDrawing().getBoard().getLibraries();
+		XLibrary lib = libraries.get(0);
 		
 		assertEquals("pinhead", lib.getName());
 		assertEquals(5, lib.getPackages().size());
@@ -193,8 +195,8 @@ public class ParserTest {
 	 */
 	@Test
 	public void testPackageElement() {
-		List<Library> libraries = eagle.getDrawing().getBoard().getLibraries();
-		Package pkg = libraries.get(0).getPackages().get(0);
+		List<XLibrary> libraries = eagle.getDrawing().getBoard().getLibraries();
+		XPackage pkg = libraries.get(0).getPackages().get(0);
 		
 		assertEquals("2X03", pkg.getName());
 		assertEquals("<b>PIN HEADER</b>", pkg.getDescription());
@@ -207,15 +209,15 @@ public class ParserTest {
 	 */
 	@Test
 	public void testPadElement() {
-		List<Library> libraries = eagle.getDrawing().getBoard().getLibraries();
-		Package pkg = libraries.get(0).getPackages().get(1); // package 1X08
-		Pad pad = (Pad) pkg.getElements().get(57);
+		List<XLibrary> libraries = eagle.getDrawing().getBoard().getLibraries();
+		XPackage pkg = libraries.get(0).getPackages().get(1); // package 1X08
+		XPad pad = (XPad) pkg.getElements().get(57);
 		
 		assertEquals("1", pad.getName());
-		assertEquals(-8.89, pad.getX(), THRESHOLD);
-		assertEquals(0, pad.getY(), THRESHOLD);
-		assertEquals(1.016, pad.getDrill(), THRESHOLD);
-		assertEquals(PadShape.LONG, pad.getShape());
+		assertEquals(-8.89, pad.getX(), DELTA);
+		assertEquals(0, pad.getY(), DELTA);
+		assertEquals(1.016, pad.getDrill(), DELTA);
+		assertEquals(XPadShape.LONG, pad.getShape());
 		assertEquals("R90", pad.getRotation());
 	}
 
@@ -224,16 +226,16 @@ public class ParserTest {
 	 */
 	@Test
 	public void testSmdElement() {
-		List<Library> libraries = eagle.getDrawing().getBoard().getLibraries();
-		Package pkg = libraries.get(1).getPackages().get(0); // package PANASONIC_D
-		Smd smd = (Smd) pkg.getElements().get(18);
+		List<XLibrary> libraries = eagle.getDrawing().getBoard().getLibraries();
+		XPackage pkg = libraries.get(1).getPackages().get(0); // package PANASONIC_D
+		XSmd smd = (XSmd) pkg.getElements().get(18);
 
 		assertEquals("-", smd.getName());
 		assertEquals("1", smd.getLayer());
-		assertEquals(-2.4, smd.getX(), THRESHOLD);
-		assertEquals(0, smd.getY(), THRESHOLD);
-		assertEquals(3, smd.getDx(), THRESHOLD);
-		assertEquals(1.4, smd.getDy(), THRESHOLD);
+		assertEquals(-2.4, smd.getX(), DELTA);
+		assertEquals(0, smd.getY(), DELTA);
+		assertEquals(3, smd.getDx(), DELTA);
+		assertEquals(1.4, smd.getDy(), DELTA);
 	}
 
 	/**
@@ -241,12 +243,12 @@ public class ParserTest {
 	 */
 	@Test
 	public void testPolygonElement() {
-		List<Library> libraries = eagle.getDrawing().getBoard().getLibraries();
-		Package pkg = libraries.get(1).getPackages().get(0); // package PANASONIC_D
-		Polygon poly = (Polygon) pkg.getElements().get(22);
+		List<XLibrary> libraries = eagle.getDrawing().getBoard().getLibraries();
+		XPackage pkg = libraries.get(1).getPackages().get(0); // package PANASONIC_D
+		XPolygon poly = (XPolygon) pkg.getElements().get(22);
 
 		assertEquals("51", poly.getLayer());
-		assertEquals(0.1016, poly.getWidth(), THRESHOLD);
+		assertEquals(0.1016, poly.getWidth(), DELTA);
 		assertEquals(8, poly.getVertices().size());
 	}
 
@@ -255,33 +257,33 @@ public class ParserTest {
 	 */
 	@Test
 	public void testVertexElement() {
-		List<Library> libraries = eagle.getDrawing().getBoard().getLibraries();
-		Package pkg = libraries.get(1).getPackages().get(0); // package PANASONIC_D
-		Vertex v = ((Polygon) pkg.getElements().get(22)).getVertices().get(0);
+		List<XLibrary> libraries = eagle.getDrawing().getBoard().getLibraries();
+		XPackage pkg = libraries.get(1).getPackages().get(0); // package PANASONIC_D
+		XVertex v = ((XPolygon) pkg.getElements().get(22)).getVertices().get(0);
 
-		assertEquals(-2.15, v.getX(), THRESHOLD);
-		assertEquals(2.15, v.getY(), THRESHOLD);
+		assertEquals(-2.15, v.getX(), DELTA);
+		assertEquals(2.15, v.getY(), DELTA);
 	}
 
 	@Test
 	public void testElementElement() {
-		List<Element> elements = eagle.getDrawing().getBoard().getElements();
-		Element e = elements.get(0);
+		List<XElement> elements = eagle.getDrawing().getBoard().getElements();
+		XElement e = elements.get(0);
 
 		assertEquals("ICSP", e.getName());
 		assertEquals("pinhead", e.getLibrary());
 		assertEquals("2X03", e.getPkg());
 		assertEquals("ICSP", e.getValue());
-		assertEquals(64.897, e.getX(), THRESHOLD);
-		assertEquals(27.94, e.getY(), THRESHOLD);
+		assertEquals(64.897, e.getX(), DELTA);
+		assertEquals(27.94, e.getY(), DELTA);
 		assertEquals("yes", e.getSmashed());
 		assertEquals("R270", e.getRotation());
 	}
 
 	@Test
 	public void testSignalElement() {
-		List<Signal> signals = eagle.getDrawing().getBoard().getSignals();
-		Signal s = signals.get(0);
+		List<XSignal> signals = eagle.getDrawing().getBoard().getSignals();
+		XSignal s = signals.get(0);
 
 		assertEquals("+5V", s.getName());
 		assertEquals(32, s.getContactReferences().size());
@@ -291,8 +293,8 @@ public class ParserTest {
 
 	@Test
 	public void testContactRefElement() {
-		List<Signal> signals = eagle.getDrawing().getBoard().getSignals();
-		ContactRef ref = signals.get(0).getContactReferences().get(0);
+		List<XSignal> signals = eagle.getDrawing().getBoard().getSignals();
+		XContactRef ref = signals.get(0).getContactReferences().get(0);
 
 		assertEquals("ICSP", ref.getElement());
 		assertEquals("2", ref.getPad());
@@ -300,13 +302,13 @@ public class ParserTest {
 
 	@Test
 	public void testViaElement() {
-		List<Signal> signals = eagle.getDrawing().getBoard().getSignals();
-		Via via = signals.get(0).getVias().get(0);
+		List<XSignal> signals = eagle.getDrawing().getBoard().getSignals();
+		XVia via = signals.get(0).getVias().get(0);
 
-		assertEquals(30.353, via.getX(), THRESHOLD);
-		assertEquals(4.953, via.getY(), THRESHOLD);
+		assertEquals(30.353, via.getX(), DELTA);
+		assertEquals(4.953, via.getY(), DELTA);
 		assertEquals("1-16", via.getExtent());
-		assertEquals(0.4064, via.getDrill(), THRESHOLD);
-		assertEquals(ViaShape.OCTAGON, via.getShape());
+		assertEquals(0.4064, via.getDrill(), DELTA);
+		assertEquals(XViaShape.OCTAGON, via.getShape());
 	}
 }

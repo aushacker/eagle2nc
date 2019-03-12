@@ -28,20 +28,20 @@ import javax.xml.bind.annotation.XmlElementWrapper;
  * @author Stephen Davies
  * @since October 2018
  */
-public class Drawing {
+public class XDrawing {
 
 	@XmlElementWrapper(name="layers")
 	@XmlElement(name="layer")
-	private List<Layer> layers;
+	private List<XLayer> layers;
 
 	@XmlElement
-	private Board board;
+	private XBoard board;
 
-	public Board getBoard() {
+	public XBoard getBoard() {
 		return board;
 	}
 
-	public List<Layer> getLayers() {
+	public List<XLayer> getLayers() {
 		return layers;
 	}
 }

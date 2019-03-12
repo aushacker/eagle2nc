@@ -19,18 +19,37 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Before;
+import org.junit.Test;
 
 /**
+ * Unit test XWire, not that there is much to actually test.
+ *
  * @author Stephen Davies
  * @since October 2018
  */
-public abstract class LayeredElement extends GraphicElement {
+public class XWireTest {
 
-	@XmlAttribute
-	private String layer;
-	
-	public String getLayer() {
-		return layer;
+	/**
+	 * Object under test.
+	 */
+	private XWire wire;
+
+	@Before
+	public void setUp() {
+		wire = new XWire();
+	}
+
+	@Test
+	public void testIsWire() {
+		assertTrue(wire.isWire());
+	}
+
+	@Test
+	public void testToString() {
+		assertEquals("XWire( (0.0,0.0) to (0.0,0.0) )", wire.toString());
 	}
 }

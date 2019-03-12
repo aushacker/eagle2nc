@@ -25,25 +25,25 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Unit test Hole, not that there is much to actually test.
+ * Unit test XRectangle, not that there is much to actually test.
  *
  * @author Stephen Davies
  * @since October 2018
  */
-public class HoleTest {
+public class XRectangleTest {
 
 	/**
 	 * Object under test.
 	 */
-	private Hole hole;
+	private XRectangle rect;
 
 	@Before
 	public void setUp() {
-		hole = new Hole();
+		rect = new XRectangle();
 	}
 
 	@Test
 	public void testToString() {
-		assertEquals("Hole( (0.0,0.0) )", hole.toString());
+		assertEquals("XRectangle( (0.0,0.0) to (0.0,0.0) )", rect.toString());
 	}
 }

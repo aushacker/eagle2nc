@@ -19,53 +19,39 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
 /**
  * @author Stephen Davies
  * @since October 2018
  */
-public class Rectangle extends LayeredElement {
+public class XLibrary {
 
 	@XmlAttribute
-	private double x1;
-	
-	@XmlAttribute
-	private double y1;
+	private String name;
 
-	@XmlAttribute
-	private double x2;
-	
-	@XmlAttribute
-	private double y2;
-	
-	public double getX1() {
-		return x1;
+	// FQ name required because java.lang.Package exists
+	@XmlElementWrapper(name="packages")
+	@XmlElement(name="package")
+	private List<com.github.aushacker.eagle2nc.xml.XPackage> packages;
+
+	public String getName() {
+		return name;
 	}
 
-	public double getX2() {
-		return x2;
-	}
-
-	public double getY1() {
-		return y1;
-	}
-
-	public double getY2() {
-		return y2;
+	public List<com.github.aushacker.eagle2nc.xml.XPackage> getPackages() {
+		return packages;
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder result = new StringBuilder("Rectangle( (");
-		result.append(x1);
-		result.append(",");
-		result.append(y1);
-		result.append(") to (");
-		result.append(x2);
-		result.append(",");
-		result.append(y2);
-		result.append(") )");
+		StringBuilder result = new StringBuilder("XLibrary(");
+		result.append(name);
+		result.append(")");
 		return result.toString();
 	}
 }

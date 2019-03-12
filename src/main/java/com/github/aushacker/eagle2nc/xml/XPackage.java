@@ -19,25 +19,44 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
 
 /**
  * @author Stephen Davies
  * @since October 2018
  */
-public class ContactRef {
+public class XPackage {
 
+	// ID
 	@XmlAttribute
-	private String element;
+	private String name;
 
-	@XmlAttribute
-	private String pad;
+	@XmlElement
+	private String description;
+	
+	@XmlElements({
+		@XmlElement(name="circle", type=XCircle.class),
+		@XmlElement(name="pad", type=XPad.class),
+		@XmlElement(name="polygon", type=XPolygon.class),
+		@XmlElement(name="rectangle", type=XRectangle.class),
+		@XmlElement(name="smd", type=XSmd.class),
+		@XmlElement(name="wire", type=XWire.class)
+	})
+	private List<XGraphicElement> elements;
 
-	public String getElement() {
-		return element;
+	public String getDescription() {
+		return description;
 	}
 
-	public String getPad() {
-		return pad;
+	public List<XGraphicElement> getElements() {
+		return elements;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

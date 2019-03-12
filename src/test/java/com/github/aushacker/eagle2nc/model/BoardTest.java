@@ -19,10 +19,8 @@
 package com.github.aushacker.eagle2nc.model;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
-import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
@@ -32,7 +30,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.github.aushacker.eagle2nc.xml.Eagle;
+import com.github.aushacker.eagle2nc.xml.XEagle;
 
 /**
  * Integration test for all of the model package.
@@ -45,9 +43,9 @@ public class BoardTest {
 
 	private static final String TEST_FILE = "data/Arduino_MEGA2560_ref.brd";
 
-	private static final double THRESHOLD = 0.0000001;
+	//private static final double THRESHOLD = 0.0000001;
 
-	private static Eagle eagle;
+	private static XEagle eagle;
 
 	private Board board;
 	
@@ -55,9 +53,9 @@ public class BoardTest {
 	public static void setupClass() throws Exception {
 		// Allow loading of eagle.dtd from file
 		System.setProperty("javax.xml.accessExternalDTD", "all");
-		JAXBContext jc = JAXBContext.newInstance(Eagle.class);
+		JAXBContext jc = JAXBContext.newInstance(XEagle.class);
 	    Unmarshaller u = jc.createUnmarshaller();
-	    eagle = (Eagle) u.unmarshal(new File(TEST_FILE));
+	    eagle = (XEagle) u.unmarshal(new File(TEST_FILE));
 	}
 
 	@Before
@@ -71,5 +69,7 @@ public class BoardTest {
 	}
 
 	@Test
-	public void testSomething() {}
+	public void testLibraryCount() {
+		assertEquals(17, board.getLibraries().size());
+	}
 }

@@ -19,16 +19,49 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
+import javax.xml.bind.annotation.XmlAttribute;
+
 /**
- * Abstract superclass for XML elements that represent physical parts of
- * the board design e.g. wires and pads.
- *
  * @author Stephen Davies
  * @since October 2018
  */
-public abstract class GraphicElement {
+public class XCircle extends XLayeredElement {
 
-	public boolean isWire() {
-		return false;
+	@XmlAttribute
+	private double radius;
+
+	@XmlAttribute
+	private double x;
+
+	@XmlAttribute
+	private double y;
+
+	@XmlAttribute
+	private double width;
+
+	public double getRadius() {
+		return radius;
+	}
+
+	public double getWidth() {
+		return width;
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder("XCircle(");
+		result.append(x);
+		result.append(",");
+		result.append(y);
+		result.append(")");
+		return result.toString();
 	}
 }

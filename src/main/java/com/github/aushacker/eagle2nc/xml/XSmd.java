@@ -19,44 +19,47 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
 
 /**
  * @author Stephen Davies
  * @since October 2018
  */
-public class Package {
+public class XSmd extends XLayeredElement {
 
 	// ID
 	@XmlAttribute
 	private String name;
 
-	@XmlElement
-	private String description;
+	@XmlAttribute
+	private double dx;
 	
-	@XmlElements({
-		@XmlElement(name="circle", type=Circle.class),
-		@XmlElement(name="pad", type=Pad.class),
-		@XmlElement(name="polygon", type=Polygon.class),
-		@XmlElement(name="rectangle", type=Rectangle.class),
-		@XmlElement(name="smd", type=Smd.class),
-		@XmlElement(name="wire", type=Wire.class)
-	})
-	private List<GraphicElement> elements;
+	@XmlAttribute
+	private double dy;
 
-	public String getDescription() {
-		return description;
+	@XmlAttribute
+	private double x;
+	
+	@XmlAttribute
+	private double y;
+
+	public double getDx() {
+		return dx;
 	}
 
-	public List<GraphicElement> getElements() {
-		return elements;
+	public double getDy() {
+		return dy;
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
 	}
 }

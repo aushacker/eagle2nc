@@ -19,49 +19,34 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-
-import org.junit.Before;
-import org.junit.Test;
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
 
 /**
- * Unit test Pad, not that there is much to actually test.
- *
  * @author Stephen Davies
  * @since October 2018
  */
-public class PadTest {
+@XmlEnum
+public enum XPadShape {
 
-	/**
-	 * Object under test.
-	 */
-	private Pad pad;
+	@XmlEnumValue("long")
+	LONG("long"),
+	@XmlEnumValue("octagon")
+	OCTAGON("octagon"),
+	@XmlEnumValue("offset")
+	OFFSET("offset"),
+	@XmlEnumValue("round")
+	ROUND("round"),
+	@XmlEnumValue("square")
+	SQUARE("square");
 
-	@Before
-	public void setUp() {
-		pad = new Pad();
+	private final String value;
+
+	private XPadShape(String value) {
+		this.value = value;
 	}
 
-	@Test
-	public void testGetRotationLazyInitialisation() {
-		assertSame(Pad.DEFAULT_ROTATION, pad.getRotation());
-	}
-
-	@Test
-	public void testGetRotationWhenExplicitlySet() {
-		pad.setRotation("R90");
-		assertEquals("R90", pad.getRotation());
-	}
-
-	@Test
-	public void testGetShapeLazyInitialisation() {
-		assertSame(PadShape.ROUND, pad.getShape());
-	}
-
-	@Test
-	public void testGetShapeWhenExplicitlySet() {
-		pad.setShape(PadShape.OCTAGON);
-		assertSame(PadShape.OCTAGON, pad.getShape());
+	public String value() {
+		return value;
 	}
 }

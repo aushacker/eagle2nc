@@ -19,37 +19,42 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import static org.junit.Assert.assertSame;
+import java.util.Collection;
 
-import org.junit.Before;
-import org.junit.Test;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Unit test Via, not that there is much to actually test.
+ * Top-level XML element in the Eagle board file.
  *
  * @author Stephen Davies
  * @since October 2018
  */
-public class ViaTest {
+@XmlRootElement (name = "eagle")
+public class XEagle {
+
+	@XmlAttribute
+	private String version;
+
+	@XmlElement
+	private XDrawing drawing;
+	
+	public XDrawing getDrawing() {
+		return drawing;
+	}
 
 	/**
-	 * Object under test.
+	 * Convenience method.
+	 *
+	 * @return Eagle component library excerpts included in the board.
 	 */
-	private Via via;
-
-	@Before
-	public void setUp() {
-		via = new Via();
+	public Collection<XLibrary> getLibraries() {
+		return getDrawing().getBoard().getLibraries();
 	}
 
-	@Test
-	public void testGetShapeLazyInitialisation() {
-		assertSame(ViaShape.ROUND, via.getShape());
+	public String getVersion() {
+		return version;
 	}
 
-	@Test
-	public void testGetShapeWhenExplicitlySet() {
-		via.setShape(ViaShape.SQUARE);
-		assertSame(ViaShape.SQUARE, via.getShape());
-	}
 }

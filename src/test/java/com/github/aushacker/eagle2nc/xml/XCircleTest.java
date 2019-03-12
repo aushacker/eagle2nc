@@ -19,42 +19,31 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Before;
+import org.junit.Test;
 
 /**
+ * Unit test XCircle, not that there is much to actually test.
+ *
  * @author Stephen Davies
  * @since October 2018
  */
-public class Hole extends GraphicElement {
+public class XCircleTest {
 
-	@XmlAttribute
-	private double drill;
+	/**
+	 * Object under test.
+	 */
+	private XCircle circle;
 
-	@XmlAttribute
-	private double x;
-	
-	@XmlAttribute
-	private double y;
-
-	public double getDrill() {
-		return drill;
+	@Before
+	public void setUp() {
+		circle = new XCircle();
 	}
 
-	public double getX() {
-		return x;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder result = new StringBuilder("Hole( (");
-		result.append(x);
-		result.append(",");
-		result.append(y);
-		result.append(") )");
-		return result.toString();
+	@Test
+	public void testToString() {
+		assertEquals("XCircle(0.0,0.0)", circle.toString());
 	}
 }

@@ -19,31 +19,25 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Before;
-import org.junit.Test;
+import javax.xml.bind.annotation.XmlAttribute;
 
 /**
- * Unit test Library, not that there is much to actually test.
- *
  * @author Stephen Davies
  * @since October 2018
  */
-public class LibraryTest {
+public class XContactRef {
 
-	/**
-	 * Object under test.
-	 */
-	private Library lib;
+	@XmlAttribute
+	private String element;
 
-	@Before
-	public void setUp() {
-		lib = new Library();
+	@XmlAttribute
+	private String pad;
+
+	public String getElement() {
+		return element;
 	}
 
-	@Test
-	public void testToString() {
-		assertEquals("Library(null)", lib.toString());
+	public String getPad() {
+		return pad;
 	}
 }

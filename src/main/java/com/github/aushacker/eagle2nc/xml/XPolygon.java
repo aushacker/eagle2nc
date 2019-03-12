@@ -19,31 +19,31 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
 
 /**
- * Unit test Rectangle, not that there is much to actually test.
- *
  * @author Stephen Davies
  * @since October 2018
  */
-public class RectangleTest {
+public class XPolygon extends XLayeredElement {
 
-	/**
-	 * Object under test.
-	 */
-	private Rectangle rect;
+	@XmlElements({
+		@XmlElement(name="vertex", type=XVertex.class)
+	})
+	private List<XVertex> vertices;
 
-	@Before
-	public void setUp() {
-		rect = new Rectangle();
+	@XmlAttribute
+	private double width;
+
+	public List<XVertex> getVertices() {
+		return vertices;
 	}
 
-	@Test
-	public void testToString() {
-		assertEquals("Rectangle( (0.0,0.0) to (0.0,0.0) )", rect.toString());
+	public double getWidth() {
+		return width;
 	}
 }

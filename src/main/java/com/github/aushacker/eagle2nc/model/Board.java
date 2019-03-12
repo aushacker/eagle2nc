@@ -19,24 +19,49 @@
 
 package com.github.aushacker.eagle2nc.model;
 
-import com.github.aushacker.eagle2nc.xml.Eagle;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.github.aushacker.eagle2nc.xml.XEagle;
+import com.github.aushacker.eagle2nc.xml.XLibrary;
 
 /**
+ * Top level model type. Wraps XML data to provide higher
+ * level information.
+ * 
  * @author Stephen Davies
  * @since October 2018
  */
 public class Board {
 
-	private Eagle xmlModel;
+	private XEagle xmlModel;
 
-	private Dimensions dimensions;
+	//private Dimensions dimensions;
 
-	public Board(Eagle xmlModel) {
+	private Map<String, Library> libraries;
+
+	public Board(XEagle xmlModel) {
 		this.xmlModel = xmlModel;
-		this.dimensions = new Dimensions(this);
+		//this.dimensions = new Dimensions(this);
 	}
 
-	public Eagle getXmlModel() {
+	public Collection<Library> getLibraries() {
+		if (libraries == null) {
+			initialiseLibraries();
+		}
+
+		return libraries.values();
+	}
+
+	public XEagle getXmlModel() {
 		return xmlModel;
+	}
+
+	private void initialiseLibraries() {
+		libraries = new HashMap<>();
+		for (XLibrary xLib : xmlModel.getLibraries()) {
+			libraries.put(xLib.getName(), new Library(xLib));
+		}
 	}
 }
