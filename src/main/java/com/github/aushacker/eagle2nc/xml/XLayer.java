@@ -73,11 +73,6 @@ public class XLayer {
 	
 	@Override
 	public String toString() {
-		StringBuilder result = new StringBuilder("XLayer(");
-		result.append(number);
-		result.append(", ");
-		result.append(name);
-		result.append(")");
-		return result.toString();
+		return "XLayer(" + number + ", " + name + ")";
 	}
 }

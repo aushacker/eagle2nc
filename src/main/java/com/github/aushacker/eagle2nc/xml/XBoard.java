@@ -19,6 +19,8 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -69,6 +71,22 @@ public class XBoard {
 
 	public List<XElement> getElements() {
 		return elements;
+	}
+
+	/**
+	 * Convenience method.
+	 *
+	 * @return Returns all top level XHole objects nested in the &lt;plain&gt; element.
+	 */
+	public Collection<XHole> getHoles() {
+		ArrayList<XHole> holes = new ArrayList<>();
+
+		plain
+			.stream()
+			.filter(e -> e.isHole())
+			.forEach(hole -> holes.add((XHole) hole));
+
+		return holes;
 	}
 
 	public List<XLibrary> getLibraries() {

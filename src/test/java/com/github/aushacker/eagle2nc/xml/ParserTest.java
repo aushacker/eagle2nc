@@ -73,6 +73,7 @@ public class ParserTest {
 	@Test
 	public void testEagleElement() {
 		assertEquals("6.2", eagle.getVersion());
+		assertEquals(6, eagle.getHoles().size());
 		assertEquals(17, eagle.getLibraries().size());
 	}
 
@@ -94,7 +95,7 @@ public class ParserTest {
 	}
 
 	/**
-	 * Check that the first layer deserialises correctly. 
+	 * Check that the first layer deserializes correctly. 
 	 */
 	@Test
 	public void testLayerElement() {

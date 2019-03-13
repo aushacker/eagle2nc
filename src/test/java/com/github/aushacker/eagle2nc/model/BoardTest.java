@@ -42,6 +42,7 @@ import com.github.aushacker.eagle2nc.xml.XEagle;
 public class BoardTest {
 
 	private static final String TEST_FILE = "data/Arduino_MEGA2560_ref.brd";
+	//private static final String TEST_FILE = "data/ms-adsr-02.brd";
 
 	//private static final double THRESHOLD = 0.0000001;
 
@@ -66,6 +67,12 @@ public class BoardTest {
 	@AfterClass
 	public static void afterClass() {
 		eagle = null;
+	}
+
+	@Test
+	public void testHoleCount() {
+		board.getHoles().stream().forEach(h -> System.out.println(h));
+		assertEquals(6, board.getHoles().size());
 	}
 
 	@Test

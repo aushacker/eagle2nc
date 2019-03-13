@@ -88,9 +88,6 @@ public class XElement {
 
 	@Override
 	public String toString() {
-		StringBuilder result = new StringBuilder("XElement(");
-		result.append(name);
-		result.append(")");
-		return result.toString();
+		return "XElement(" + name + ")";
 	}
 }

@@ -48,13 +48,12 @@ public class XHole extends XGraphicElement {
 		return y;
 	}
 
+	public boolean isHole() {
+		return true;
+	}
+
 	@Override
 	public String toString() {
-		StringBuilder result = new StringBuilder("XHole( (");
-		result.append(x);
-		result.append(",");
-		result.append(y);
-		result.append(") )");
-		return result.toString();
+		return "XHole(" + x + "," + y + ")";
 	}
 }

@@ -19,35 +19,38 @@
 
 package com.github.aushacker.eagle2nc.model;
 
-import com.github.aushacker.eagle2nc.xml.XLibrary;
+import com.github.aushacker.eagle2nc.xml.XHole;
 
 /**
- * Wrapper for the XML Library type.
- *
+ * A top level hole located within the &lt;plain&gt; element.
+ * <p>
+ * Holes are located using absolute coordinate values.
+ * 
  * @author Stephen Davies
  * @since March 2019
  */
-public class Library {
+public class Hole implements DrillHole {
 
-	/**
-	 * Wrapped XML Library.
-	 */
-	private XLibrary library;
-	
-	public Library(XLibrary library) {
-		this.library = library;
+	private XHole hole;
+
+	public Hole(XHole hole) {
+		this.hole = hole;
 	}
 
-	public String getName() {
-		return library.getName();
+	public double getDrill() {
+		return hole.getDrill();
+	}
+
+	public double getX() {
+		return hole.getX();
+	}
+
+	public double getY() {
+		return hole.getY();
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder("Library(\"");
-		sb.append(getName());
-		sb.append("\"");
-
-		return sb.toString();
+		return "Hole(" + getX() + ", " + getY() + ", " + getDrill() + ")";
 	}
 }

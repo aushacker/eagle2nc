@@ -57,11 +57,6 @@ public class XCircle extends XLayeredElement {
 
 	@Override
 	public String toString() {
-		StringBuilder result = new StringBuilder("XCircle(");
-		result.append(x);
-		result.append(",");
-		result.append(y);
-		result.append(")");
-		return result.toString();
+		return "XCircle(" + x + "," + y + ")";
 	}
 }

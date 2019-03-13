@@ -49,9 +49,6 @@ public class XLibrary {
 
 	@Override
 	public String toString() {
-		StringBuilder result = new StringBuilder("XLibrary(");
-		result.append(name);
-		result.append(")");
-		return result.toString();
+		return "XLibrary(" + name + ")";
 	}
 }

@@ -19,35 +19,40 @@
 
 package com.github.aushacker.eagle2nc.model;
 
-import com.github.aushacker.eagle2nc.xml.XLibrary;
+import com.github.aushacker.eagle2nc.xml.XVia;
 
 /**
- * Wrapper for the XML Library type.
- *
+ * Adapts an XVia for drilling. Currently only plated through hole (PTH)
+ * vias are supported. Blind and buried vias are not possible. It's difficult
+ * to produce that level of complexity using desktop methods.
+ * <p>
+ * Holes are located using absolute coordinate values.
+ * 
  * @author Stephen Davies
  * @since March 2019
  */
-public class Library {
+public class Via implements DrillHole {
 
-	/**
-	 * Wrapped XML Library.
-	 */
-	private XLibrary library;
-	
-	public Library(XLibrary library) {
-		this.library = library;
+	private XVia via;
+
+	public Via(XVia via) {
+		this.via = via;
 	}
 
-	public String getName() {
-		return library.getName();
+	public double getDrill() {
+		return via.getDrill();
+	}
+
+	public double getX() {
+		return via.getX();
+	}
+
+	public double getY() {
+		return via.getY();
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder("Library(\"");
-		sb.append(getName());
-		sb.append("\"");
-
-		return sb.toString();
+		return "Via(" + getX() + ", " + getY() + ", " + getDrill() + ")";
 	}
 }

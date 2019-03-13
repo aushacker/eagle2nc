@@ -57,15 +57,6 @@ public class XRectangle extends XLayeredElement {
 
 	@Override
 	public String toString() {
-		StringBuilder result = new StringBuilder("XRectangle( (");
-		result.append(x1);
-		result.append(",");
-		result.append(y1);
-		result.append(") to (");
-		result.append(x2);
-		result.append(",");
-		result.append(y2);
-		result.append(") )");
-		return result.toString();
+		return "XRectangle( (" + x1 + "," + y1 + ") to (" + x2 + "," + y2 + ") )";
 	}
 }

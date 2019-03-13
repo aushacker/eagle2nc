@@ -44,6 +44,6 @@ public class XHoleTest {
 
 	@Test
 	public void testToString() {
-		assertEquals("XHole( (0.0,0.0) )", hole.toString());
+		assertEquals("XHole(0.0,0.0)", hole.toString());
 	}
 }

@@ -47,6 +47,15 @@ public class XEagle {
 	/**
 	 * Convenience method.
 	 *
+	 * @return Returns all top level XHole objects nested in the &lt;plain&gt; element.
+	 */
+	public Collection<XHole> getHoles() {
+		return getDrawing().getBoard().getHoles();
+	}
+
+	/**
+	 * Convenience method.
+	 *
 	 * @return Eagle component library excerpts included in the board.
 	 */
 	public Collection<XLibrary> getLibraries() {
@@ -56,5 +65,4 @@ public class XEagle {
 	public String getVersion() {
 		return version;
 	}
-
 }

@@ -19,11 +19,13 @@
 
 package com.github.aushacker.eagle2nc.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.github.aushacker.eagle2nc.xml.XEagle;
+import com.github.aushacker.eagle2nc.xml.XHole;
 import com.github.aushacker.eagle2nc.xml.XLibrary;
 
 /**
@@ -39,11 +41,25 @@ public class Board {
 
 	//private Dimensions dimensions;
 
+	private Collection<DrillHole> holes;
+
 	private Map<String, Library> libraries;
 
 	public Board(XEagle xmlModel) {
 		this.xmlModel = xmlModel;
 		//this.dimensions = new Dimensions(this);
+	}
+
+	public Collection<DrillHole> getHoles() {
+		if (holes == null) {
+			holes = new ArrayList<>();
+
+			// Get top-level holes
+			for (XHole hole : xmlModel.getHoles()) {
+				holes.add(new Hole(hole));
+			}
+		}
+		return holes;
 	}
 
 	public Collection<Library> getLibraries() {

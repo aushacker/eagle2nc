@@ -19,35 +19,22 @@
 
 package com.github.aushacker.eagle2nc.model;
 
-import com.github.aushacker.eagle2nc.xml.XLibrary;
-
 /**
- * Wrapper for the XML Library type.
- *
+ * In Eagle, the information for drilling holes can come from a number
+ * of places in the .brd file. Top level holes, those placed using the Eagle Hole command, are located
+ * within the &lt;plain&gt; element. Other holes are implied by certain shapes, i.e. pads and vias.
+ * <p>
+ * Hide the actual information source behind an abstract facade.
+ * 
  * @author Stephen Davies
  * @since March 2019
  */
-public class Library {
+public interface DrillHole {
 
-	/**
-	 * Wrapped XML Library.
-	 */
-	private XLibrary library;
-	
-	public Library(XLibrary library) {
-		this.library = library;
-	}
+	public double getDrill();
 
-	public String getName() {
-		return library.getName();
-	}
+	public double getX();
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder("Library(\"");
-		sb.append(getName());
-		sb.append("\"");
+	public double getY();
 
-		return sb.toString();
-	}
 }
