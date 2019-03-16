@@ -19,6 +19,7 @@
 
 package com.github.aushacker.eagle2nc.xml;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -58,6 +59,9 @@ public class XSignal {
 	}
 
 	public List<XVia> getVias() {
+		if (vias == null) {
+			vias = new ArrayList<>();
+		}
 		return vias;
 	}
 

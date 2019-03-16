@@ -81,7 +81,7 @@ public class XBoard {
 	public Collection<XHole> getHoles() {
 		ArrayList<XHole> holes = new ArrayList<>();
 
-		plain
+		getPlain()
 			.stream()
 			.filter(e -> e.isHole())
 			.forEach(hole -> holes.add((XHole) hole));
@@ -90,14 +90,41 @@ public class XBoard {
 	}
 
 	public List<XLibrary> getLibraries() {
+		if (libraries == null) {
+			libraries = new ArrayList<>();
+		}
+
 		return libraries;
 	}
 
 	public List<XGraphicElement> getPlain() {
+		if (plain == null) {
+			plain = new ArrayList<>();
+		}
+
 		return plain;
 	}
 
 	public List<XSignal> getSignals() {
+		if (signals == null) {
+			signals = new ArrayList<>();
+		}
+
 		return signals;
+	}
+
+	/**
+	 * Convenience method.
+	 *
+	 * @return
+	 */
+	public Collection<XVia> getVias() {
+		ArrayList<XVia> vias = new ArrayList<>();
+
+		getSignals()
+			.forEach(s -> s.getVias()
+					.forEach(v -> vias.add(v)));
+
+		return vias;
 	}
 }

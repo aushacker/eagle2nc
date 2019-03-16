@@ -74,6 +74,7 @@ public class ParserTest {
 	public void testEagleElement() {
 		assertEquals("6.2", eagle.getVersion());
 		assertEquals(6, eagle.getHoles().size());
+		assertEquals(144, eagle.getVias().size());
 		assertEquals(17, eagle.getLibraries().size());
 	}
 

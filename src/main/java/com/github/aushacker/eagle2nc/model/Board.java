@@ -55,9 +55,16 @@ public class Board {
 			holes = new ArrayList<>();
 
 			// Get top-level holes
-			for (XHole hole : xmlModel.getHoles()) {
-				holes.add(new Hole(hole));
-			}
+			xmlModel.getHoles()
+				.stream()
+				.forEach(xHole -> holes.add(new Hole(xHole)));
+
+			// Get vias
+			xmlModel.getVias()
+				.stream()
+				.forEach(xVia -> holes.add(new Via(xVia)));
+			
+			// Get pads
 		}
 		return holes;
 	}

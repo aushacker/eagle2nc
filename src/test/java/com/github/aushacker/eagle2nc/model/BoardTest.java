@@ -71,8 +71,9 @@ public class BoardTest {
 
 	@Test
 	public void testHoleCount() {
-		board.getHoles().stream().forEach(h -> System.out.println(h));
-		assertEquals(6, board.getHoles().size());
+		board.getHoles()
+			.forEach(h -> System.out.println(h));
+		assertEquals(150, board.getHoles().size());
 	}
 
 	@Test

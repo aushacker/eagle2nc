@@ -27,6 +27,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Top-level XML element in the Eagle board file.
+ * <p>
+ * Not much useful detail at this level, much of this can be found in
+ * the &ltldrawing&gt; element.
  *
  * @author Stephen Davies
  * @since October 2018
@@ -56,7 +59,7 @@ public class XEagle {
 	/**
 	 * Convenience method.
 	 *
-	 * @return Eagle component library excerpts included in the board.
+	 * @return Eagle component library fragments included in the board.
 	 */
 	public Collection<XLibrary> getLibraries() {
 		return getDrawing().getBoard().getLibraries();
@@ -64,5 +67,9 @@ public class XEagle {
 
 	public String getVersion() {
 		return version;
+	}
+
+	public Collection<XVia> getVias() {
+		return getDrawing().getBoard().getVias();
 	}
 }
