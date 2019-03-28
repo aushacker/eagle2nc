@@ -19,13 +19,33 @@
 
 package com.github.aushacker.eagle2nc.model;
 
+import java.awt.geom.Point2D;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * @author Stephen Davies
  * @since October 2018
  */
-public class Dimensions extends Model {
+public class Dimensions implements Iterable<Point2D> {
 
-	public Dimensions(Board board) {
-		super(board);
+	private List<Point2D> points;
+
+	public Dimensions() {
+		this.points = new LinkedList<>();
+	}
+
+	public void add(Point2D p) {
+		points.add(p);
+	}
+
+	public Point2D start() {
+		return points.get(0);
+	}
+
+	@Override
+	public Iterator<Point2D> iterator() {
+		return points.iterator();
 	}
 }

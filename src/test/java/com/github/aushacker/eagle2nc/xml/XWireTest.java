@@ -20,6 +20,7 @@
 package com.github.aushacker.eagle2nc.xml;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -40,7 +41,18 @@ public class XWireTest {
 
 	@Before
 	public void setUp() {
-		wire = new XWire();
+		wire = new XWire(0, 0, 10, 10);
+	}
+
+	@Test
+	public void testIsConnected() {
+		XWire w2 = new XWire(10, 10, 20, 20);
+		XWire w3 = new XWire(20, 20, 10, 10);
+		XWire w4 = new XWire(-5, -5, 20, 20);
+
+		assertTrue(wire.isConnected(w2));
+		assertTrue(wire.isConnected(w3));
+		assertFalse(wire.isConnected(w4));
 	}
 
 	@Test
@@ -50,6 +62,6 @@ public class XWireTest {
 
 	@Test
 	public void testToString() {
-		assertEquals("XWire( (0.0,0.0) to (0.0,0.0) )", wire.toString());
+		assertEquals("XWire( (0.0,0.0) to (10.0,10.0) )", wire.toString());
 	}
 }

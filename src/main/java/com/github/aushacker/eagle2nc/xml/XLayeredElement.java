@@ -33,4 +33,8 @@ public abstract class XLayeredElement extends XGraphicElement {
 	public String getLayer() {
 		return layer;
 	}
+
+	public boolean isIn(String layerId) {
+		return layerId.equals(getLayer());
+	}
 }

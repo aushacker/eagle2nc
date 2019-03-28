@@ -21,11 +21,7 @@ package com.github.aushacker.eagle2nc.xml;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.io.File;
 import java.util.List;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -51,15 +47,11 @@ public class ParserTest {
 
 	@BeforeClass
 	public static void setupClass() throws Exception {
-		// Allow loading of eagle.dtd from file
-		System.setProperty("javax.xml.accessExternalDTD", "all");
 		//DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		//dbf.setFeature("http://xml.org/sax/features/validation", false);
 		//dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 		//dbf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
-		JAXBContext jc = JAXBContext.newInstance(XEagle.class);
-	    Unmarshaller u = jc.createUnmarshaller();
-	    eagle = (XEagle) u.unmarshal(new File(TEST_FILE));
+	    eagle = Parser.parse(TEST_FILE);
 	}
 
 	@AfterClass
@@ -73,6 +65,7 @@ public class ParserTest {
 	@Test
 	public void testEagleElement() {
 		assertEquals("6.2", eagle.getVersion());
+		assertEquals(9, eagle.getDimensionWires().size());
 		assertEquals(6, eagle.getHoles().size());
 		assertEquals(144, eagle.getVias().size());
 		assertEquals(17, eagle.getLibraries().size());

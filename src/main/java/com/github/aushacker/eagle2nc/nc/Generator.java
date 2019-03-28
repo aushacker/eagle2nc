@@ -19,7 +19,13 @@
 
 package com.github.aushacker.eagle2nc.nc;
 
+import java.awt.geom.Point2D;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
+import java.text.DecimalFormat;
+
+import com.github.aushacker.eagle2nc.model.Board;
 
 /**
  * @author Stephen Davies
@@ -29,13 +35,20 @@ public class Generator {
 
 	private static final String TEST_FILE = "data/astable_555.brd";
 
+	private static final String BASE_FILE = "target/astable_555_";
+
+	private static final String DIMENSIONS_SUFFIX = "dims.nc";
+
 	//private static final double DEFAULT_CLEARANCE = 1.0;
+
+	private Board board;
 
 	private PrintStream out;
 
 	private ZStrategy zStrategy;
 
 	private Generator(String file, ZStrategy zStrategy) {
+		this.board = new Board(file);
 		this.out = System.out;
 		this.zStrategy = zStrategy;
 	}
@@ -43,13 +56,72 @@ public class Generator {
 	public static void main(String[] args) {
 		Generator gen = new Generator(TEST_FILE, new SolenoidStrategy());
 
-		gen.generate();
+		try {
+			gen.generate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	private void generate() {
-		// TODO setOutputFile();
+	private void endJob() {
+		out.println(GCode.PROGRAM_END);
+	}
+
+	/**
+	 * Format 5.4.
+	 *
+	 * @return
+	 */
+	private String formatAxisValue(double value) {
+		DecimalFormat df = new DecimalFormat("####0.0###;-####0.0####");
+		return df.format(value);
+	}
+
+	private void generate() throws IOException {
+		generateDimensions();
+	}
+
+	/**
+	 * 
+	 */
+	private void generateDimensions() throws IOException {
+		setOutputFile(DIMENSIONS_SUFFIX);
 		preamble();
+		
+		// Tool change to engraver
+		toolChange(ToolType.ENGRAVER);
+
+		// Move to start  position
+		moveTo(board.getDimensions().start());
+
+		// Start spindle
+		spindleOn(24000);
+
+		// Engrave board outline
+		if (zStrategy.supportsMultiplePasses()) {
+			zStrategy.engraveRough(out);
+			board.getDimensions().forEach(p -> lineTo(p));
+		}
+		zStrategy.engraveFinish(out);
+		board.getDimensions().forEach(p -> lineTo(p));
+		
+		// Head up
 		zStrategy.toolChange(out);
+
+		// Motor off
+		spindleOff();
+		endJob();
+	}
+
+	private void lineTo(Point2D p) {
+		out.print(GCode.LINEAR);
+		write(p);
+	}
+
+	private void moveTo(Point2D p) {
+		out.print(GCode.RAPID);
+		write(p);
 	}
 
 	/**
@@ -64,4 +136,31 @@ public class Generator {
 		out.println("G17 ( xy plane )");
 	}
 
+	private void setOutputFile(String suffix) throws IOException {
+		if (out != null) {
+			out.close();
+		}
+		out = new PrintStream(new FileOutputStream(BASE_FILE + suffix));
+	}
+
+	private void spindleOff() {
+		out.println(GCode.SPINDLE_STOP);
+	}
+
+	private void spindleOn(int rpm) {
+		out.print(GCode.SPINDLE_CW);
+		out.print(" S");
+		out.println(rpm);
+	}
+
+	private void toolChange(ToolType type) {
+		
+	}
+
+	private void write(Point2D p) {
+		out.print(" X");
+		out.print(formatAxisValue(p.getX()));
+		out.print(" Y");
+		out.println(formatAxisValue(p.getY()));
+	}
 }

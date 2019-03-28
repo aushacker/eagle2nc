@@ -20,10 +20,13 @@
 package com.github.aushacker.eagle2nc.xml;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.github.aushacker.eagle2nc.model.Layer;
 
 /**
  * Top-level XML element in the Eagle board file.
@@ -42,7 +45,21 @@ public class XEagle {
 
 	@XmlElement
 	private XDrawing drawing;
-	
+
+	/**
+	 * Convenience method.
+	 *
+	 * @return Returns all top level XWire objects nested in the &lt;plain&gt; element
+	 * that are in the Dimension layer.
+	 */
+	public Collection<XWire> getDimensionWires() {
+		return getDrawing().getBoard().getPlain()
+				.stream()
+				.filter(e -> (e.isWire() && e.isIn(Layer.DIMENSION.getId())))
+				.map(e -> (XWire) e)
+				.collect(Collectors.toList());
+	}
+
 	public XDrawing getDrawing() {
 		return drawing;
 	}

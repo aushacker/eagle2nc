@@ -17,33 +17,27 @@
  * along with eagle2nc. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.aushacker.eagle2nc.nc;
+package com.github.aushacker.eagle2nc.xml;
+
+import java.io.File;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 /**
- * Hardcoded, constant Gcode values.
+ * Utility class to provide top level access to the
+ * XML parser output.
  *
  * @author Stephen Davies
- * @since March 2019
+ * @since MArch 2019
  */
-public class GCode {
+public class Parser {
 
-	public static final String RAPID = "G0";
-	public static final String LINEAR = "G1";
-
-	/**
-	 * Miscellaneous Functions
-	 */
-	public static final String SPINDLE_CW = "M03";
-	public static final String SPINDLE_CCW = "M04";
-	public static final String SPINDLE_STOP = "M05";
-	public static final String ATC = "M06";
-	public static final String COOLANT_MIST = "M07";
-	public static final String COOLANT_FLOOD = "M08";
-	public static final String COOLANT_OFF = "M09";
-	public static final String PROGRAM_END = "M30";
-
-	/**
-	 * Prevent instantiation.
-	 */
-	private GCode() {}
+	public static XEagle parse(String filename) throws JAXBException {
+		System.setProperty("javax.xml.accessExternalDTD", "all");
+		JAXBContext jc = JAXBContext.newInstance(XEagle.class);
+	    Unmarshaller u = jc.createUnmarshaller();
+	    return (XEagle) u.unmarshal(new File(filename));
+	}
 }

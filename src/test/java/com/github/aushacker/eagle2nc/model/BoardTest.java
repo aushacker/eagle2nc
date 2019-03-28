@@ -20,16 +20,12 @@ package com.github.aushacker.eagle2nc.model;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
-
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.github.aushacker.eagle2nc.xml.Parser;
 import com.github.aushacker.eagle2nc.xml.XEagle;
 
 /**
@@ -52,11 +48,7 @@ public class BoardTest {
 	
 	@BeforeClass
 	public static void setupClass() throws Exception {
-		// Allow loading of eagle.dtd from file
-		System.setProperty("javax.xml.accessExternalDTD", "all");
-		JAXBContext jc = JAXBContext.newInstance(XEagle.class);
-	    Unmarshaller u = jc.createUnmarshaller();
-	    eagle = (XEagle) u.unmarshal(new File(TEST_FILE));
+	    eagle = Parser.parse(TEST_FILE);
 	}
 
 	@Before

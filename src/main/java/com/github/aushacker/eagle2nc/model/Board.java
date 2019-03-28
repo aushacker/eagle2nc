@@ -19,12 +19,19 @@
 
 package com.github.aushacker.eagle2nc.model;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
+import javax.xml.bind.JAXBException;
+
+import com.github.aushacker.eagle2nc.xml.Parser;
 import com.github.aushacker.eagle2nc.xml.XEagle;
+import com.github.aushacker.eagle2nc.xml.XWire;
 
 /**
  * Top level model type. Wraps XML data to provide higher
@@ -37,15 +44,30 @@ public class Board {
 
 	private XEagle xmlModel;
 
-	//private Dimensions dimensions;
+	private Dimensions dimensions;
 
 	private Collection<DrillHole> holes;
 
 	private Map<String, Library> libraries;
 
+	public Board(String filename) {
+		try {
+			this.xmlModel = Parser.parse(filename);
+		}
+		catch (JAXBException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	public Board(XEagle xmlModel) {
 		this.xmlModel = xmlModel;
-		//this.dimensions = new Dimensions(this);
+	}
+
+	public Dimensions getDimensions() {
+		if (dimensions == null) {
+			initializeDimensions();
+		}
+		return dimensions;
 	}
 
 	public Collection<DrillHole> getHoles() {
@@ -79,5 +101,50 @@ public class Board {
 
 	public XEagle getXmlModel() {
 		return xmlModel;
+	}
+
+	private void initializeDimensions() {
+		dimensions = new Dimensions();
+		List<XWire> wires = new LinkedList<>(xmlModel.getDimensionWires());
+
+		// pluck first wire
+		XWire first = wires.get(0);
+		XWire previous = first;
+		wires.remove(0);
+		dimensions.add(new Point2D.Double(first.getX1(), first.getY1()));
+		Point2D next = new Point2D.Double(first.getX2(), first.getY2());
+		dimensions.add(next);
+
+		while (!wires.isEmpty()) {
+			// Search for next connected wire
+			XWire current = null;
+			for (XWire w : wires) {
+				if (w.isConnected(previous)) {
+					current = w;
+					break;
+				}
+			}
+
+			// Not found (should not really happen)
+			if (current == null) {
+				throw new IllegalStateException("Something weird with the board dimensions.");
+			}
+
+			// Handle case where wire directions are reversed
+			if ((next.getX() == current.getX1()) && (next.getY() == current.getY1())) {
+				// head to tail
+				next = new Point2D.Double(current.getX2(), current.getY2());
+			} else {
+				// head/tails are reversed
+				next = new Point2D.Double(current.getX1(), current.getY1());
+			}
+
+			dimensions.add(next);
+			wires.remove(current);
+			previous = current;
+		}
+
+		// Back to start
+		//dimensions.add(new Point2D.Double(first.getX1(), first.getY1()));
 	}
 }

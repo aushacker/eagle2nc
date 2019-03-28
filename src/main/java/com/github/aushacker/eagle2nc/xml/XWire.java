@@ -44,6 +44,15 @@ public class XWire extends XLayeredElement {
 	@XmlAttribute
 	private double width;
 
+	public XWire() {}
+
+	public XWire(double x1, double y1, double x2, double y2) {
+		this.x1 = x1;
+		this.y1 = y1;
+		this.x2 = x2;
+		this.y2 = y2;
+	}
+
 	public double getWidth() {
 		return width;
 	}
@@ -62,6 +71,13 @@ public class XWire extends XLayeredElement {
 
 	public double getY2() {
 		return y2;
+	}
+
+	public boolean isConnected(XWire other) {
+		return (this.x1 == other.x1 && this.y1 == other.y1) ||
+				(this.x1 == other.x2 && this.y1 == other.y2) ||
+				(this.x2 == other.x1 && this.y2 == other.y1) ||
+				(this.x2 == other.x2 && this.y2 == other.y2);
 	}
 
 	@Override

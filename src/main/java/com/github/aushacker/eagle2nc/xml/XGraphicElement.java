@@ -32,6 +32,10 @@ public abstract class XGraphicElement {
 		return false;
 	}
 
+	public boolean isIn(String layerId) {
+		return false;
+	}
+
 	public boolean isWire() {
 		return false;
 	}
