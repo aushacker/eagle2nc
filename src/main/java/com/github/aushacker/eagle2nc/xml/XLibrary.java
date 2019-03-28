@@ -34,10 +34,9 @@ public class XLibrary {
 	@XmlAttribute
 	private String name;
 
-	// FQ name required because java.lang.Package exists
 	@XmlElementWrapper(name="packages")
 	@XmlElement(name="package")
-	private List<com.github.aushacker.eagle2nc.xml.XPackage> packages;
+	private List<XPackage> packages;
 
 	public String getName() {
 		return name;

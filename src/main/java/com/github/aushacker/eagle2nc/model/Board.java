@@ -25,8 +25,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.github.aushacker.eagle2nc.xml.XEagle;
-import com.github.aushacker.eagle2nc.xml.XHole;
-import com.github.aushacker.eagle2nc.xml.XLibrary;
 
 /**
  * Top level model type. Wraps XML data to provide higher
@@ -56,22 +54,24 @@ public class Board {
 
 			// Get top-level holes
 			xmlModel.getHoles()
-				.stream()
 				.forEach(xHole -> holes.add(new Hole(xHole)));
 
 			// Get vias
 			xmlModel.getVias()
-				.stream()
 				.forEach(xVia -> holes.add(new Via(xVia)));
 			
 			// Get pads
+			// TODO
 		}
 		return holes;
 	}
 
 	public Collection<Library> getLibraries() {
 		if (libraries == null) {
-			initialiseLibraries();
+			libraries = new HashMap<>();
+
+			xmlModel.getLibraries()
+				.forEach(xLib -> libraries.put(xLib.getName(), new Library(xLib)));
 		}
 
 		return libraries.values();
@@ -79,12 +79,5 @@ public class Board {
 
 	public XEagle getXmlModel() {
 		return xmlModel;
-	}
-
-	private void initialiseLibraries() {
-		libraries = new HashMap<>();
-		for (XLibrary xLib : xmlModel.getLibraries()) {
-			libraries.put(xLib.getName(), new Library(xLib));
-		}
 	}
 }

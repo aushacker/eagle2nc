@@ -22,6 +22,7 @@ package com.github.aushacker.eagle2nc.xml;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -79,14 +80,11 @@ public class XBoard {
 	 * @return Returns all top level XHole objects nested in the &lt;plain&gt; element.
 	 */
 	public Collection<XHole> getHoles() {
-		ArrayList<XHole> holes = new ArrayList<>();
-
-		getPlain()
+		return getPlain()
 			.stream()
 			.filter(e -> e.isHole())
-			.forEach(hole -> holes.add((XHole) hole));
-
-		return holes;
+			.map(e -> (XHole) e)
+			.collect(Collectors.toList());
 	}
 
 	public List<XLibrary> getLibraries() {
@@ -98,6 +96,14 @@ public class XBoard {
 	}
 
 	public List<XGraphicElement> getPlain() {
+		if (plain == null) {
+			plain = new ArrayList<>();
+		}
+
+		return plain;
+	}
+
+	public List<XGraphicElement> getPlainWires() {
 		if (plain == null) {
 			plain = new ArrayList<>();
 		}
