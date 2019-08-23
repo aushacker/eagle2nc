@@ -19,6 +19,9 @@
 
 package com.github.aushacker.eagle2nc.model;
 
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
+
 import com.github.aushacker.eagle2nc.xml.XVia;
 
 /**
@@ -41,6 +44,23 @@ public class Via implements DrillHole {
 
 	public double getDrill() {
 		return via.getDrill();
+	}
+
+	public Ellipse2D.Double getHole() {
+		return DrillHole.holeShape(getX(), getY(), getDrill());
+	}
+
+	public Area getPad() {
+		double diameter = getDrill() * 2; // TODO fudge
+		Ellipse2D.Double outer = new Ellipse2D.Double(getX() - (diameter/2),
+						getY() - (diameter/2),
+						diameter,
+						diameter);
+
+		Area result = new Area(outer);
+		result.subtract(new Area(getHole()));
+
+		return result;
 	}
 
 	public double getX() {

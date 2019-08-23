@@ -20,6 +20,8 @@ package com.github.aushacker.eagle2nc.model;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -48,7 +50,7 @@ public class BoardTest {
 	
 	@BeforeClass
 	public static void setupClass() throws Exception {
-	    eagle = Parser.parse(TEST_FILE);
+	    eagle = Parser.parse(new File(TEST_FILE));
 	}
 
 	@Before

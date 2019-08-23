@@ -20,6 +20,7 @@
 package com.github.aushacker.eagle2nc.nc;
 
 import java.awt.geom.Point2D;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -48,7 +49,7 @@ public class Generator {
 	private ZStrategy zStrategy;
 
 	private Generator(String file, ZStrategy zStrategy) {
-		this.board = new Board(file);
+		this.board = new Board(new File(file));
 		this.out = System.out;
 		this.zStrategy = zStrategy;
 	}

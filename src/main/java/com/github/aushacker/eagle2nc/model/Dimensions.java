@@ -28,24 +28,24 @@ import java.util.List;
  * @author Stephen Davies
  * @since October 2018
  */
-public class Dimensions implements Iterable<Point2D> {
+public class Dimensions implements Iterable<Point2D.Double> {
 
-	private List<Point2D> points;
+	private List<Point2D.Double> points;
 
 	public Dimensions() {
 		this.points = new LinkedList<>();
 	}
 
-	public void add(Point2D p) {
+	public void add(Point2D.Double p) {
 		points.add(p);
 	}
 
-	public Point2D start() {
+	public Point2D.Double start() {
 		return points.get(0);
 	}
 
 	@Override
-	public Iterator<Point2D> iterator() {
+	public Iterator<Point2D.Double> iterator() {
 		return points.iterator();
 	}
 }

@@ -19,10 +19,13 @@
 
 package com.github.aushacker.eagle2nc.model;
 
+import java.awt.geom.Ellipse2D;
+
 /**
  * In Eagle, the information for drilling holes can come from a number
- * of places in the .brd file. Top level holes, those placed using the Eagle Hole command, are located
- * within the &lt;plain&gt; element. Other holes are implied by certain shapes, i.e. pads and vias.
+ * of places in the .brd file. Top level holes, those placed using the Eagle
+ * Hole command, are located within the &lt;plain&gt; element. Other holes are
+ * implied by certain shapes, i.e. pads and vias.
  * <p>
  * Hide the actual information source behind an abstract facade.
  * 
@@ -31,10 +34,16 @@ package com.github.aushacker.eagle2nc.model;
  */
 public interface DrillHole {
 
-	public double getDrill();
+	double getDrill();
 
-	public double getX();
+	double getX();
 
-	public double getY();
+	double getY();
 
+	public static Ellipse2D.Double holeShape(double x, double y, double diameter) {
+		return new Ellipse2D.Double(x - (diameter/2),
+				y - (diameter/2),
+				diameter,
+				diameter);
+	}
 }

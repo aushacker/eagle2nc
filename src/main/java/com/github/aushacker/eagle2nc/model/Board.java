@@ -20,6 +20,7 @@
 package com.github.aushacker.eagle2nc.model;
 
 import java.awt.geom.Point2D;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -50,9 +51,11 @@ public class Board {
 
 	private Map<String, Library> libraries;
 
-	public Board(String filename) {
+	private Collection<Via> vias;
+
+	public Board(File f) {
 		try {
-			this.xmlModel = Parser.parse(filename);
+			this.xmlModel = Parser.parse(f);
 		}
 		catch (JAXBException e) {
 			throw new RuntimeException(e);
@@ -99,6 +102,15 @@ public class Board {
 		return libraries.values();
 	}
 
+	public Collection<Via> getVias() {
+		if (vias == null) {
+			vias = new ArrayList<>();
+			xmlModel.getVias().forEach(xVia -> vias.add(new Via(xVia)));
+		}
+		
+		return vias;
+	}
+
 	public XEagle getXmlModel() {
 		return xmlModel;
 	}
@@ -112,7 +124,7 @@ public class Board {
 		XWire previous = first;
 		wires.remove(0);
 		dimensions.add(new Point2D.Double(first.getX1(), first.getY1()));
-		Point2D next = new Point2D.Double(first.getX2(), first.getY2());
+		Point2D.Double next = new Point2D.Double(first.getX2(), first.getY2());
 		dimensions.add(next);
 
 		while (!wires.isEmpty()) {

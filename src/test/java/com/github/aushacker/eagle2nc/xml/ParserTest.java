@@ -21,6 +21,7 @@ package com.github.aushacker.eagle2nc.xml;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.io.File;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -51,7 +52,7 @@ public class ParserTest {
 		//dbf.setFeature("http://xml.org/sax/features/validation", false);
 		//dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 		//dbf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
-	    eagle = Parser.parse(TEST_FILE);
+	    eagle = Parser.parse(new File(TEST_FILE));
 	}
 
 	@AfterClass
