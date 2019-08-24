@@ -22,6 +22,10 @@ package com.github.aushacker.eagle2nc.xml;
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
+ * Routes signals between layers. Has lots in common with pads.
+ * It appears that &lt;via&gt; elements only ever appear nested under 
+ * &lt;signal&gt; elements.
+ *
  * @author Stephen Davies
  * @since October 2018
  */

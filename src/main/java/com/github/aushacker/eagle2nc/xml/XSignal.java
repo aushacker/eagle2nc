@@ -66,6 +66,10 @@ public class XSignal {
 	}
 
 	public List<XWire> getWires() {
+		if (wires == null) {
+			wires = new ArrayList<>();
+		}
+
 		return wires;
 	}
 }

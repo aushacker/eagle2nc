@@ -82,10 +82,20 @@ public class XEagle {
 		return getDrawing().getBoard().getLibraries();
 	}
 
+	/**
+	 * Convenience method.
+	 */
+	public Collection<XSignal> getSignals() {
+		return getDrawing().getBoard().getSignals();
+	}
+
 	public String getVersion() {
 		return version;
 	}
 
+	/**
+	 * Convenience method.
+	 */
 	public Collection<XVia> getVias() {
 		return getDrawing().getBoard().getVias();
 	}

@@ -51,7 +51,7 @@ public class Board {
 
 	private Map<String, Library> libraries;
 
-	private Collection<Via> vias;
+	private Collection<Signal> signals;
 
 	public Board(File f) {
 		try {
@@ -102,13 +102,21 @@ public class Board {
 		return libraries.values();
 	}
 
-	public Collection<Via> getVias() {
-		if (vias == null) {
-			vias = new ArrayList<>();
-			xmlModel.getVias().forEach(xVia -> vias.add(new Via(xVia)));
+	public Collection<Signal> getSignals() {
+		if (signals == null) {
+			signals = new ArrayList<>();
+			xmlModel.getSignals().forEach(xSignal -> signals.add(new Signal(xSignal)));
 		}
 		
-		return vias;
+		return signals;
+	}
+
+	public Collection<Via> getVias() {
+		LinkedList<Via> result = new LinkedList<>();
+		
+		getSignals().forEach(s -> s.getVias().forEach(v -> result.add(v)));
+		
+		return result;
 	}
 
 	public XEagle getXmlModel() {

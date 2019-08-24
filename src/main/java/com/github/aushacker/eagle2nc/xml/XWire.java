@@ -22,6 +22,10 @@ package com.github.aushacker.eagle2nc.xml;
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
+ * Occur all over the place. Most important are those located
+ * under the boards &lt;plain&gt; element (dimensions) and
+ * those nested under &lt;signal&gt; (traces).
+ *
  * @author Stephen Davies
  * @since October 2018
  */

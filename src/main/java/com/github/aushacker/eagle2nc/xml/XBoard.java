@@ -38,7 +38,8 @@ public class XBoard {
 	 * GraphicElements that have been placed directly on the board itself, rather than
 	 * nested within a Package.
 	 *
-	 * Examples include PCB Dimension layer and top level text (silkscreen).
+	 * Examples include PCB Dimension layer, top level text (silkscreen) and
+	 * top level holes (mounting).
 	 */
 	@XmlElementWrapper(name="plain")
 	@XmlElements({
@@ -104,11 +105,8 @@ public class XBoard {
 	}
 
 	public List<XGraphicElement> getPlainWires() {
-		if (plain == null) {
-			plain = new ArrayList<>();
-		}
-
-		return plain;
+		// TODO
+		return null;
 	}
 
 	public List<XSignal> getSignals() {

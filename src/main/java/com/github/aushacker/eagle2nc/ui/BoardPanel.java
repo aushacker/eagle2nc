@@ -32,6 +32,7 @@ import java.util.Iterator;
 import javax.swing.JPanel;
 
 import com.github.aushacker.eagle2nc.model.Board;
+import com.github.aushacker.eagle2nc.model.Layer;
 
 /**
  * @author Stephen Davies
@@ -40,6 +41,20 @@ import com.github.aushacker.eagle2nc.model.Board;
 public class BoardPanel extends JPanel {
 
 	private Board board;
+
+	private void drawAxes(Graphics2D g) {
+		g.setColor(Color.CYAN);
+		Stroke savedStroke = g.getStroke();
+		g.setStroke(new BasicStroke(0.1f));
+
+		// X axis
+		g.draw(new Line2D.Double(-200, 0, 200, 0));
+		
+		// Y axis
+		g.draw(new Line2D.Double(0, -200, 0, 200));
+		
+		g.setStroke(savedStroke);
+	}
 
 	private void drawDimensions(Graphics2D g) {
 		g.setColor(Color.BLACK);
@@ -61,12 +76,33 @@ public class BoardPanel extends JPanel {
 		g.setStroke(savedStroke);
 	}
 
+	private void drawTraces(Graphics2D g) {
+		Stroke savedStroke = g.getStroke();
+		g.setStroke(new BasicStroke(0.0f));
+
+		g.setColor(Color.RED);
+		board.getSignals()
+			.forEach(s ->
+				s.getTraces().stream()
+					.filter(t -> t.getLayer() == Layer.TOP)
+					.forEach(t -> g.draw(t.getShape())));
+			
+		g.setColor(Color.BLUE);
+		board.getSignals()
+			.forEach(s ->
+				s.getTraces().stream()
+					.filter(t -> t.getLayer() == Layer.BOTTOM)
+					.forEach(t -> g.draw(t.getShape())));
+			
+		g.setStroke(savedStroke);
+	}
+
 	private void drawVias(Graphics2D g) {
 		g.setColor(Color.GREEN);
 		Stroke savedStroke = g.getStroke();
 		g.setStroke(new BasicStroke(0.0f));
 
-		board.getVias().forEach(v -> g.fill(v.getPad()));
+		board.getVias().forEach(v -> g.fill(v.getShape()));
 
 		g.setStroke(savedStroke);
 	}
@@ -77,10 +113,12 @@ public class BoardPanel extends JPanel {
 		Graphics2D g2 = (Graphics2D) g;
 		AffineTransform previous = g2.getTransform();
 
-		g2.scale(8, -8);
-		g2.translate(5, -50);
+		g2.scale(7, -7);
+		g2.translate(5, -60);
 
+		drawAxes(g2);
 		drawDimensions(g2);
+		drawTraces(g2);
 		drawVias(g2);
 
 		g2.setTransform(previous);
