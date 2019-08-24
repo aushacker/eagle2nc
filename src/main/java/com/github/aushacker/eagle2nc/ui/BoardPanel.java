@@ -85,14 +85,14 @@ public class BoardPanel extends JPanel {
 			.forEach(s ->
 				s.getTraces().stream()
 					.filter(t -> t.getLayer() == Layer.TOP)
-					.forEach(t -> g.draw(t.getShape())));
+					.forEach(t -> g.fill(t.getShape())));
 			
 		g.setColor(Color.BLUE);
 		board.getSignals()
 			.forEach(s ->
 				s.getTraces().stream()
 					.filter(t -> t.getLayer() == Layer.BOTTOM)
-					.forEach(t -> g.draw(t.getShape())));
+					.forEach(t -> g.fill(t.getShape())));
 			
 		g.setStroke(savedStroke);
 	}
@@ -113,8 +113,8 @@ public class BoardPanel extends JPanel {
 		Graphics2D g2 = (Graphics2D) g;
 		AffineTransform previous = g2.getTransform();
 
-		g2.scale(7, -7);
-		g2.translate(5, -60);
+		g2.translate(400, 300);
+		g2.scale(10, -10);
 
 		drawAxes(g2);
 		drawDimensions(g2);
