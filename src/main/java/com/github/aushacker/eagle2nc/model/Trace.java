@@ -22,11 +22,8 @@ package com.github.aushacker.eagle2nc.model;
 import java.awt.Shape;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.RoundRectangle2D;
 
 import com.github.aushacker.eagle2nc.xml.XWire;
 
@@ -38,7 +35,7 @@ public class Trace {
 
 	private Layer layer;
 
-	private Shape shape;
+	private Area shape;
 
 	private XWire wire;
 	
@@ -54,12 +51,16 @@ public class Trace {
 		return layer;
 	}
 
+	/**
+	 * Gnarly bit of trigonometry going on here. Traces a rectangle around the
+	 * wire using trig to work out perpendicular points at each end.
+	 * <p>
+	 * The ends are drawn using circles (Ellipses) to ensure a smooth transition
+	 * to the next trace segment.
+	 */
 	public Shape getShape() {
 		if (shape == null) {
 			double theta = Math.atan2(getY2() - getY1(), getX2() - getX1());
-			double length = Math.sqrt(Math.pow((getX2() - getX1()), 2) + Math.pow((getY2() - getY1()), 2));
-
-			double t2 = theta + Math.PI / 2;
 
 			Point2D.Double p1 = new Point2D.Double(
 					getX1() + (getWidth() / 2 * Math.cos(theta + Math.PI / 2)),
@@ -81,7 +82,17 @@ public class Trace {
 			path.lineTo(p4.x,  p4.y);
 			path.lineTo(p1.x,  p1.y);
 			
-			shape = path;
+			shape = new Area(path);
+			
+			shape.add(new Area(new Ellipse2D.Double(
+					getX1() - getWidth() / 2,
+					getY1() - getWidth() / 2,
+					getWidth(), getWidth())));
+
+			shape.add(new Area(new Ellipse2D.Double(
+					getX2() - getWidth() / 2,
+					getY2() - getWidth() / 2,
+					getWidth(), getWidth())));
 		}
 
 		return shape;

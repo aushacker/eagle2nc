@@ -51,8 +51,8 @@ public class Eagle2Nc extends JFrame {
 	public Eagle2Nc() {
 		super("Eagle2nc");
 
-		open(new File("data/astable_555.brd"));
-		//open(new File("data/Arduino_MEGA2560_ref.brd"));
+		//open(new File("data/astable_555.brd"));
+		open(new File("data/Arduino_MEGA2560_ref.brd"));
 
 		Container contentPane = getContentPane();
 
@@ -73,15 +73,16 @@ public class Eagle2Nc extends JFrame {
 	}
 
 	private void fileOpen() {
+		
 		JFileChooser chooser;
 
 //		if (home != null && home.trim().length() > 0) {
 //			chooser = new JFileChooser(home);
 //		} else {
-//			chooser = new JFileChooser();
+			chooser = new JFileChooser();
 //		}
 
-//		int result = chooser.showOpenDialog(tp);
+		int result = chooser.showOpenDialog(this);
 //		File script = chooser.getSelectedFile();
 //		if (result == JFileChooser.APPROVE_OPTION && script.exists()) {
 //			runPanel.openFile(script);
@@ -103,8 +104,7 @@ public class Eagle2Nc extends JFrame {
 
 	private void open(File f) {
 		try {
-			Board b = new Board(f);
-			bp.setBoard(b);
+			bp.setBoard(new Board(f));
 		}
 		catch (Exception e) {
 			// TODO prompt user

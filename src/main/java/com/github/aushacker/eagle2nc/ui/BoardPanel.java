@@ -113,8 +113,8 @@ public class BoardPanel extends JPanel {
 		Graphics2D g2 = (Graphics2D) g;
 		AffineTransform previous = g2.getTransform();
 
-		g2.translate(400, 300);
-		g2.scale(10, -10);
+		g2.translate(50, 500);
+		g2.scale(7, -7);
 
 		drawAxes(g2);
 		drawDimensions(g2);
