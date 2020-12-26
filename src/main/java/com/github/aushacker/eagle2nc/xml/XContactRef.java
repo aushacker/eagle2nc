@@ -27,17 +27,17 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public class XContactRef {
 
-	@XmlAttribute
-	private String element;
+    @XmlAttribute
+    private String element;
 
-	@XmlAttribute
-	private String pad;
+    @XmlAttribute
+    private String pad;
 
-	public String getElement() {
-		return element;
-	}
+    public String getElement() {
+        return element;
+    }
 
-	public String getPad() {
-		return pad;
-	}
+    public String getPad() {
+        return pad;
+    }
 }

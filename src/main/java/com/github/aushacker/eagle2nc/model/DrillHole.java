@@ -34,16 +34,16 @@ import java.awt.geom.Ellipse2D;
  */
 public interface DrillHole {
 
-	double getDrill();
+    double getDrill();
 
-	double getX();
+    double getX();
 
-	double getY();
+    double getY();
 
-	public static Ellipse2D.Double holeShape(double x, double y, double diameter) {
-		return new Ellipse2D.Double(x - (diameter/2),
-				y - (diameter/2),
-				diameter,
-				diameter);
-	}
+    public static Ellipse2D.Double holeShape(double x, double y, double diameter) {
+        return new Ellipse2D.Double(x - (diameter/2),
+                y - (diameter/2),
+                diameter,
+                diameter);
+    }
 }

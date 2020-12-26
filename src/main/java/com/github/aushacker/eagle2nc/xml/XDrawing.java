@@ -30,18 +30,18 @@ import javax.xml.bind.annotation.XmlElementWrapper;
  */
 public class XDrawing {
 
-	@XmlElementWrapper(name="layers")
-	@XmlElement(name="layer")
-	private List<XLayer> layers;
+    @XmlElementWrapper(name="layers")
+    @XmlElement(name="layer")
+    private List<XLayer> layers;
 
-	@XmlElement
-	private XBoard board;
+    @XmlElement
+    private XBoard board;
 
-	public XBoard getBoard() {
-		return board;
-	}
+    public XBoard getBoard() {
+        return board;
+    }
 
-	public List<XLayer> getLayers() {
-		return layers;
-	}
+    public List<XLayer> getLayers() {
+        return layers;
+    }
 }

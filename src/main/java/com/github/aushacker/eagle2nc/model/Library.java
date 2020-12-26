@@ -29,25 +29,25 @@ import com.github.aushacker.eagle2nc.xml.XLibrary;
  */
 public class Library {
 
-	/**
-	 * Wrapped XML Library.
-	 */
-	private XLibrary library;
-	
-	public Library(XLibrary library) {
-		this.library = library;
-	}
+    /**
+     * Wrapped XML Library.
+     */
+    private XLibrary library;
+    
+    public Library(XLibrary library) {
+        this.library = library;
+    }
 
-	public String getName() {
-		return library.getName();
-	}
+    public String getName() {
+        return library.getName();
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder("Library(\"");
-		sb.append(getName());
-		sb.append("\"");
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Library(\"");
+        sb.append(getName());
+        sb.append("\"");
 
-		return sb.toString();
-	}
+        return sb.toString();
+    }
 }

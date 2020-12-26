@@ -34,34 +34,34 @@ import org.junit.Test;
  */
 public class XWireTest {
 
-	/**
-	 * Object under test.
-	 */
-	private XWire wire;
+    /**
+     * Object under test.
+     */
+    private XWire wire;
 
-	@Before
-	public void setUp() {
-		wire = new XWire(0, 0, 10, 10);
-	}
+    @Before
+    public void setUp() {
+        wire = new XWire(0, 0, 10, 10);
+    }
 
-	@Test
-	public void testIsConnected() {
-		XWire w2 = new XWire(10, 10, 20, 20);
-		XWire w3 = new XWire(20, 20, 10, 10);
-		XWire w4 = new XWire(-5, -5, 20, 20);
+    @Test
+    public void testIsConnected() {
+        XWire w2 = new XWire(10, 10, 20, 20);
+        XWire w3 = new XWire(20, 20, 10, 10);
+        XWire w4 = new XWire(-5, -5, 20, 20);
 
-		assertTrue(wire.isConnected(w2));
-		assertTrue(wire.isConnected(w3));
-		assertFalse(wire.isConnected(w4));
-	}
+        assertTrue(wire.isConnected(w2));
+        assertTrue(wire.isConnected(w3));
+        assertFalse(wire.isConnected(w4));
+    }
 
-	@Test
-	public void testIsWire() {
-		assertTrue(wire.isWire());
-	}
+    @Test
+    public void testIsWire() {
+        assertTrue(wire.isWire());
+    }
 
-	@Test
-	public void testToString() {
-		assertEquals("XWire( (0.0,0.0) to (10.0,10.0) )", wire.toString());
-	}
+    @Test
+    public void testToString() {
+        assertEquals("XWire( (0.0,0.0) to (10.0,10.0) )", wire.toString());
+    }
 }

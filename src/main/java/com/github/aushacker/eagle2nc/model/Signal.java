@@ -31,32 +31,32 @@ import com.github.aushacker.eagle2nc.xml.XSignal;
  */
 public class Signal {
 
-	private XSignal signal;
+    private XSignal signal;
 
-	private Collection<Trace> traces;
+    private Collection<Trace> traces;
 
-	private Collection<Via> vias;
+    private Collection<Via> vias;
 
-	public Signal(XSignal signal) {
-		this.signal = signal;
-	}
-	
-	public Collection<Trace> getTraces() {
-		if (traces == null) {
-			traces = new ArrayList<>();
-			signal.getWires().forEach(w -> traces.add(new Trace(w)));
-		}
+    public Signal(XSignal signal) {
+        this.signal = signal;
+    }
+    
+    public Collection<Trace> getTraces() {
+        if (traces == null) {
+            traces = new ArrayList<>();
+            signal.getWires().forEach(w -> traces.add(new Trace(w)));
+        }
 
-		return traces;
-	}
+        return traces;
+    }
 
-	public Collection<Via> getVias() {
-		if (vias == null) {
-			vias = new ArrayList<>();
-			
-			signal.getVias().forEach(xVia -> vias.add(new Via(xVia)));
-		}
-		
-		return vias;
-	}
+    public Collection<Via> getVias() {
+        if (vias == null) {
+            vias = new ArrayList<>();
+            
+            signal.getVias().forEach(xVia -> vias.add(new Via(xVia)));
+        }
+        
+        return vias;
+    }
 }

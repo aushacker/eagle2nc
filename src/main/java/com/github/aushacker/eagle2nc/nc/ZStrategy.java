@@ -30,16 +30,16 @@ import java.io.PrintStream;
  */
 public interface ZStrategy {
 
-	/**
-	 * A 'high' clearance, suitable for changing tools.
-	 */
-	public void toolChange(PrintStream out);
+    /**
+     * A 'high' clearance, suitable for changing tools.
+     */
+    public void toolChange(PrintStream out);
 
-	public void engraveRough(PrintStream out);
+    public void engraveRough(PrintStream out);
 
-	public void engraveFinish(PrintStream out);
+    public void engraveFinish(PrintStream out);
 
-	public boolean supportsMultiplePasses();
+    public boolean supportsMultiplePasses();
 
-	public void drill(PrintStream out);
+    public void drill(PrintStream out);
 }

@@ -37,47 +37,47 @@ import com.github.aushacker.eagle2nc.xml.XVia;
  */
 public class Via implements DrillHole {
 
-	private Area shape;
+    private Area shape;
 
-	private XVia via;
+    private XVia via;
 
-	public Via(XVia via) {
-		this.via = via;
-	}
+    public Via(XVia via) {
+        this.via = via;
+    }
 
-	public double getDrill() {
-		return via.getDrill();
-	}
+    public double getDrill() {
+        return via.getDrill();
+    }
 
-	public Ellipse2D.Double getHole() {
-		return DrillHole.holeShape(getX(), getY(), getDrill());
-	}
+    public Ellipse2D.Double getHole() {
+        return DrillHole.holeShape(getX(), getY(), getDrill());
+    }
 
-	public Shape getShape() {
-		if (shape == null) {
-			double diameter = getDrill() * 2; // TODO fudge
-			Ellipse2D.Double outer = new Ellipse2D.Double(getX() - (diameter/2),
-						getY() - (diameter/2),
-						diameter,
-						diameter);
+    public Shape getShape() {
+        if (shape == null) {
+            double diameter = getDrill() * 2; // TODO fudge
+            Ellipse2D.Double outer = new Ellipse2D.Double(getX() - (diameter/2),
+                        getY() - (diameter/2),
+                        diameter,
+                        diameter);
 
-			shape = new Area(outer);
-			shape.subtract(new Area(getHole()));
-		}
+            shape = new Area(outer);
+            //shape.subtract(new Area(getHole()));
+        }
 
-		return shape;
-	}
+        return shape;
+    }
 
-	public double getX() {
-		return via.getX();
-	}
+    public double getX() {
+        return via.getX();
+    }
 
-	public double getY() {
-		return via.getY();
-	}
+    public double getY() {
+        return via.getY();
+    }
 
-	@Override
-	public String toString() {
-		return "Via(" + getX() + ", " + getY() + ", " + getDrill() + ")";
-	}
+    @Override
+    public String toString() {
+        return "Via(" + getX() + ", " + getY() + ", " + getDrill() + ")";
+    }
 }

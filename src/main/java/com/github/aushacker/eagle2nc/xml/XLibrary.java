@@ -31,23 +31,23 @@ import javax.xml.bind.annotation.XmlElementWrapper;
  */
 public class XLibrary {
 
-	@XmlAttribute
-	private String name;
+    @XmlAttribute
+    private String name;
 
-	@XmlElementWrapper(name="packages")
-	@XmlElement(name="package")
-	private List<XPackage> packages;
+    @XmlElementWrapper(name="packages")
+    @XmlElement(name="package")
+    private List<XPackage> packages;
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public List<com.github.aushacker.eagle2nc.xml.XPackage> getPackages() {
-		return packages;
-	}
+    public List<com.github.aushacker.eagle2nc.xml.XPackage> getPackages() {
+        return packages;
+    }
 
-	@Override
-	public String toString() {
-		return "XLibrary(" + name + ")";
-	}
+    @Override
+    public String toString() {
+        return "XLibrary(" + name + ")";
+    }
 }

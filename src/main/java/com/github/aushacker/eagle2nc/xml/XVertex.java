@@ -27,17 +27,17 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public class XVertex {
 
-	@XmlAttribute
-	private double x;
-	
-	@XmlAttribute
-	private double y;
+    @XmlAttribute
+    private double x;
+    
+    @XmlAttribute
+    private double y;
 
-	public double getX() {
-		return x;
-	}
+    public double getX() {
+        return x;
+    }
 
-	public double getY() {
-		return y;
-	}
+    public double getY() {
+        return y;
+    }
 }

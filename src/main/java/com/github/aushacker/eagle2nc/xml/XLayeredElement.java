@@ -27,14 +27,14 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public abstract class XLayeredElement extends XGraphicElement {
 
-	@XmlAttribute
-	private String layer;
-	
-	public String getLayer() {
-		return layer;
-	}
+    @XmlAttribute
+    private String layer;
+    
+    public String getLayer() {
+        return layer;
+    }
 
-	public boolean isIn(String layerId) {
-		return layerId.equals(getLayer());
-	}
+    public boolean isIn(String layerId) {
+        return layerId.equals(getLayer());
+    }
 }

@@ -32,18 +32,18 @@ import org.junit.Test;
  */
 public class XLibraryTest {
 
-	/**
-	 * Object under test.
-	 */
-	private XLibrary lib;
+    /**
+     * Object under test.
+     */
+    private XLibrary lib;
 
-	@Before
-	public void setUp() {
-		lib = new XLibrary();
-	}
+    @Before
+    public void setUp() {
+        lib = new XLibrary();
+    }
 
-	@Test
-	public void testToString() {
-		assertEquals("XLibrary(null)", lib.toString());
-	}
+    @Test
+    public void testToString() {
+        assertEquals("XLibrary(null)", lib.toString());
+    }
 }

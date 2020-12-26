@@ -1,7 +1,7 @@
 /*
  * Copyright 2019 Stephen Davies
  *
- * This file is part of g2client.
+ * This file is part of eagle2nc.
  *
  * Eagle2nc is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,91 +42,91 @@ import com.github.aushacker.eagle2nc.model.Board;
  */
 public class Eagle2Nc extends JFrame {
 
-	private BoardPanel bp = new BoardPanel();
+    private BoardPanel bp = new BoardPanel();
 
-	private JMenuBar mb = new JMenuBar();
-	private JMenu fileMenu = new JMenu("File");
-	private JMenuItem openItem = new JMenuItem("Open...");
+    private JMenuBar mb = new JMenuBar();
+    private JMenu fileMenu = new JMenu("File");
+    private JMenuItem openItem = new JMenuItem("Open...");
 
-	public Eagle2Nc() {
-		super("Eagle2nc");
+    public Eagle2Nc() {
+        super("Eagle2nc");
 
-		//open(new File("data/astable_555.brd"));
-		open(new File("data/Arduino_MEGA2560_ref.brd"));
+        open(new File("data/astable_555.brd"));
+        //open(new File("data/Arduino_MEGA2560_ref.brd"));
 
-		Container contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
-		initializeMenus();
+        initializeMenus();
 
-		contentPane.add(bp, BorderLayout.CENTER);
+        contentPane.add(bp, BorderLayout.CENTER);
 
-		// Window resizes are persistent
-//		contentPane.addComponentListener(new ComponentAdapter() {
-//			@Override
-//			public void componentResized(ComponentEvent e) {
-//				preferences.setHeight(getHeight());
-//				preferences.setWidth(getWidth());
-//			}
-//		});
+        // Window resizes are persistent
+//      contentPane.addComponentListener(new ComponentAdapter() {
+//          @Override
+//          public void componentResized(ComponentEvent e) {
+//              preferences.setHeight(getHeight());
+//              preferences.setWidth(getWidth());
+//          }
+//      });
 
-//		SwingUtilities.invokeLater(new InitializationProcess(tp));
-	}
+//      SwingUtilities.invokeLater(new InitializationProcess(tp));
+    }
 
-	private void fileOpen() {
-		
-		JFileChooser chooser;
+    private void fileOpen() {
+        
+        JFileChooser chooser;
 
-//		if (home != null && home.trim().length() > 0) {
-//			chooser = new JFileChooser(home);
-//		} else {
-			chooser = new JFileChooser();
-//		}
+//      if (home != null && home.trim().length() > 0) {
+//          chooser = new JFileChooser(home);
+//      } else {
+            chooser = new JFileChooser();
+//      }
 
-		int result = chooser.showOpenDialog(this);
-//		File script = chooser.getSelectedFile();
-//		if (result == JFileChooser.APPROVE_OPTION && script.exists()) {
-//			runPanel.openFile(script);
-//		}
-	}
+        int result = chooser.showOpenDialog(this);
+//      File script = chooser.getSelectedFile();
+//      if (result == JFileChooser.APPROVE_OPTION && script.exists()) {
+//          runPanel.openFile(script);
+//      }
+    }
 
-	private void initializeMenus() {
-		mb.add(fileMenu);
-		fileMenu.add(openItem);
-		setJMenuBar(mb);
-		
-		openItem.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				fileOpen();
-			}
-		});
-	}
+    private void initializeMenus() {
+        mb.add(fileMenu);
+        fileMenu.add(openItem);
+        setJMenuBar(mb);
+        
+        openItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fileOpen();
+            }
+        });
+    }
 
-	private void open(File f) {
-		try {
-			bp.setBoard(new Board(f));
-		}
-		catch (Exception e) {
-			// TODO prompt user
-			e.printStackTrace(System.err);
-		}
-	}
+    private void open(File f) {
+        try {
+            bp.setBoard(new Board(f));
+        }
+        catch (Exception e) {
+            // TODO prompt user
+            e.printStackTrace(System.err);
+        }
+    }
 
-	private void shutdown() {
-	}
+    private void shutdown() {
+    }
 
-	public static void main(String[] args) {
-		Eagle2Nc f = new Eagle2Nc();
+    public static void main(String[] args) {
+        Eagle2Nc f = new Eagle2Nc();
 
-		f.setBounds(100, 100, 800, 600);
-		f.setVisible(true);
-		f.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        f.setBounds(100, 100, 800, 600);
+        f.setVisible(true);
+        f.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-		f.addWindowListener(new WindowAdapter() {
-			public void windowClosed(WindowEvent e) {
-				f.shutdown();
-				System.exit(0);
-			}
-		});
-	}
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosed(WindowEvent e) {
+                f.shutdown();
+                System.exit(0);
+            }
+        });
+    }
 }

@@ -32,18 +32,18 @@ import org.junit.Test;
  */
 public class XLayerTest {
 
-	/**
-	 * Object under test.
-	 */
-	private XLayer layer;
+    /**
+     * Object under test.
+     */
+    private XLayer layer;
 
-	@Before
-	public void setUp() {
-		layer = new XLayer();
-	}
+    @Before
+    public void setUp() {
+        layer = new XLayer();
+    }
 
-	@Test
-	public void testToString() {
-		assertEquals("XLayer(null, null)", layer.toString());
-	}
+    @Test
+    public void testToString() {
+        assertEquals("XLayer(null, null)", layer.toString());
+    }
 }

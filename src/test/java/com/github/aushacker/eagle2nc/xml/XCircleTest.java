@@ -32,18 +32,18 @@ import org.junit.Test;
  */
 public class XCircleTest {
 
-	/**
-	 * Object under test.
-	 */
-	private XCircle circle;
+    /**
+     * Object under test.
+     */
+    private XCircle circle;
 
-	@Before
-	public void setUp() {
-		circle = new XCircle();
-	}
+    @Before
+    public void setUp() {
+        circle = new XCircle();
+    }
 
-	@Test
-	public void testToString() {
-		assertEquals("XCircle(0.0,0.0)", circle.toString());
-	}
+    @Test
+    public void testToString() {
+        assertEquals("XCircle(0.0,0.0)", circle.toString());
+    }
 }

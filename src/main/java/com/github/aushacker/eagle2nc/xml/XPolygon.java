@@ -31,19 +31,19 @@ import javax.xml.bind.annotation.XmlElements;
  */
 public class XPolygon extends XLayeredElement {
 
-	@XmlElements({
-		@XmlElement(name="vertex", type=XVertex.class)
-	})
-	private List<XVertex> vertices;
+    @XmlElements({
+        @XmlElement(name="vertex", type=XVertex.class)
+    })
+    private List<XVertex> vertices;
 
-	@XmlAttribute
-	private double width;
+    @XmlAttribute
+    private double width;
 
-	public List<XVertex> getVertices() {
-		return vertices;
-	}
+    public List<XVertex> getVertices() {
+        return vertices;
+    }
 
-	public double getWidth() {
-		return width;
-	}
+    public double getWidth() {
+        return width;
+    }
 }

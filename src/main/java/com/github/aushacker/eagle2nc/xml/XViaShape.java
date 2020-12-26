@@ -29,20 +29,20 @@ import javax.xml.bind.annotation.XmlEnumValue;
 @XmlEnum
 public enum XViaShape {
 
-	@XmlEnumValue("octagon")
-	OCTAGON("octagon"),
-	@XmlEnumValue("round")
-	ROUND("round"),
-	@XmlEnumValue("square")
-	SQUARE("square");
+    @XmlEnumValue("octagon")
+    OCTAGON("octagon"),
+    @XmlEnumValue("round")
+    ROUND("round"),
+    @XmlEnumValue("square")
+    SQUARE("square");
 
-	private final String value;
+    private final String value;
 
-	private XViaShape(String value) {
-		this.value = value;
-	}
+    private XViaShape(String value) {
+        this.value = value;
+    }
 
-	public String value() {
-		return value;
-	}
+    public String value() {
+        return value;
+    }
 }

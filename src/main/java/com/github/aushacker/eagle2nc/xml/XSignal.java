@@ -32,44 +32,44 @@ import javax.xml.bind.annotation.XmlElements;
  */
 public class XSignal {
 
-	@XmlAttribute
-	private String name;
+    @XmlAttribute
+    private String name;
 
-	@XmlElements({
-		@XmlElement(name="contactref", type=XContactRef.class)
-	})
-	private List<XContactRef> contactReferences;
+    @XmlElements({
+        @XmlElement(name="contactref", type=XContactRef.class)
+    })
+    private List<XContactRef> contactReferences;
 
-	@XmlElements({
-		@XmlElement(name="wire", type=XWire.class)
-	})
-	private List<XWire> wires;
+    @XmlElements({
+        @XmlElement(name="wire", type=XWire.class)
+    })
+    private List<XWire> wires;
 
-	@XmlElements({
-		@XmlElement(name="via", type=XVia.class)
-	})
-	private List<XVia> vias;
+    @XmlElements({
+        @XmlElement(name="via", type=XVia.class)
+    })
+    private List<XVia> vias;
 
-	public List<XContactRef> getContactReferences() {
-		return contactReferences;
-	}
+    public List<XContactRef> getContactReferences() {
+        return contactReferences;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public List<XVia> getVias() {
-		if (vias == null) {
-			vias = new ArrayList<>();
-		}
-		return vias;
-	}
+    public List<XVia> getVias() {
+        if (vias == null) {
+            vias = new ArrayList<>();
+        }
+        return vias;
+    }
 
-	public List<XWire> getWires() {
-		if (wires == null) {
-			wires = new ArrayList<>();
-		}
+    public List<XWire> getWires() {
+        if (wires == null) {
+            wires = new ArrayList<>();
+        }
 
-		return wires;
-	}
+        return wires;
+    }
 }

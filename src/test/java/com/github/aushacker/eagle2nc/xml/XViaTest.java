@@ -32,24 +32,24 @@ import org.junit.Test;
  */
 public class XViaTest {
 
-	/**
-	 * Object under test.
-	 */
-	private XVia via;
+    /**
+     * Object under test.
+     */
+    private XVia via;
 
-	@Before
-	public void setUp() {
-		via = new XVia();
-	}
+    @Before
+    public void setUp() {
+        via = new XVia();
+    }
 
-	@Test
-	public void testGetShapeLazyInitialisation() {
-		assertSame(XViaShape.ROUND, via.getShape());
-	}
+    @Test
+    public void testGetShapeLazyInitialisation() {
+        assertSame(XViaShape.ROUND, via.getShape());
+    }
 
-	@Test
-	public void testGetShapeWhenExplicitlySet() {
-		via.setShape(XViaShape.SQUARE);
-		assertSame(XViaShape.SQUARE, via.getShape());
-	}
+    @Test
+    public void testGetShapeWhenExplicitlySet() {
+        via.setShape(XViaShape.SQUARE);
+        assertSame(XViaShape.SQUARE, via.getShape());
+    }
 }

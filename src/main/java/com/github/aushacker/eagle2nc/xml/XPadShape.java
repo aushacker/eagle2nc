@@ -29,24 +29,24 @@ import javax.xml.bind.annotation.XmlEnumValue;
 @XmlEnum
 public enum XPadShape {
 
-	@XmlEnumValue("long")
-	LONG("long"),
-	@XmlEnumValue("octagon")
-	OCTAGON("octagon"),
-	@XmlEnumValue("offset")
-	OFFSET("offset"),
-	@XmlEnumValue("round")
-	ROUND("round"),
-	@XmlEnumValue("square")
-	SQUARE("square");
+    @XmlEnumValue("long")
+    LONG("long"),
+    @XmlEnumValue("octagon")
+    OCTAGON("octagon"),
+    @XmlEnumValue("offset")
+    OFFSET("offset"),
+    @XmlEnumValue("round")
+    ROUND("round"),
+    @XmlEnumValue("square")
+    SQUARE("square");
 
-	private final String value;
+    private final String value;
 
-	private XPadShape(String value) {
-		this.value = value;
-	}
+    private XPadShape(String value) {
+        this.value = value;
+    }
 
-	public String value() {
-		return value;
-	}
+    public String value() {
+        return value;
+    }
 }

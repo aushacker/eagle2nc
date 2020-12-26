@@ -30,22 +30,22 @@ import java.util.List;
  */
 public class Dimensions implements Iterable<Point2D.Double> {
 
-	private List<Point2D.Double> points;
+    private List<Point2D.Double> points;
 
-	public Dimensions() {
-		this.points = new LinkedList<>();
-	}
+    public Dimensions() {
+        this.points = new LinkedList<>();
+    }
 
-	public void add(Point2D.Double p) {
-		points.add(p);
-	}
+    public void add(Point2D.Double p) {
+        points.add(p);
+    }
 
-	public Point2D.Double start() {
-		return points.get(0);
-	}
+    public Point2D.Double start() {
+        return points.get(0);
+    }
 
-	@Override
-	public Iterator<Point2D.Double> iterator() {
-		return points.iterator();
-	}
+    @Override
+    public Iterator<Point2D.Double> iterator() {
+        return points.iterator();
+    }
 }

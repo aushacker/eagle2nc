@@ -31,75 +31,75 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public class XWire extends XLayeredElement {
 
-	// TODO add attr for curve (package CAT16, BOURNS)
-	
-	@XmlAttribute
-	private double x1;
-	
-	@XmlAttribute
-	private double y1;
+    // TODO add attr for curve (package CAT16, BOURNS)
+    
+    @XmlAttribute
+    private double x1;
+    
+    @XmlAttribute
+    private double y1;
 
-	@XmlAttribute
-	private double x2;
-	
-	@XmlAttribute
-	private double y2;
-	
-	@XmlAttribute
-	private double width;
+    @XmlAttribute
+    private double x2;
+    
+    @XmlAttribute
+    private double y2;
+    
+    @XmlAttribute
+    private double width;
 
-	public XWire() {}
+    public XWire() {}
 
-	public XWire(double x1, double y1, double x2, double y2) {
-		this.x1 = x1;
-		this.y1 = y1;
-		this.x2 = x2;
-		this.y2 = y2;
-	}
+    public XWire(double x1, double y1, double x2, double y2) {
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+    }
 
-	public double getWidth() {
-		return width;
-	}
+    public double getWidth() {
+        return width;
+    }
 
-	public double getX1() {
-		return x1;
-	}
+    public double getX1() {
+        return x1;
+    }
 
-	public double getX2() {
-		return x2;
-	}
+    public double getX2() {
+        return x2;
+    }
 
-	public double getY1() {
-		return y1;
-	}
+    public double getY1() {
+        return y1;
+    }
 
-	public double getY2() {
-		return y2;
-	}
+    public double getY2() {
+        return y2;
+    }
 
-	public boolean isConnected(XWire other) {
-		return (this.x1 == other.x1 && this.y1 == other.y1) ||
-				(this.x1 == other.x2 && this.y1 == other.y2) ||
-				(this.x2 == other.x1 && this.y2 == other.y1) ||
-				(this.x2 == other.x2 && this.y2 == other.y2);
-	}
+    public boolean isConnected(XWire other) {
+        return (this.x1 == other.x1 && this.y1 == other.y1) ||
+                (this.x1 == other.x2 && this.y1 == other.y2) ||
+                (this.x2 == other.x1 && this.y2 == other.y1) ||
+                (this.x2 == other.x2 && this.y2 == other.y2);
+    }
 
-	@Override
-	public boolean isWire() {
-		return true;
-	}
+    @Override
+    public boolean isWire() {
+        return true;
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder result = new StringBuilder("XWire( (");
-		result.append(x1);
-		result.append(",");
-		result.append(y1);
-		result.append(") to (");
-		result.append(x2);
-		result.append(",");
-		result.append(y2);
-		result.append(") )");
-		return result.toString();
-	}
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("XWire( (");
+        result.append(x1);
+        result.append(",");
+        result.append(y1);
+        result.append(") to (");
+        result.append(x2);
+        result.append(",");
+        result.append(y2);
+        result.append(") )");
+        return result.toString();
+    }
 }

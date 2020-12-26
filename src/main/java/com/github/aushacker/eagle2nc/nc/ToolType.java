@@ -24,16 +24,16 @@ package com.github.aushacker.eagle2nc.nc;
  * @since March 2019
  */
 public enum ToolType {
-	ENGRAVER,
-	DRILL_03,
-	DRILL_04,
-	DRILL_05,
-	DRILL_06,
-	DRILL_07,
-	DRILL_08,
-	DRILL_09,
-	DRILL_10,
-	DRILL_11,
-	DRILL_12,
-	MILL;
+    ENGRAVER,
+    DRILL_03,
+    DRILL_04,
+    DRILL_05,
+    DRILL_06,
+    DRILL_07,
+    DRILL_08,
+    DRILL_09,
+    DRILL_10,
+    DRILL_11,
+    DRILL_12,
+    MILL;
 }

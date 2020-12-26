@@ -31,45 +31,45 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public class XVia extends XGraphicElement {
 
-	@XmlAttribute
-	private double drill;
+    @XmlAttribute
+    private double drill;
 
-	@XmlAttribute
-	private String extent;
+    @XmlAttribute
+    private String extent;
 
-	@XmlAttribute
-	private XViaShape shape;
+    @XmlAttribute
+    private XViaShape shape;
 
-	@XmlAttribute
-	private double x;
+    @XmlAttribute
+    private double x;
 
-	@XmlAttribute
-	private double y;
+    @XmlAttribute
+    private double y;
 
-	public double getDrill() {
-		return drill;
-	}
+    public double getDrill() {
+        return drill;
+    }
 
-	public String getExtent() {
-		return extent;
-	}
+    public String getExtent() {
+        return extent;
+    }
 
-	public XViaShape getShape() {
-		if (shape == null) {
-			shape = XViaShape.ROUND;
-		}
-		return shape;
-	}
+    public XViaShape getShape() {
+        if (shape == null) {
+            shape = XViaShape.ROUND;
+        }
+        return shape;
+    }
 
-	public double getX() {
-		return x;
-	}
+    public double getX() {
+        return x;
+    }
 
-	public double getY() {
-		return y;
-	}
+    public double getY() {
+        return y;
+    }
 
-	public void setShape(XViaShape shape) {
-		this.shape = shape;
-	}
+    public void setShape(XViaShape shape) {
+        this.shape = shape;
+    }
 }

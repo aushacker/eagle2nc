@@ -40,63 +40,63 @@ import com.github.aushacker.eagle2nc.model.Layer;
 @XmlRootElement (name = "eagle")
 public class XEagle {
 
-	@XmlAttribute
-	private String version;
+    @XmlAttribute
+    private String version;
 
-	@XmlElement
-	private XDrawing drawing;
+    @XmlElement
+    private XDrawing drawing;
 
-	/**
-	 * Convenience method.
-	 *
-	 * @return Returns all top level XWire objects nested in the &lt;plain&gt; element
-	 * that are in the Dimension layer.
-	 */
-	public Collection<XWire> getDimensionWires() {
-		return getDrawing().getBoard().getPlain()
-				.stream()
-				.filter(e -> (e.isWire() && e.isIn(Layer.DIMENSION.getId())))
-				.map(e -> (XWire) e)
-				.collect(Collectors.toList());
-	}
+    /**
+     * Convenience method.
+     *
+     * @return Returns all top level XWire objects nested in the &lt;plain&gt; element
+     * that are in the Dimension layer.
+     */
+    public Collection<XWire> getDimensionWires() {
+        return getDrawing().getBoard().getPlain()
+                .stream()
+                .filter(e -> (e.isWire() && e.isIn(Layer.DIMENSION.getId())))
+                .map(e -> (XWire) e)
+                .collect(Collectors.toList());
+    }
 
-	public XDrawing getDrawing() {
-		return drawing;
-	}
+    public XDrawing getDrawing() {
+        return drawing;
+    }
 
-	/**
-	 * Convenience method.
-	 *
-	 * @return Returns all top level XHole objects nested in the &lt;plain&gt; element.
-	 */
-	public Collection<XHole> getHoles() {
-		return getDrawing().getBoard().getHoles();
-	}
+    /**
+     * Convenience method.
+     *
+     * @return Returns all top level XHole objects nested in the &lt;plain&gt; element.
+     */
+    public Collection<XHole> getHoles() {
+        return getDrawing().getBoard().getHoles();
+    }
 
-	/**
-	 * Convenience method.
-	 *
-	 * @return Eagle component library fragments included in the board.
-	 */
-	public Collection<XLibrary> getLibraries() {
-		return getDrawing().getBoard().getLibraries();
-	}
+    /**
+     * Convenience method.
+     *
+     * @return Eagle component library fragments included in the board.
+     */
+    public Collection<XLibrary> getLibraries() {
+        return getDrawing().getBoard().getLibraries();
+    }
 
-	/**
-	 * Convenience method.
-	 */
-	public Collection<XSignal> getSignals() {
-		return getDrawing().getBoard().getSignals();
-	}
+    /**
+     * Convenience method.
+     */
+    public Collection<XSignal> getSignals() {
+        return getDrawing().getBoard().getSignals();
+    }
 
-	public String getVersion() {
-		return version;
-	}
+    public String getVersion() {
+        return version;
+    }
 
-	/**
-	 * Convenience method.
-	 */
-	public Collection<XVia> getVias() {
-		return getDrawing().getBoard().getVias();
-	}
+    /**
+     * Convenience method.
+     */
+    public Collection<XVia> getVias() {
+        return getDrawing().getBoard().getVias();
+    }
 }

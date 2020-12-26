@@ -29,65 +29,65 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public class XElement {
 
-	@XmlAttribute
-	private String library;
+    @XmlAttribute
+    private String library;
 
-	@XmlAttribute
-	private String name;
+    @XmlAttribute
+    private String name;
 
-	// package is Java reserved word
-	@XmlAttribute(name="package")
-	private String pkg;
+    // package is Java reserved word
+    @XmlAttribute(name="package")
+    private String pkg;
 
-	@XmlAttribute(name="rot")
-	private String rotation;
-	
-	@XmlAttribute
-	private String smashed;
+    @XmlAttribute(name="rot")
+    private String rotation;
+    
+    @XmlAttribute
+    private String smashed;
 
-	@XmlAttribute
-	private String value;
-	
-	@XmlAttribute
-	private double x;
+    @XmlAttribute
+    private String value;
+    
+    @XmlAttribute
+    private double x;
 
-	@XmlAttribute
-	private double y;
+    @XmlAttribute
+    private double y;
 
-	public String getLibrary() {
-		return library;
-	}
+    public String getLibrary() {
+        return library;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getPkg() {
-		return pkg;
-	}
+    public String getPkg() {
+        return pkg;
+    }
 
-	public String getRotation() {
-		return rotation;
-	}
+    public String getRotation() {
+        return rotation;
+    }
 
-	public String getSmashed() {
-		return smashed;
-	}
+    public String getSmashed() {
+        return smashed;
+    }
 
-	public String getValue() {
-		return value;
-	}
+    public String getValue() {
+        return value;
+    }
 
-	public double getX() {
-		return x;
-	}
+    public double getX() {
+        return x;
+    }
 
-	public double getY() {
-		return y;
-	}
+    public double getY() {
+        return y;
+    }
 
-	@Override
-	public String toString() {
-		return "XElement(" + name + ")";
-	}
+    @Override
+    public String toString() {
+        return "XElement(" + name + ")";
+    }
 }

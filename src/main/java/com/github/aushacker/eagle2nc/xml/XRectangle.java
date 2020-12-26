@@ -27,36 +27,36 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public class XRectangle extends XLayeredElement {
 
-	@XmlAttribute
-	private double x1;
-	
-	@XmlAttribute
-	private double y1;
+    @XmlAttribute
+    private double x1;
+    
+    @XmlAttribute
+    private double y1;
 
-	@XmlAttribute
-	private double x2;
-	
-	@XmlAttribute
-	private double y2;
-	
-	public double getX1() {
-		return x1;
-	}
+    @XmlAttribute
+    private double x2;
+    
+    @XmlAttribute
+    private double y2;
+    
+    public double getX1() {
+        return x1;
+    }
 
-	public double getX2() {
-		return x2;
-	}
+    public double getX2() {
+        return x2;
+    }
 
-	public double getY1() {
-		return y1;
-	}
+    public double getY1() {
+        return y1;
+    }
 
-	public double getY2() {
-		return y2;
-	}
+    public double getY2() {
+        return y2;
+    }
 
-	@Override
-	public String toString() {
-		return "XRectangle( (" + x1 + "," + y1 + ") to (" + x2 + "," + y2 + ") )";
-	}
+    @Override
+    public String toString() {
+        return "XRectangle( (" + x1 + "," + y1 + ") to (" + x2 + "," + y2 + ") )";
+    }
 }

@@ -27,39 +27,39 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public class XSmd extends XLayeredElement {
 
-	// ID
-	@XmlAttribute
-	private String name;
+    // ID
+    @XmlAttribute
+    private String name;
 
-	@XmlAttribute
-	private double dx;
-	
-	@XmlAttribute
-	private double dy;
+    @XmlAttribute
+    private double dx;
+    
+    @XmlAttribute
+    private double dy;
 
-	@XmlAttribute
-	private double x;
-	
-	@XmlAttribute
-	private double y;
+    @XmlAttribute
+    private double x;
+    
+    @XmlAttribute
+    private double y;
 
-	public double getDx() {
-		return dx;
-	}
+    public double getDx() {
+        return dx;
+    }
 
-	public double getDy() {
-		return dy;
-	}
+    public double getDy() {
+        return dy;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public double getX() {
-		return x;
-	}
+    public double getX() {
+        return x;
+    }
 
-	public double getY() {
-		return y;
-	}
+    public double getY() {
+        return y;
+    }
 }

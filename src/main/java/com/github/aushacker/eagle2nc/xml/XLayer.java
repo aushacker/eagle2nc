@@ -29,50 +29,50 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public class XLayer {
 
-	@XmlAttribute
-	private String number;
-	
-	@XmlAttribute
-	private String name;
-	
-	@XmlAttribute
-	private String color;
-	
-	@XmlAttribute
-	private String fill;
-	
-	@XmlAttribute
-	private String visible;
-	
-	@XmlAttribute
-	private String active;
-	
-	public String getActive() {
-		return active;
-	}
-	
-	public String getColor() {
-		return color;
-	}
+    @XmlAttribute
+    private String number;
+    
+    @XmlAttribute
+    private String name;
+    
+    @XmlAttribute
+    private String color;
+    
+    @XmlAttribute
+    private String fill;
+    
+    @XmlAttribute
+    private String visible;
+    
+    @XmlAttribute
+    private String active;
+    
+    public String getActive() {
+        return active;
+    }
+    
+    public String getColor() {
+        return color;
+    }
 
-	public String getFill() {
-		return fill;
-	}
+    public String getFill() {
+        return fill;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getNumber() {
-		return number;
-	}
+    public String getNumber() {
+        return number;
+    }
 
-	public String getVisible() {
-		return visible;
-	}
-	
-	@Override
-	public String toString() {
-		return "XLayer(" + number + ", " + name + ")";
-	}
+    public String getVisible() {
+        return visible;
+    }
+    
+    @Override
+    public String toString() {
+        return "XLayer(" + number + ", " + name + ")";
+    }
 }

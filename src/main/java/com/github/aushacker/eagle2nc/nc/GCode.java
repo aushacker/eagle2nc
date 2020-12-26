@@ -27,23 +27,23 @@ package com.github.aushacker.eagle2nc.nc;
  */
 public class GCode {
 
-	public static final String RAPID = "G0";
-	public static final String LINEAR = "G1";
+    public static final String RAPID = "G0";
+    public static final String LINEAR = "G1";
 
-	/**
-	 * Miscellaneous Functions
-	 */
-	public static final String SPINDLE_CW = "M03";
-	public static final String SPINDLE_CCW = "M04";
-	public static final String SPINDLE_STOP = "M05";
-	public static final String ATC = "M06";
-	public static final String COOLANT_MIST = "M07";
-	public static final String COOLANT_FLOOD = "M08";
-	public static final String COOLANT_OFF = "M09";
-	public static final String PROGRAM_END = "M30";
+    /**
+     * Miscellaneous Functions
+     */
+    public static final String SPINDLE_CW = "M03";
+    public static final String SPINDLE_CCW = "M04";
+    public static final String SPINDLE_STOP = "M05";
+    public static final String ATC = "M06";
+    public static final String COOLANT_MIST = "M07";
+    public static final String COOLANT_FLOOD = "M08";
+    public static final String COOLANT_OFF = "M09";
+    public static final String PROGRAM_END = "M30";
 
-	/**
-	 * Prevent instantiation.
-	 */
-	private GCode() {}
+    /**
+     * Prevent instantiation.
+     */
+    private GCode() {}
 }

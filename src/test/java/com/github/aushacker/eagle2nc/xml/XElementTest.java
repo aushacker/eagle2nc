@@ -32,18 +32,18 @@ import org.junit.Test;
  */
 public class XElementTest {
 
-	/**
-	 * Object under test.
-	 */
-	private XElement element;
+    /**
+     * Object under test.
+     */
+    private XElement element;
 
-	@Before
-	public void setUp() {
-		element = new XElement();
-	}
+    @Before
+    public void setUp() {
+        element = new XElement();
+    }
 
-	@Test
-	public void testToString() {
-		assertEquals("XElement(null)", element.toString());
-	}
+    @Test
+    public void testToString() {
+        assertEquals("XElement(null)", element.toString());
+    }
 }

@@ -27,36 +27,36 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public class XCircle extends XLayeredElement {
 
-	@XmlAttribute
-	private double radius;
+    @XmlAttribute
+    private double radius;
 
-	@XmlAttribute
-	private double x;
+    @XmlAttribute
+    private double x;
 
-	@XmlAttribute
-	private double y;
+    @XmlAttribute
+    private double y;
 
-	@XmlAttribute
-	private double width;
+    @XmlAttribute
+    private double width;
 
-	public double getRadius() {
-		return radius;
-	}
+    public double getRadius() {
+        return radius;
+    }
 
-	public double getWidth() {
-		return width;
-	}
+    public double getWidth() {
+        return width;
+    }
 
-	public double getX() {
-		return x;
-	}
+    public double getX() {
+        return x;
+    }
 
-	public double getY() {
-		return y;
-	}
+    public double getY() {
+        return y;
+    }
 
-	@Override
-	public String toString() {
-		return "XCircle(" + x + "," + y + ")";
-	}
+    @Override
+    public String toString() {
+        return "XCircle(" + x + "," + y + ")";
+    }
 }

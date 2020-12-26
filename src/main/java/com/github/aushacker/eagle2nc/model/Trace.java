@@ -33,88 +33,88 @@ import com.github.aushacker.eagle2nc.xml.XWire;
  */
 public class Trace {
 
-	private Layer layer;
+    private Layer layer;
 
-	private Area shape;
+    private Area shape;
 
-	private XWire wire;
-	
-	public Trace(XWire wire) {
-		this.wire = wire;
-	}
+    private XWire wire;
+    
+    public Trace(XWire wire) {
+        this.wire = wire;
+    }
 
-	public Layer getLayer() {
-		if (layer == null) {
-			layer = Layer.lookup(wire.getLayer());
-		}
-		
-		return layer;
-	}
+    public Layer getLayer() {
+        if (layer == null) {
+            layer = Layer.lookup(wire.getLayer());
+        }
+        
+        return layer;
+    }
 
-	/**
-	 * Gnarly bit of trigonometry going on here. Traces a rectangle around the
-	 * wire using trig to work out perpendicular points at each end.
-	 * <p>
-	 * The ends are drawn using circles (Ellipses) to ensure a smooth transition
-	 * to the next trace segment.
-	 */
-	public Shape getShape() {
-		if (shape == null) {
-			double theta = Math.atan2(getY2() - getY1(), getX2() - getX1());
+    /**
+     * Gnarly bit of trigonometry going on here. Traces a rectangle around the
+     * wire using trig to work out perpendicular points at each end.
+     * <p>
+     * The ends are drawn using circles (Ellipses) to ensure a smooth transition
+     * to the next trace segment.
+     */
+    public Shape getShape() {
+        if (shape == null) {
+            double theta = Math.atan2(getY2() - getY1(), getX2() - getX1());
 
-			Point2D.Double p1 = new Point2D.Double(
-					getX1() + (getWidth() / 2 * Math.cos(theta + Math.PI / 2)),
-					getY1() + (getWidth() / 2 * Math.sin(theta + Math.PI / 2)));	
-			Point2D.Double p2 = new Point2D.Double(
-					getX2() + (getWidth() / 2 * Math.cos(theta + Math.PI / 2)),
-					getY2() + (getWidth() / 2 * Math.sin(theta + Math.PI / 2)));		
-			Point2D.Double p3 = new Point2D.Double(
-					getX2() + (getWidth() / 2 * Math.cos(theta - Math.PI / 2)),
-					getY2() + (getWidth() / 2 * Math.sin(theta - Math.PI / 2)));
-			Point2D.Double p4 = new Point2D.Double(
-					getX1() + (getWidth() / 2 * Math.cos(theta - Math.PI / 2)),
-					getY1() + (getWidth() / 2 * Math.sin(theta - Math.PI / 2)));
+            Point2D.Double p1 = new Point2D.Double(
+                    getX1() + (getWidth() / 2 * Math.cos(theta + Math.PI / 2)),
+                    getY1() + (getWidth() / 2 * Math.sin(theta + Math.PI / 2)));    
+            Point2D.Double p2 = new Point2D.Double(
+                    getX2() + (getWidth() / 2 * Math.cos(theta + Math.PI / 2)),
+                    getY2() + (getWidth() / 2 * Math.sin(theta + Math.PI / 2)));        
+            Point2D.Double p3 = new Point2D.Double(
+                    getX2() + (getWidth() / 2 * Math.cos(theta - Math.PI / 2)),
+                    getY2() + (getWidth() / 2 * Math.sin(theta - Math.PI / 2)));
+            Point2D.Double p4 = new Point2D.Double(
+                    getX1() + (getWidth() / 2 * Math.cos(theta - Math.PI / 2)),
+                    getY1() + (getWidth() / 2 * Math.sin(theta - Math.PI / 2)));
 
-			Path2D.Double path = new Path2D.Double();
-			path.moveTo(p1.x, p1.y);
-			path.lineTo(p2.x,  p2.y);
-			path.lineTo(p3.x,  p3.y);
-			path.lineTo(p4.x,  p4.y);
-			path.lineTo(p1.x,  p1.y);
-			
-			shape = new Area(path);
-			
-			shape.add(new Area(new Ellipse2D.Double(
-					getX1() - getWidth() / 2,
-					getY1() - getWidth() / 2,
-					getWidth(), getWidth())));
+            Path2D.Double path = new Path2D.Double();
+            path.moveTo(p1.x, p1.y);
+            path.lineTo(p2.x,  p2.y);
+            path.lineTo(p3.x,  p3.y);
+            path.lineTo(p4.x,  p4.y);
+            path.lineTo(p1.x,  p1.y);
+            
+            shape = new Area(path);
+            
+            shape.add(new Area(new Ellipse2D.Double(
+                    getX1() - getWidth() / 2,
+                    getY1() - getWidth() / 2,
+                    getWidth(), getWidth())));
 
-			shape.add(new Area(new Ellipse2D.Double(
-					getX2() - getWidth() / 2,
-					getY2() - getWidth() / 2,
-					getWidth(), getWidth())));
-		}
+            shape.add(new Area(new Ellipse2D.Double(
+                    getX2() - getWidth() / 2,
+                    getY2() - getWidth() / 2,
+                    getWidth(), getWidth())));
+        }
 
-		return shape;
-	}
+        return shape;
+    }
 
-	public double getWidth() {
-		return wire.getWidth();
-	}
+    public double getWidth() {
+        return wire.getWidth();
+    }
 
-	public double getX1() {
-		return wire.getX1();
-	}
-	
-	public double getX2() {
-		return wire.getX2();
-	}
-	
-	public double getY1() {
-		return wire.getY1();
-	}
-	
-	public double getY2() {
-		return wire.getY2();
-	}
+    public double getX1() {
+        return wire.getX1();
+    }
+    
+    public double getX2() {
+        return wire.getX2();
+    }
+    
+    public double getY1() {
+        return wire.getY1();
+    }
+    
+    public double getY2() {
+        return wire.getY2();
+    }
 }

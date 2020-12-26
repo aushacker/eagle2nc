@@ -32,18 +32,18 @@ import org.junit.Test;
  */
 public class XRectangleTest {
 
-	/**
-	 * Object under test.
-	 */
-	private XRectangle rect;
+    /**
+     * Object under test.
+     */
+    private XRectangle rect;
 
-	@Before
-	public void setUp() {
-		rect = new XRectangle();
-	}
+    @Before
+    public void setUp() {
+        rect = new XRectangle();
+    }
 
-	@Test
-	public void testToString() {
-		assertEquals("XRectangle( (0.0,0.0) to (0.0,0.0) )", rect.toString());
-	}
+    @Test
+    public void testToString() {
+        assertEquals("XRectangle( (0.0,0.0) to (0.0,0.0) )", rect.toString());
+    }
 }

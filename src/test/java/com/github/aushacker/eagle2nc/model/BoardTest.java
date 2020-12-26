@@ -39,39 +39,39 @@ import com.github.aushacker.eagle2nc.xml.XEagle;
  */
 public class BoardTest {
 
-	private static final String TEST_FILE = "data/Arduino_MEGA2560_ref.brd";
-	//private static final String TEST_FILE = "data/ms-adsr-02.brd";
+    private static final String TEST_FILE = "data/Arduino_MEGA2560_ref.brd";
+    //private static final String TEST_FILE = "data/ms-adsr-02.brd";
 
-	//private static final double THRESHOLD = 0.0000001;
+    //private static final double THRESHOLD = 0.0000001;
 
-	private static XEagle eagle;
+    private static XEagle eagle;
 
-	private Board board;
-	
-	@BeforeClass
-	public static void setupClass() throws Exception {
-	    eagle = Parser.parse(new File(TEST_FILE));
-	}
+    private Board board;
+    
+    @BeforeClass
+    public static void setupClass() throws Exception {
+        eagle = Parser.parse(new File(TEST_FILE));
+    }
 
-	@Before
-	public void setUp() {
-		board = new Board(eagle);
-	}
+    @Before
+    public void setUp() {
+        board = new Board(eagle);
+    }
 
-	@AfterClass
-	public static void afterClass() {
-		eagle = null;
-	}
+    @AfterClass
+    public static void afterClass() {
+        eagle = null;
+    }
 
-	@Test
-	public void testHoleCount() {
-		board.getHoles()
-			.forEach(h -> System.out.println(h));
-		assertEquals(150, board.getHoles().size());
-	}
+    @Test
+    public void testHoleCount() {
+        board.getHoles()
+            .forEach(h -> System.out.println(h));
+        assertEquals(150, board.getHoles().size());
+    }
 
-	@Test
-	public void testLibraryCount() {
-		assertEquals(17, board.getLibraries().size());
-	}
+    @Test
+    public void testLibraryCount() {
+        assertEquals(17, board.getLibraries().size());
+    }
 }

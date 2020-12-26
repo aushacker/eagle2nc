@@ -27,62 +27,62 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public class XPad extends XGraphicElement {
 
-	static final String DEFAULT_ROTATION = "R0";
+    static final String DEFAULT_ROTATION = "R0";
 
-	// ID
-	@XmlAttribute
-	private String name;
+    // ID
+    @XmlAttribute
+    private String name;
 
-	@XmlAttribute
-	private double drill;
+    @XmlAttribute
+    private double drill;
 
-	@XmlAttribute(name="rot")
-	private String rotation;
+    @XmlAttribute(name="rot")
+    private String rotation;
 
-	@XmlAttribute
-	private XPadShape shape;
+    @XmlAttribute
+    private XPadShape shape;
 
-	@XmlAttribute
-	private double x;
+    @XmlAttribute
+    private double x;
 
-	@XmlAttribute
-	private double y;
+    @XmlAttribute
+    private double y;
 
-	public double getDrill() {
-		return drill;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getRotation() {
-		if (rotation == null) {
-			rotation = DEFAULT_ROTATION;
-		}
-		return rotation;
-	}
-
-	public XPadShape getShape() {
-		if (shape == null) {
-			shape = XPadShape.ROUND;
-		}
-		return shape;
-	}
-
-	public double getX() {
-		return x;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-    public void setRotation(String rotation) {
-    	this.rotation = rotation;
+    public double getDrill() {
+        return drill;
     }
 
-	public void setShape(XPadShape shape) {
-		this.shape = shape;
-	}
+    public String getName() {
+        return name;
+    }
+
+    public String getRotation() {
+        if (rotation == null) {
+            rotation = DEFAULT_ROTATION;
+        }
+        return rotation;
+    }
+
+    public XPadShape getShape() {
+        if (shape == null) {
+            shape = XPadShape.ROUND;
+        }
+        return shape;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setRotation(String rotation) {
+        this.rotation = rotation;
+    }
+
+    public void setShape(XPadShape shape) {
+        this.shape = shape;
+    }
 }

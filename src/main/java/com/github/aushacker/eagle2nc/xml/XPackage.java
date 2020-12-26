@@ -31,32 +31,32 @@ import javax.xml.bind.annotation.XmlElements;
  */
 public class XPackage {
 
-	// ID
-	@XmlAttribute
-	private String name;
+    // ID
+    @XmlAttribute
+    private String name;
 
-	@XmlElement
-	private String description;
-	
-	@XmlElements({
-		@XmlElement(name="circle", type=XCircle.class),
-		@XmlElement(name="pad", type=XPad.class),
-		@XmlElement(name="polygon", type=XPolygon.class),
-		@XmlElement(name="rectangle", type=XRectangle.class),
-		@XmlElement(name="smd", type=XSmd.class),
-		@XmlElement(name="wire", type=XWire.class)
-	})
-	private List<XGraphicElement> elements;
+    @XmlElement
+    private String description;
+    
+    @XmlElements({
+        @XmlElement(name="circle", type=XCircle.class),
+        @XmlElement(name="pad", type=XPad.class),
+        @XmlElement(name="polygon", type=XPolygon.class),
+        @XmlElement(name="rectangle", type=XRectangle.class),
+        @XmlElement(name="smd", type=XSmd.class),
+        @XmlElement(name="wire", type=XWire.class)
+    })
+    private List<XGraphicElement> elements;
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public List<XGraphicElement> getElements() {
-		return elements;
-	}
+    public List<XGraphicElement> getElements() {
+        return elements;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 }

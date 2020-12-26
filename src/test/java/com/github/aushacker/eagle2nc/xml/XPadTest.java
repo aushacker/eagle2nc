@@ -33,35 +33,35 @@ import org.junit.Test;
  */
 public class XPadTest {
 
-	/**
-	 * Object under test.
-	 */
-	private XPad pad;
+    /**
+     * Object under test.
+     */
+    private XPad pad;
 
-	@Before
-	public void setUp() {
-		pad = new XPad();
-	}
+    @Before
+    public void setUp() {
+        pad = new XPad();
+    }
 
-	@Test
-	public void testGetRotationLazyInitialisation() {
-		assertSame(XPad.DEFAULT_ROTATION, pad.getRotation());
-	}
+    @Test
+    public void testGetRotationLazyInitialisation() {
+        assertSame(XPad.DEFAULT_ROTATION, pad.getRotation());
+    }
 
-	@Test
-	public void testGetRotationWhenExplicitlySet() {
-		pad.setRotation("R90");
-		assertEquals("R90", pad.getRotation());
-	}
+    @Test
+    public void testGetRotationWhenExplicitlySet() {
+        pad.setRotation("R90");
+        assertEquals("R90", pad.getRotation());
+    }
 
-	@Test
-	public void testGetShapeLazyInitialisation() {
-		assertSame(XPadShape.ROUND, pad.getShape());
-	}
+    @Test
+    public void testGetShapeLazyInitialisation() {
+        assertSame(XPadShape.ROUND, pad.getShape());
+    }
 
-	@Test
-	public void testGetShapeWhenExplicitlySet() {
-		pad.setShape(XPadShape.OCTAGON);
-		assertSame(XPadShape.OCTAGON, pad.getShape());
-	}
+    @Test
+    public void testGetShapeWhenExplicitlySet() {
+        pad.setShape(XPadShape.OCTAGON);
+        assertSame(XPadShape.OCTAGON, pad.getShape());
+    }
 }

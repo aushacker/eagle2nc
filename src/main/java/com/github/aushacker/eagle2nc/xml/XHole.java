@@ -27,33 +27,33 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public class XHole extends XGraphicElement {
 
-	@XmlAttribute
-	private double drill;
+    @XmlAttribute
+    private double drill;
 
-	@XmlAttribute
-	private double x;
-	
-	@XmlAttribute
-	private double y;
+    @XmlAttribute
+    private double x;
+    
+    @XmlAttribute
+    private double y;
 
-	public double getDrill() {
-		return drill;
-	}
+    public double getDrill() {
+        return drill;
+    }
 
-	public double getX() {
-		return x;
-	}
+    public double getX() {
+        return x;
+    }
 
-	public double getY() {
-		return y;
-	}
+    public double getY() {
+        return y;
+    }
 
-	public boolean isHole() {
-		return true;
-	}
+    public boolean isHole() {
+        return true;
+    }
 
-	@Override
-	public String toString() {
-		return "XHole(" + x + "," + y + ")";
-	}
+    @Override
+    public String toString() {
+        return "XHole(" + x + "," + y + ")";
+    }
 }

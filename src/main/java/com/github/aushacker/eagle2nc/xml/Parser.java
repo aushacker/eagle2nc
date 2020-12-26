@@ -34,10 +34,10 @@ import javax.xml.bind.Unmarshaller;
  */
 public class Parser {
 
-	public static XEagle parse(File f) throws JAXBException {
-		System.setProperty("javax.xml.accessExternalDTD", "all");
-		JAXBContext jc = JAXBContext.newInstance(XEagle.class);
-	    Unmarshaller u = jc.createUnmarshaller();
-	    return (XEagle) u.unmarshal(f);
-	}
+    public static XEagle parse(File f) throws JAXBException {
+        System.setProperty("javax.xml.accessExternalDTD", "all");
+        JAXBContext jc = JAXBContext.newInstance(XEagle.class);
+        Unmarshaller u = jc.createUnmarshaller();
+        return (XEagle) u.unmarshal(f);
+    }
 }

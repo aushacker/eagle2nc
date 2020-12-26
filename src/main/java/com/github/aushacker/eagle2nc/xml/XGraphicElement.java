@@ -28,15 +28,15 @@ package com.github.aushacker.eagle2nc.xml;
  */
 public abstract class XGraphicElement {
 
-	public boolean isHole() {
-		return false;
-	}
+    public boolean isHole() {
+        return false;
+    }
 
-	public boolean isIn(String layerId) {
-		return false;
-	}
+    public boolean isIn(String layerId) {
+        return false;
+    }
 
-	public boolean isWire() {
-		return false;
-	}
+    public boolean isWire() {
+        return false;
+    }
 }

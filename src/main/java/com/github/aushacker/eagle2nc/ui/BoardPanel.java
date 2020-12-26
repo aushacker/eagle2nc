@@ -27,12 +27,15 @@ import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.swing.JPanel;
 
 import com.github.aushacker.eagle2nc.model.Board;
 import com.github.aushacker.eagle2nc.model.Layer;
+import com.github.aushacker.eagle2nc.model.Via;
 
 /**
  * @author Stephen Davies
@@ -40,91 +43,114 @@ import com.github.aushacker.eagle2nc.model.Layer;
  */
 public class BoardPanel extends JPanel {
 
-	private Board board;
+    private static final Map<String, Color> colors;
 
-	private void drawAxes(Graphics2D g) {
-		g.setColor(Color.CYAN);
-		Stroke savedStroke = g.getStroke();
-		g.setStroke(new BasicStroke(0.1f));
+    static {
+        colors = new HashMap<>();
+        colors.put("bottom", new Color(0, 119, 174));
+        colors.put("pad", new Color(39, 177, 119));
+        colors.put("top", new Color(163, 5, 0));
+        colors.put("via", new Color(197, 180, 73));
+    }
 
-		// X axis
-		g.draw(new Line2D.Double(-200, 0, 200, 0));
-		
-		// Y axis
-		g.draw(new Line2D.Double(0, -200, 0, 200));
-		
-		g.setStroke(savedStroke);
-	}
+    private Board board;
 
-	private void drawDimensions(Graphics2D g) {
-		g.setColor(Color.BLACK);
-		Stroke savedStroke = g.getStroke();
-		g.setStroke(new BasicStroke(0.1f));
+    private void drawAxes(Graphics2D g) {
+        g.setColor(Color.CYAN);
+        Stroke savedStroke = g.getStroke();
+        g.setStroke(new BasicStroke(0.1f));
 
-		Iterator<Point2D.Double> points = board.getDimensions().iterator();
-		Point2D.Double start = points.next();
-		Point2D.Double current = start;
-		
-		while (points.hasNext()) {
-			Point2D.Double next = points.next();
-			g.draw(new Line2D.Double(current, next));
-			current = next;
-		}
+        // X axis
+        g.draw(new Line2D.Double(-200, 0, 200, 0));
+        
+        // Y axis
+        g.draw(new Line2D.Double(0, -200, 0, 200));
+        
+        g.setStroke(savedStroke);
+    }
 
-		g.draw(new Line2D.Double(current, start));
-		
-		g.setStroke(savedStroke);
-	}
+    private void drawDimensions(Graphics2D g) {
+        Stroke savedStroke = g.getStroke();
+        g.setStroke(new BasicStroke(0.1f));
 
-	private void drawTraces(Graphics2D g) {
-		Stroke savedStroke = g.getStroke();
-		g.setStroke(new BasicStroke(0.0f));
+        g.setColor(Color.BLACK);
+        Iterator<Point2D.Double> points = board.getDimensions().iterator();
+        Point2D.Double start = points.next();
+        Point2D.Double current = start;
+        
+        while (points.hasNext()) {
+            Point2D.Double next = points.next();
+            g.draw(new Line2D.Double(current, next));
+            current = next;
+        }
 
-		g.setColor(Color.RED);
-		board.getSignals()
-			.forEach(s ->
-				s.getTraces().stream()
-					.filter(t -> t.getLayer() == Layer.TOP)
-					.forEach(t -> g.fill(t.getShape())));
-			
-		g.setColor(Color.BLUE);
-		board.getSignals()
-			.forEach(s ->
-				s.getTraces().stream()
-					.filter(t -> t.getLayer() == Layer.BOTTOM)
-					.forEach(t -> g.fill(t.getShape())));
-			
-		g.setStroke(savedStroke);
-	}
+        g.draw(new Line2D.Double(current, start));
+        
+        g.setStroke(savedStroke);
+    }
 
-	private void drawVias(Graphics2D g) {
-		g.setColor(Color.GREEN);
-		Stroke savedStroke = g.getStroke();
-		g.setStroke(new BasicStroke(0.0f));
+    private void drawPads(Graphics2D g) {
+        Stroke savedStroke = g.getStroke();
+        g.setStroke(new BasicStroke(0.0f));
 
-		board.getVias().forEach(v -> g.fill(v.getShape()));
+        g.setColor(colors.get("pad"));
+        //TODO
+        //board.getPads().forEach(p -> g.fill(p.getShape()));
 
-		g.setStroke(savedStroke);
-	}
+        g.setStroke(savedStroke);
+    }
 
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		
-		Graphics2D g2 = (Graphics2D) g;
-		AffineTransform previous = g2.getTransform();
+    private void drawTraces(Graphics2D g) {
+        Stroke savedStroke = g.getStroke();
+        g.setStroke(new BasicStroke(0.0f));
 
-		g2.translate(50, 500);
-		g2.scale(7, -7);
+        g.setColor(colors.get("top"));
+        board.getSignals()
+            .forEach(s ->
+                s.getTraces().stream()
+                    .filter(t -> t.getLayer() == Layer.TOP)
+                    .forEach(t -> g.fill(t.getShape())));
+            
+        g.setColor(colors.get("bottom"));
+        board.getSignals()
+            .forEach(s ->
+                s.getTraces().stream()
+                    .filter(t -> t.getLayer() == Layer.BOTTOM)
+                    .forEach(t -> g.fill(t.getShape())));
+            
+        g.setStroke(savedStroke);
+    }
 
-		drawAxes(g2);
-		drawDimensions(g2);
-		drawTraces(g2);
-		drawVias(g2);
+    private void drawVias(Graphics2D g) {
+        Stroke savedStroke = g.getStroke();
+        g.setStroke(new BasicStroke(0.0f));
 
-		g2.setTransform(previous);
-	}
+        g.setColor(colors.get("via"));
+        board.getVias().forEach(v -> g.fill(v.getShape()));
 
-	public void setBoard(Board board) {
-		this.board = board;
-	}
+        g.setStroke(savedStroke);
+    }
+
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
+        Graphics2D g2 = (Graphics2D) g;
+        AffineTransform previous = g2.getTransform();
+
+        g2.translate(50, 500);
+        g2.scale(7, -7);
+
+        drawAxes(g2);
+        drawDimensions(g2);
+        drawTraces(g2);
+        //TODO
+        //drawPads(g2);
+        drawVias(g2);
+
+        g2.setTransform(previous);
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
 }

@@ -32,18 +32,18 @@ import org.junit.Test;
  */
 public class XHoleTest {
 
-	/**
-	 * Object under test.
-	 */
-	private XHole hole;
+    /**
+     * Object under test.
+     */
+    private XHole hole;
 
-	@Before
-	public void setUp() {
-		hole = new XHole();
-	}
+    @Before
+    public void setUp() {
+        hole = new XHole();
+    }
 
-	@Test
-	public void testToString() {
-		assertEquals("XHole(0.0,0.0)", hole.toString());
-	}
+    @Test
+    public void testToString() {
+        assertEquals("XHole(0.0,0.0)", hole.toString());
+    }
 }

@@ -43,128 +43,128 @@ import com.github.aushacker.eagle2nc.xml.XWire;
  */
 public class Board {
 
-	private XEagle xmlModel;
+    private XEagle xmlModel;
 
-	private Dimensions dimensions;
+    private Dimensions dimensions;
 
-	private Collection<DrillHole> holes;
+    private Collection<DrillHole> holes;
 
-	private Map<String, Library> libraries;
+    private Map<String, Library> libraries;
 
-	private Collection<Signal> signals;
+    private Collection<Signal> signals;
 
-	public Board(File f) {
-		try {
-			this.xmlModel = Parser.parse(f);
-		}
-		catch (JAXBException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    public Board(File f) {
+        try {
+            this.xmlModel = Parser.parse(f);
+        }
+        catch (JAXBException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	public Board(XEagle xmlModel) {
-		this.xmlModel = xmlModel;
-	}
+    public Board(XEagle xmlModel) {
+        this.xmlModel = xmlModel;
+    }
 
-	public Dimensions getDimensions() {
-		if (dimensions == null) {
-			initializeDimensions();
-		}
-		return dimensions;
-	}
+    public Dimensions getDimensions() {
+        if (dimensions == null) {
+            initializeDimensions();
+        }
+        return dimensions;
+    }
 
-	public Collection<DrillHole> getHoles() {
-		if (holes == null) {
-			holes = new ArrayList<>();
+    public Collection<DrillHole> getHoles() {
+        if (holes == null) {
+            holes = new ArrayList<>();
 
-			// Get top-level holes
-			xmlModel.getHoles()
-				.forEach(xHole -> holes.add(new Hole(xHole)));
+            // Get top-level holes
+            xmlModel.getHoles()
+                .forEach(xHole -> holes.add(new Hole(xHole)));
 
-			// Get vias
-			xmlModel.getVias()
-				.forEach(xVia -> holes.add(new Via(xVia)));
-			
-			// Get pads
-			// TODO
-		}
-		return holes;
-	}
+            // Get vias
+            xmlModel.getVias()
+                .forEach(xVia -> holes.add(new Via(xVia)));
+            
+            // Get pads
+            // TODO
+        }
+        return holes;
+    }
 
-	public Collection<Library> getLibraries() {
-		if (libraries == null) {
-			libraries = new HashMap<>();
+    public Collection<Library> getLibraries() {
+        if (libraries == null) {
+            libraries = new HashMap<>();
 
-			xmlModel.getLibraries()
-				.forEach(xLib -> libraries.put(xLib.getName(), new Library(xLib)));
-		}
+            xmlModel.getLibraries()
+                .forEach(xLib -> libraries.put(xLib.getName(), new Library(xLib)));
+        }
 
-		return libraries.values();
-	}
+        return libraries.values();
+    }
 
-	public Collection<Signal> getSignals() {
-		if (signals == null) {
-			signals = new ArrayList<>();
-			xmlModel.getSignals().forEach(xSignal -> signals.add(new Signal(xSignal)));
-		}
-		
-		return signals;
-	}
+    public Collection<Signal> getSignals() {
+        if (signals == null) {
+            signals = new ArrayList<>();
+            xmlModel.getSignals().forEach(xSignal -> signals.add(new Signal(xSignal)));
+        }
+        
+        return signals;
+    }
 
-	public Collection<Via> getVias() {
-		LinkedList<Via> result = new LinkedList<>();
-		
-		getSignals().forEach(s -> s.getVias().forEach(v -> result.add(v)));
-		
-		return result;
-	}
+    public Collection<Via> getVias() {
+        LinkedList<Via> result = new LinkedList<>();
+        
+        getSignals().forEach(s -> s.getVias().forEach(v -> result.add(v)));
+        
+        return result;
+    }
 
-	public XEagle getXmlModel() {
-		return xmlModel;
-	}
+    public XEagle getXmlModel() {
+        return xmlModel;
+    }
 
-	private void initializeDimensions() {
-		dimensions = new Dimensions();
-		List<XWire> wires = new LinkedList<>(xmlModel.getDimensionWires());
+    private void initializeDimensions() {
+        dimensions = new Dimensions();
+        List<XWire> wires = new LinkedList<>(xmlModel.getDimensionWires());
 
-		// pluck first wire
-		XWire first = wires.get(0);
-		XWire previous = first;
-		wires.remove(0);
-		dimensions.add(new Point2D.Double(first.getX1(), first.getY1()));
-		Point2D.Double next = new Point2D.Double(first.getX2(), first.getY2());
-		dimensions.add(next);
+        // pluck first wire
+        XWire first = wires.get(0);
+        XWire previous = first;
+        wires.remove(0);
+        dimensions.add(new Point2D.Double(first.getX1(), first.getY1()));
+        Point2D.Double next = new Point2D.Double(first.getX2(), first.getY2());
+        dimensions.add(next);
 
-		while (!wires.isEmpty()) {
-			// Search for next connected wire
-			XWire current = null;
-			for (XWire w : wires) {
-				if (w.isConnected(previous)) {
-					current = w;
-					break;
-				}
-			}
+        while (!wires.isEmpty()) {
+            // Search for next connected wire
+            XWire current = null;
+            for (XWire w : wires) {
+                if (w.isConnected(previous)) {
+                    current = w;
+                    break;
+                }
+            }
 
-			// Not found (should not really happen)
-			if (current == null) {
-				throw new IllegalStateException("Something weird with the board dimensions.");
-			}
+            // Not found (should not really happen)
+            if (current == null) {
+                throw new IllegalStateException("Something weird with the board dimensions.");
+            }
 
-			// Handle case where wire directions are reversed
-			if ((next.getX() == current.getX1()) && (next.getY() == current.getY1())) {
-				// head to tail
-				next = new Point2D.Double(current.getX2(), current.getY2());
-			} else {
-				// head/tails are reversed
-				next = new Point2D.Double(current.getX1(), current.getY1());
-			}
+            // Handle case where wire directions are reversed
+            if ((next.getX() == current.getX1()) && (next.getY() == current.getY1())) {
+                // head to tail
+                next = new Point2D.Double(current.getX2(), current.getY2());
+            } else {
+                // head/tails are reversed
+                next = new Point2D.Double(current.getX1(), current.getY1());
+            }
 
-			dimensions.add(next);
-			wires.remove(current);
-			previous = current;
-		}
+            dimensions.add(next);
+            wires.remove(current);
+            previous = current;
+        }
 
-		// Back to start
-		//dimensions.add(new Point2D.Double(first.getX1(), first.getY1()));
-	}
+        // Back to start
+        //dimensions.add(new Point2D.Double(first.getX1(), first.getY1()));
+    }
 }

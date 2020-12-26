@@ -31,28 +31,28 @@ import com.github.aushacker.eagle2nc.xml.XWire;
  */
 public abstract class Model {
 
-	private Board board;
+    private Board board;
 
-	public Model(Board board) {
-		this.board = board;
-	}
+    public Model(Board board) {
+        this.board = board;
+    }
 
-	public Board getBoard() {
-		return board;
-	}
+    public Board getBoard() {
+        return board;
+    }
 
-	protected List<XWire> extractDimensions() {
-		List<XWire> wires = new ArrayList<XWire>();
-		
-		for (XGraphicElement e : getDrawingBoard().getPlain()) {
-			if (e.isWire() && ((XWire)e).getLayer().equals(Layer.DIMENSION.getId())) {
-				wires.add((XWire)e);
-			}
-		}
-		return wires;
-	}
+    protected List<XWire> extractDimensions() {
+        List<XWire> wires = new ArrayList<XWire>();
+        
+        for (XGraphicElement e : getDrawingBoard().getPlain()) {
+            if (e.isWire() && ((XWire)e).getLayer().equals(Layer.DIMENSION.getId())) {
+                wires.add((XWire)e);
+            }
+        }
+        return wires;
+    }
 
-	protected com.github.aushacker.eagle2nc.xml.XBoard getDrawingBoard() {
-		return board.getXmlModel().getDrawing().getBoard();
-	}
+    protected com.github.aushacker.eagle2nc.xml.XBoard getDrawingBoard() {
+        return board.getXmlModel().getDrawing().getBoard();
+    }
 }

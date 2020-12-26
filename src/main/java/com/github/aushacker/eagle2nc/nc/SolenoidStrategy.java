@@ -31,47 +31,47 @@ import java.io.PrintStream;
  */
 public class SolenoidStrategy implements ZStrategy {
 
-	/**
-	 * GCode to turn solenoid off.
-	 */
-	private String off;
+    /**
+     * GCode to turn solenoid off.
+     */
+    private String off;
 
-	/**
-	 * GCode to turn solenoid on.
-	 */
-	private String on;
+    /**
+     * GCode to turn solenoid on.
+     */
+    private String on;
 
-	public SolenoidStrategy() {
-		this(GCode.COOLANT_OFF, GCode.COOLANT_FLOOD);
-	}
+    public SolenoidStrategy() {
+        this(GCode.COOLANT_OFF, GCode.COOLANT_FLOOD);
+    }
 
-	public SolenoidStrategy(String off, String on) {
-		this.off = off;
-		this.on = on;
-	}
+    public SolenoidStrategy(String off, String on) {
+        this.off = off;
+        this.on = on;
+    }
 
-	@Override
-	public void toolChange(PrintStream out) {
-		out.println(off);
-	}
+    @Override
+    public void toolChange(PrintStream out) {
+        out.println(off);
+    }
 
-	@Override
-	public void engraveRough(PrintStream out) {
-		out.println(on);
-	}
+    @Override
+    public void engraveRough(PrintStream out) {
+        out.println(on);
+    }
 
-	@Override
-	public void engraveFinish(PrintStream out) {
-		out.println(on);
-	}
+    @Override
+    public void engraveFinish(PrintStream out) {
+        out.println(on);
+    }
 
-	@Override
-	public boolean supportsMultiplePasses() {
-		return false;
-	}
+    @Override
+    public boolean supportsMultiplePasses() {
+        return false;
+    }
 
-	@Override
-	public void drill(PrintStream out) {
-		out.println(on);
-	}
+    @Override
+    public void drill(PrintStream out) {
+        out.println(on);
+    }
 }
