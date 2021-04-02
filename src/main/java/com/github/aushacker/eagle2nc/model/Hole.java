@@ -37,14 +37,17 @@ public class Hole implements DrillHole {
         this.hole = hole;
     }
 
+    @Override
     public double getDrill() {
         return hole.getDrill();
     }
 
+    @Override
     public double getX() {
         return hole.getX();
     }
 
+    @Override
     public double getY() {
         return hole.getY();
     }

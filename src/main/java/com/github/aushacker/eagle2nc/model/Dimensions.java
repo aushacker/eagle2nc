@@ -48,4 +48,8 @@ public class Dimensions implements Iterable<Point2D.Double> {
     public Iterator<Point2D.Double> iterator() {
         return points.iterator();
     }
+
+    public int size() {
+        return points.size();
+    }
 }

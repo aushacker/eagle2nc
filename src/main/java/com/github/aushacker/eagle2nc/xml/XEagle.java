@@ -32,7 +32,7 @@ import com.github.aushacker.eagle2nc.model.Layer;
  * Top-level XML element in the Eagle board file.
  * <p>
  * Not much useful detail at this level, much of this can be found in
- * the &ltldrawing&gt; element.
+ * the &ltdrawing&gt; element.
  *
  * @author Stephen Davies
  * @since October 2018
@@ -62,6 +62,15 @@ public class XEagle {
 
     public XDrawing getDrawing() {
         return drawing;
+    }
+
+    /**
+     * Convenience method.
+     *
+     * @return Returns all top level XElement objects nested in the &lt;plain&gt; element.
+     */
+    public Collection<XElement> getElements() {
+        return getDrawing().getBoard().getElements();
     }
 
     /**

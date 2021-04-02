@@ -1,7 +1,7 @@
 /*
- * Copyright 2018 Stephen Davies
+ * Copyright 2021 Stephen Davies
  *
- * This file is part of Eagle2nc.
+ * This file is part of eagle2nc.
  *
  * Eagle2nc is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,32 +14,24 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Eagle2nc. If not, see <https://www.gnu.org/licenses/>.
+ * along with eagle2nc. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.aushacker.eagle2nc.xml;
+package com.github.aushacker.eagle2nc.model;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import com.github.aushacker.eagle2nc.xml.XElement;
 
 /**
+ * 
  * @author Stephen Davies
- * @since October 2018
+ * @since April 2021
  */
-public abstract class XLayeredElement extends XGraphicElement {
+public class Element {
 
-    @XmlAttribute
-    private String layer;
-    
-    public String getLayer() {
-        return layer;
+    private XElement element;
+
+    public Element(XElement element) {
+        this.element = element;
     }
 
-    @Override
-    public boolean isIn(String layerId) {
-        return layerId.equals(getLayer());
-    }
-
-    public void setLayer(String layer) {
-        this.layer = layer;
-    }
 }

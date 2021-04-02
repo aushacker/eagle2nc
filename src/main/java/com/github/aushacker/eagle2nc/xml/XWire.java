@@ -89,6 +89,10 @@ public class XWire extends XLayeredElement {
         return true;
     }
 
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("XWire( (");

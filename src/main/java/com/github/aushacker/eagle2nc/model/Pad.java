@@ -1,14 +1,14 @@
 /*
- * Copyright 2019 Stephen Davies
+ * Copyright 2021 Stephen Davies
  *
  * This file is part of eagle2nc.
  *
- * eagle2nc is free software: you can redistribute it and/or modify
+ * Eagle2nc is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * eagle2nc is distributed in the hope that it will be useful,
+ * Eagle2nc is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -23,35 +23,27 @@ import java.awt.Shape;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 
-import com.github.aushacker.eagle2nc.xml.XVia;
+import com.github.aushacker.eagle2nc.xml.XPad;
 
 /**
- * Adapts an XVia for drilling. Currently only plated through hole (PTH)
- * vias are supported. Blind and buried vias are not possible. It's difficult
- * to produce that level of complexity using desktop methods.
- * <p>
- * Holes are located using absolute coordinate values.
  * 
  * @author Stephen Davies
- * @since March 2019
+ * @since April 2021
  */
-public class Via implements DrillHole {
+public class Pad implements DrillHole {
+
+    private XPad pad;
 
     private Area shape;
 
-    private XVia via;
-
-    public Via(XVia via) {
-        this.via = via;
+    public Pad(XPad pad) {
+        this.pad = pad;
     }
 
     @Override
     public double getDrill() {
-        return via.getDrill();
-    }
-
-    public Ellipse2D.Double getHole() {
-        return DrillHole.holeShape(getX(), getY(), getDrill());
+        // TODO Auto-generated method stub
+        return 0;
     }
 
     public Shape getShape() {
@@ -63,7 +55,7 @@ public class Via implements DrillHole {
                         diameter);
 
             shape = new Area(outer);
-            shape.subtract(new Area(getHole()));
+            //shape.subtract(new Area(getHole()));
         }
 
         return shape;
@@ -71,16 +63,14 @@ public class Via implements DrillHole {
 
     @Override
     public double getX() {
-        return via.getX();
+        // TODO Auto-generated method stub
+        return 0;
     }
 
     @Override
     public double getY() {
-        return via.getY();
+        // TODO Auto-generated method stub
+        return 0;
     }
 
-    @Override
-    public String toString() {
-        return "Via(" + getX() + ", " + getY() + ", " + getDrill() + ")";
-    }
 }

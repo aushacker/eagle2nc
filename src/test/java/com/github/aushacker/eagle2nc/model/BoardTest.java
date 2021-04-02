@@ -64,6 +64,11 @@ public class BoardTest {
     }
 
     @Test
+    public void testDimensions() {
+        assertEquals(10, board.getDimensions().size());
+    }
+
+    @Test
     public void testHoleCount() {
         board.getHoles()
             .forEach(h -> System.out.println(h));
@@ -73,5 +78,25 @@ public class BoardTest {
     @Test
     public void testLibraryCount() {
         assertEquals(17, board.getLibraries().size());
+    }
+
+    @Test
+    public void testPackageCount() {
+        assertEquals("pinhead", 5, board.getLibrary("pinhead").getPackages().size());
+        assertEquals("rcl", 3, board.getLibrary("rcl").getPackages().size());
+        assertEquals("diode", 1, board.getLibrary("diode").getPackages().size());
+        assertEquals("led", 1, board.getLibrary("led").getPackages().size());
+        assertEquals("linear", 3, board.getLibrary("linear").getPackages().size());
+        assertEquals("powersupply", 1, board.getLibrary("powersupply").getPackages().size());
+    }
+
+    @Test
+    public void testElementCount() {
+        assertEquals(72, board.getElements().size());
+    }
+
+    @Test
+    public void testPadCount() {
+        assertEquals(400, board.getPads().size());
     }
 }

@@ -43,6 +43,7 @@ import com.github.aushacker.eagle2nc.model.Via;
  */
 public class BoardPanel extends JPanel {
 
+    private static final long serialVersionUID = -3360233126478880229L;
     private static final Map<String, Color> colors;
 
     static {
@@ -95,7 +96,7 @@ public class BoardPanel extends JPanel {
 
         g.setColor(colors.get("pad"));
         //TODO
-        //board.getPads().forEach(p -> g.fill(p.getShape()));
+//        board.getPads().forEach(p -> g.fill(p.getShape()));
 
         g.setStroke(savedStroke);
     }
@@ -131,6 +132,7 @@ public class BoardPanel extends JPanel {
         g.setStroke(savedStroke);
     }
 
+    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Stephen Davies
+ * Copyright 2021 Stephen Davies
  *
  * This file is part of eagle2nc.
  *
@@ -19,49 +19,35 @@
 
 package com.github.aushacker.eagle2nc.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.github.aushacker.eagle2nc.xml.XLibrary;
 import com.github.aushacker.eagle2nc.xml.XPackage;
 
 /**
- * Wrapper for the XML Library type.
+ * Wrapper for the XML Package type.
  *
  * @author Stephen Davies
- * @since March 2019
+ * @since April 2021
  */
-public class Library {
+public class Package {
 
     /**
-     * Wrapped XML Library.
+     * Wrapped XML Package.
      */
-    private XLibrary library;
-
-    private Map<String,Package> packages;
+    private XPackage pkg;
     
-    public Library(XLibrary library) {
-        this.library = library;
-        
-        packages = new HashMap<>();
+    private Library library;
 
-        for (XPackage pkg : library.getPackages()) {
-            Package p = new Package(pkg, this);
-            packages.put(p.getName(), p);
-        }
+    public Package(XPackage pkg, Library library) {
+        this.pkg = pkg;
+        this.library = library;
     }
 
     public String getName() {
-        return library.getName();
-    }
-
-    public Map<String,Package> getPackages() {
-        return packages;
+        return pkg.getName();
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Library(\"");
+        StringBuilder sb = new StringBuilder("Package(\"");
         sb.append(getName());
         sb.append("\"");
 

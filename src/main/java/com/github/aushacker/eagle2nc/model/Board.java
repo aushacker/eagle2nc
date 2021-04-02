@@ -32,6 +32,7 @@ import javax.xml.bind.JAXBException;
 
 import com.github.aushacker.eagle2nc.xml.Parser;
 import com.github.aushacker.eagle2nc.xml.XEagle;
+import com.github.aushacker.eagle2nc.xml.XElement;
 import com.github.aushacker.eagle2nc.xml.XWire;
 
 /**
@@ -47,9 +48,14 @@ public class Board {
 
     private Dimensions dimensions;
 
+    private Collection<Element> elements;
+
     private Collection<DrillHole> holes;
 
+    // name -> Library
     private Map<String, Library> libraries;
+
+    private Collection<Pad> pads;
 
     private Collection<Signal> signals;
 
@@ -73,6 +79,16 @@ public class Board {
         return dimensions;
     }
 
+    public Collection<Element> getElements() {
+        if (elements == null) {
+            elements = new ArrayList<>();
+            for (XElement xe : xmlModel.getElements()) {
+                elements.add(new Element(xe));
+            }
+        }
+        return elements;
+    }
+
     public Collection<DrillHole> getHoles() {
         if (holes == null) {
             holes = new ArrayList<>();
@@ -91,7 +107,7 @@ public class Board {
         return holes;
     }
 
-    public Collection<Library> getLibraries() {
+    public Map<String,Library> getLibraries() {
         if (libraries == null) {
             libraries = new HashMap<>();
 
@@ -99,7 +115,18 @@ public class Board {
                 .forEach(xLib -> libraries.put(xLib.getName(), new Library(xLib)));
         }
 
-        return libraries.values();
+        return libraries;
+    }
+
+    public Library getLibrary(String name) {
+        return getLibraries().get(name);
+    }
+
+    public Collection<Pad> getPads() {
+        if (pads == null) {
+            initialisePads();
+        }
+        return pads;
     }
 
     public Collection<Signal> getSignals() {
@@ -166,5 +193,11 @@ public class Board {
 
         // Back to start
         //dimensions.add(new Point2D.Double(first.getX1(), first.getY1()));
+    }
+    
+    private void initialisePads() {
+        pads = new ArrayList<>();
+        
+        
     }
 }
