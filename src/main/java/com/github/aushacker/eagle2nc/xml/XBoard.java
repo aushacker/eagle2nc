@@ -127,7 +127,7 @@ public class XBoard {
 
         getSignals()
             .forEach(s -> s.getVias()
-                    .forEach(v -> vias.add(v)));
+                .forEach(v -> vias.add(v)));
 
         return vias;
     }

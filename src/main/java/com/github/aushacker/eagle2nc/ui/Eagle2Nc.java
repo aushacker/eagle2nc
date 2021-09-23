@@ -51,8 +51,8 @@ public class Eagle2Nc extends JFrame {
     public Eagle2Nc() {
         super("Eagle2nc");
 
-        open(new File("data/astable_555.brd"));
-        //open(new File("data/Arduino_MEGA2560_ref.brd"));
+        //open(new File("data/astable_555.brd"));
+        open(new File("data/Arduino_MEGA2560_ref.brd"));
 
         Container contentPane = getContentPane();
 

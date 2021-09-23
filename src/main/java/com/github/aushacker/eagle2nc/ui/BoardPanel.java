@@ -94,7 +94,6 @@ public class BoardPanel extends JPanel {
         g.setStroke(new BasicStroke(0.0f));
 
         g.setColor(colors.get("pad"));
-        //TODO
         //board.getPads().forEach(p -> g.fill(p.getShape()));
 
         g.setStroke(savedStroke);
@@ -143,8 +142,7 @@ public class BoardPanel extends JPanel {
         drawAxes(g2);
         drawDimensions(g2);
         drawTraces(g2);
-        //TODO
-        //drawPads(g2);
+        drawPads(g2);
         drawVias(g2);
 
         g2.setTransform(previous);

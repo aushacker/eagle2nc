@@ -51,6 +51,8 @@ public class Board {
 
     private Map<String, Library> libraries;
 
+    private Collection<Pad> pads;
+
     private Collection<Signal> signals;
 
     public Board(File f) {
@@ -100,6 +102,17 @@ public class Board {
         }
 
         return libraries.values();
+    }
+
+    public Collection<Pad> getPads() {
+        if (pads == null) {
+            pads = new ArrayList<>();
+
+            xmlModel.getLibraries()
+                .forEach(xLib -> pads.add(xLib.getName(), new Library(xLib)));
+        }
+
+        return pads;
     }
 
     public Collection<Signal> getSignals() {
