@@ -108,8 +108,9 @@ public class Board {
         if (pads == null) {
             pads = new ArrayList<>();
 
-            xmlModel.getLibraries()
-                .forEach(xLib -> pads.add(xLib.getName(), new Library(xLib)));
+            // TODO
+//            xmlModel.getLibraries()
+//                .forEach(xLib -> pads.add(xLib.getName(), new Library(xLib)));
         }
 
         return pads;
