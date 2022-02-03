@@ -18,9 +18,9 @@
  */
 package com.github.aushacker.eagle2nc.model;
 
-import com.github.aushacker.eagle2nc.xml.XLibrary;
 import com.github.aushacker.eagle2nc.xml.XPackage;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -46,7 +46,7 @@ public class Package {
 
     public Collection<Pad> getPads() {
         // TODO
-        return null;
+        return new ArrayList<>();
     }
 
     @Override

@@ -38,14 +38,14 @@ public class Pad implements DrillHole {
 
     private Area shape;
 
-    private XPad pad;
+    private XPad xPad;
 
-    public Pad(XPad pad) {
-        this.pad = pad;
+    public Pad(XPad xPad) {
+        this.xPad = xPad;
     }
 
     public double getDrill() {
-        return pad.getDrill();
+        return xPad.getDrill();
     }
 
     public Ellipse2D.Double getHole() {
@@ -68,11 +68,11 @@ public class Pad implements DrillHole {
     }
 
     public double getX() {
-        return pad.getX();
+        return xPad.getX();
     }
 
     public double getY() {
-        return pad.getY();
+        return xPad.getY();
     }
 
     @Override

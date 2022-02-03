@@ -31,20 +31,20 @@ import com.github.aushacker.eagle2nc.xml.XSignal;
  */
 public class Signal {
 
-    private XSignal signal;
+    private XSignal xSignal;
 
     private Collection<Trace> traces;
 
     private Collection<Via> vias;
 
-    public Signal(XSignal signal) {
-        this.signal = signal;
+    public Signal(XSignal xSignal) {
+        this.xSignal = xSignal;
     }
     
     public Collection<Trace> getTraces() {
         if (traces == null) {
             traces = new ArrayList<>();
-            signal.getWires().forEach(w -> traces.add(new Trace(w)));
+            xSignal.getWires().forEach(w -> traces.add(new Trace(w)));
         }
 
         return traces;
@@ -54,7 +54,7 @@ public class Signal {
         if (vias == null) {
             vias = new ArrayList<>();
             
-            signal.getVias().forEach(xVia -> vias.add(new Via(xVia)));
+            xSignal.getVias().forEach(xVia -> vias.add(new Via(xVia)));
         }
         
         return vias;

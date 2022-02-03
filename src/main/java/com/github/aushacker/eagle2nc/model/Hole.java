@@ -31,22 +31,22 @@ import com.github.aushacker.eagle2nc.xml.XHole;
  */
 public class Hole implements DrillHole {
 
-    private XHole hole;
+    private XHole xHole;
 
-    public Hole(XHole hole) {
-        this.hole = hole;
+    public Hole(XHole xHole) {
+        this.xHole = xHole;
     }
 
     public double getDrill() {
-        return hole.getDrill();
+        return xHole.getDrill();
     }
 
     public double getX() {
-        return hole.getX();
+        return xHole.getX();
     }
 
     public double getY() {
-        return hole.getY();
+        return xHole.getY();
     }
 
     @Override

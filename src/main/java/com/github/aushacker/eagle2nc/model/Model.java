@@ -33,7 +33,7 @@ public abstract class Model {
 
     private Board board;
 
-    public Model(Board board) {
+    protected Model(Board board) {
         this.board = board;
     }
 
@@ -42,7 +42,7 @@ public abstract class Model {
     }
 
     protected List<XWire> extractDimensions() {
-        List<XWire> wires = new ArrayList<XWire>();
+        List<XWire> wires = new ArrayList<>();
         
         for (XGraphicElement e : getDrawingBoard().getPlain()) {
             if (e.isWire() && ((XWire)e).getLayer().equals(Layer.DIMENSION.getId())) {

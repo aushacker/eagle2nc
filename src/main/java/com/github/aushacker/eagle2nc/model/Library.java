@@ -19,7 +19,6 @@
 
 package com.github.aushacker.eagle2nc.model;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.github.aushacker.eagle2nc.xml.XLibrary;
@@ -35,20 +34,21 @@ public class Library {
     /**
      * Wrapped XML Library.
      */
-    private XLibrary library;
+    private XLibrary xLibrary;
 
     /**
-     * Packages declard within the Library. Key is package name
-     * e.g. DIL08.
+     * Packages declared within the Library.
+     * <p>
+     * Key is package name e.g. DIL08.
      */
     private Map<String,Package> packages;
 
-    public Library(XLibrary library) {
-        this.library = library;
+    public Library(XLibrary xLibrary) {
+        this.xLibrary = xLibrary;
     }
 
     public String getName() {
-        return library.getName();
+        return xLibrary.getName();
     }
 
     public Map<String,Package> getPackages() {

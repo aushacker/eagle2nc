@@ -28,7 +28,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 
 import com.github.aushacker.eagle2nc.xml.Parser;
 import com.github.aushacker.eagle2nc.xml.XEagle;
@@ -55,12 +55,12 @@ public class Board {
 
     private Collection<Signal> signals;
 
-    public Board(File f) {
+    public Board(File f) throws ParseException {
         try {
             this.xmlModel = Parser.parse(f);
         }
         catch (JAXBException e) {
-            throw new RuntimeException(e);
+            throw new ParseException(e);
         }
     }
 
@@ -128,7 +128,7 @@ public class Board {
     public Collection<Via> getVias() {
         LinkedList<Via> result = new LinkedList<>();
 
-        getSignals().forEach(s -> s.getVias().forEach(v -> result.add(v)));
+        getSignals().forEach(s -> s.getVias().forEach(result::add));
 
         return result;
     }

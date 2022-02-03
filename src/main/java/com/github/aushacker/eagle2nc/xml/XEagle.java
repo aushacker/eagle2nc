@@ -22,9 +22,9 @@ package com.github.aushacker.eagle2nc.xml;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 import com.github.aushacker.eagle2nc.model.Layer;
 
@@ -56,7 +56,7 @@ public class XEagle {
         return getDrawing().getBoard().getPlain()
                 .stream()
                 .filter(e -> (e.isWire() && e.isIn(Layer.DIMENSION.getId())))
-                .map(e -> (XWire) e)
+                .map(XWire.class::cast)
                 .collect(Collectors.toList());
     }
 

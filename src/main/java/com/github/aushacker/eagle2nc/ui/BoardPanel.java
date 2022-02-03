@@ -35,7 +35,6 @@ import javax.swing.JPanel;
 
 import com.github.aushacker.eagle2nc.model.Board;
 import com.github.aushacker.eagle2nc.model.Layer;
-import com.github.aushacker.eagle2nc.model.Via;
 
 /**
  * @author Stephen Davies
@@ -53,7 +52,7 @@ public class BoardPanel extends JPanel {
         colors.put("via", new Color(197, 180, 73));
     }
 
-    private Board board;
+    private transient Board board;
 
     private void drawAxes(Graphics2D g) {
         g.setColor(Color.CYAN);
@@ -130,6 +129,7 @@ public class BoardPanel extends JPanel {
         g.setStroke(savedStroke);
     }
 
+    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         

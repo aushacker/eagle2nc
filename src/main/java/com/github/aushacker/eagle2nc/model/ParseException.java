@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Stephen Davies
+ * Copyright 2022 Stephen Davies
  *
  * This file is part of eagle2nc.
  *
@@ -16,27 +16,17 @@
  * You should have received a copy of the GNU General Public License
  * along with eagle2nc. If not, see <https://www.gnu.org/licenses/>.
  */
-package com.github.aushacker.eagle2nc.xml;
+package com.github.aushacker.eagle2nc.model;
 
-import java.io.File;
+public class ParseException extends Exception {
 
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Unmarshaller;
-
-/**
- * Utility class to provide top level access to the
- * XML parser output.
- *
- * @author Stephen Davies
- * @since March 2019
- */
-public class Parser {
-
-    public static XEagle parse(File f) throws JAXBException {
-        System.setProperty("javax.xml.accessExternalDTD", "all");
-        JAXBContext jc = JAXBContext.newInstance(XEagle.class);
-        Unmarshaller u = jc.createUnmarshaller();
-        return (XEagle) u.unmarshal(f);
+    /**
+     * Constructs a new exception with the specified cause.
+     *
+     * @param cause - the cause (which is saved for later retrieval by the Throwable.getCause() method).
+     *              (A null value is permitted, and indicates that the cause is nonexistent or unknown.)
+     */
+    public ParseException(Throwable cause) {
+        super (cause);
     }
 }
