@@ -86,7 +86,7 @@ public class Board {
             // Get vias
             xmlModel.getVias()
                 .forEach(xVia -> holes.add(new Via(xVia)));
-            
+
             // Get pads
             // TODO
         }
@@ -120,15 +120,15 @@ public class Board {
             signals = new ArrayList<>();
             xmlModel.getSignals().forEach(xSignal -> signals.add(new Signal(xSignal)));
         }
-        
+
         return signals;
     }
 
     public Collection<Via> getVias() {
         LinkedList<Via> result = new LinkedList<>();
-        
+
         getSignals().forEach(s -> s.getVias().forEach(v -> result.add(v)));
-        
+
         return result;
     }
 

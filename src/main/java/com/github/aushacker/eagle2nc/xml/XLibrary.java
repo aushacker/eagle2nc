@@ -42,7 +42,7 @@ public class XLibrary {
         return name;
     }
 
-    public List<com.github.aushacker.eagle2nc.xml.XPackage> getPackages() {
+    public List<XPackage> getPackages() {
         return packages;
     }
 
