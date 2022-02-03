@@ -48,4 +48,20 @@ public class Dimensions implements Iterable<Point2D.Double> {
     public Iterator<Point2D.Double> iterator() {
         return points.iterator();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder buff = new StringBuilder("Dimensions(");
+        boolean first = true;
+        for (Point2D.Double p : points) {
+            if (!first) {
+                buff.append(",");
+            } else {
+                first = false;
+            }
+            buff.append(p);
+        }
+        buff.append(")");
+        return buff.toString();
+    }
 }

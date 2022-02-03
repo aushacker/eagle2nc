@@ -31,7 +31,7 @@ import com.github.aushacker.eagle2nc.xml.Parser;
 import com.github.aushacker.eagle2nc.xml.XEagle;
 
 /**
- * Integration test for all of the model package.
+ * Integration tests for the entire model package.
  * Attempts to load the entire Arduino Mega board example.
  *
  * @author Stephen Davies
@@ -40,33 +40,24 @@ import com.github.aushacker.eagle2nc.xml.XEagle;
 public class BoardTest {
 
     private static final String TEST_FILE = "data/Arduino_MEGA2560_ref.brd";
-    //private static final String TEST_FILE = "data/ms-adsr-02.brd";
 
     //private static final double THRESHOLD = 0.0000001;
 
-    private static XEagle eagle;
-
     private Board board;
     
-    @BeforeClass
-    public static void setupClass() throws Exception {
-        eagle = Parser.parse(new File(TEST_FILE));
-    }
-
     @Before
-    public void setUp() {
-        board = new Board(eagle);
+    public void setUp() throws ParseException {
+        board = new Board(new File(TEST_FILE));
     }
 
-    @AfterClass
-    public static void afterClass() {
-        eagle = null;
+    @Test
+    public void testDimensions() {
+        Dimensions d = board.getDimensions();
+        System.out.println(d);
     }
 
     @Test
     public void testHoleCount() {
-        board.getHoles()
-            .forEach(h -> System.out.println(h));
         assertEquals(150, board.getHoles().size());
     }
 

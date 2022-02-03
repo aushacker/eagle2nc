@@ -80,11 +80,11 @@ public class Board {
             holes = new ArrayList<>();
 
             // Get top-level holes
-            xmlModel.getHoles()
+            getXmlModel().getHoles()
                 .forEach(xHole -> holes.add(new Hole(xHole)));
 
             // Get vias
-            xmlModel.getVias()
+            getXmlModel().getVias()
                 .forEach(xVia -> holes.add(new Via(xVia)));
 
             // Get pads
