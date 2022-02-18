@@ -21,9 +21,9 @@ package com.github.aushacker.eagle2nc.xml;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
 
 /**
  * @author Stephen Davies
@@ -42,7 +42,7 @@ public class XLibrary {
         return name;
     }
 
-    public List<com.github.aushacker.eagle2nc.xml.XPackage> getPackages() {
+    public List<XPackage> getPackages() {
         return packages;
     }
 

@@ -36,23 +36,28 @@ public class Library {
     /**
      * Wrapped XML Library.
      */
-    private XLibrary library;
+    private XLibrary xLibrary;
 
+    /**
+     * Packages declared within the Library.
+     * <p>
+     * Key is package name e.g. DIL08.
+     */
     private Map<String,Package> packages;
-    
-    public Library(XLibrary library) {
-        this.library = library;
-        
+
+    public Library(XLibrary xLibrary) {
+        this.xLibrary = xLibrary;
+
         packages = new HashMap<>();
 
-        for (XPackage pkg : library.getPackages()) {
+        for (XPackage pkg : xLibrary.getPackages()) {
             Package p = new Package(pkg, this);
             packages.put(p.getName(), p);
         }
     }
 
     public String getName() {
-        return library.getName();
+        return xLibrary.getName();
     }
 
     public Map<String,Package> getPackages() {

@@ -31,5 +31,5 @@
 @XmlAccessorType(XmlAccessType.FIELD)
 package com.github.aushacker.eagle2nc.xml;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;

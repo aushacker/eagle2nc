@@ -85,7 +85,7 @@ public class Eagle2Nc extends JFrame {
     }
 
     private void fileOpen() {
-        
+
         JFileChooser chooser;
 
 //      if (home != null && home.trim().length() > 0) {
@@ -102,7 +102,7 @@ public class Eagle2Nc extends JFrame {
     }
 
     private void generate() {
-        
+
     }
 
     private void initializeMenus() {
@@ -113,7 +113,7 @@ public class Eagle2Nc extends JFrame {
         mb.add(codeMenu);
         codeMenu.add(genItem);
         setJMenuBar(mb);
-        
+
         openItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -126,14 +126,14 @@ public class Eagle2Nc extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
-        });        
+        });
 
         genItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 generate();
             }
-        });        
+        });
     }
 
     private void open(File f) {

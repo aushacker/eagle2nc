@@ -39,15 +39,15 @@ public class Via implements DrillHole {
 
     private Area shape;
 
-    private XVia via;
+    private XVia xVia;
 
     public Via(XVia via) {
-        this.via = via;
+        this.xVia = via;
     }
 
     @Override
     public double getDrill() {
-        return via.getDrill();
+        return xVia.getDrill();
     }
 
     public Ellipse2D.Double getHole() {
@@ -71,12 +71,12 @@ public class Via implements DrillHole {
 
     @Override
     public double getX() {
-        return via.getX();
+        return xVia.getX();
     }
 
     @Override
     public double getY() {
-        return via.getY();
+        return xVia.getY();
     }
 
     @Override

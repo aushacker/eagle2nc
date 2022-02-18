@@ -24,9 +24,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
+import jakarta.xml.bind.annotation.XmlElements;
 
 /**
  * @author Stephen Davies
@@ -83,8 +83,8 @@ public class XBoard {
     public Collection<XHole> getHoles() {
         return getPlain()
             .stream()
-            .filter(e -> e.isHole())
-            .map(e -> (XHole) e)
+            .filter(XGraphicElement::isHole)
+            .map(XHole.class::cast)
             .collect(Collectors.toList());
     }
 
@@ -127,7 +127,7 @@ public class XBoard {
 
         getSignals()
             .forEach(s -> s.getVias()
-                    .forEach(v -> vias.add(v)));
+                .forEach(vias::add));
 
         return vias;
     }

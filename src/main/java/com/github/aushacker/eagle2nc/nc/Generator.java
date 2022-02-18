@@ -27,6 +27,7 @@ import java.io.PrintStream;
 import java.text.DecimalFormat;
 
 import com.github.aushacker.eagle2nc.model.Board;
+import com.github.aushacker.eagle2nc.model.ParseException;
 
 /**
  * @author Stephen Davies
@@ -48,16 +49,15 @@ public class Generator {
 
     private ZStrategy zStrategy;
 
-    private Generator(String file, ZStrategy zStrategy) {
+    private Generator(String file, ZStrategy zStrategy) throws ParseException {
         this.board = new Board(new File(file));
         this.out = System.out;
         this.zStrategy = zStrategy;
     }
 
     public static void main(String[] args) {
-        Generator gen = new Generator(TEST_FILE, new SolenoidStrategy());
-
         try {
+            Generator gen = new Generator(TEST_FILE, new SolenoidStrategy());
             gen.generate();
         }
         catch (Exception e) {
@@ -102,10 +102,10 @@ public class Generator {
         // Engrave board outline
         if (zStrategy.supportsMultiplePasses()) {
             zStrategy.engraveRough(out);
-            board.getDimensions().forEach(p -> lineTo(p));
+            board.getDimensions().forEach(this::lineTo);
         }
         zStrategy.engraveFinish(out);
-        board.getDimensions().forEach(p -> lineTo(p));
+        board.getDimensions().forEach(this::lineTo);
         
         // Head up
         zStrategy.toolChange(out);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Stephen Davies
+ * Copyright 2022 Stephen Davies
  *
  * This file is part of eagle2nc.
  *
@@ -18,41 +18,15 @@
  */
 package com.github.aushacker.eagle2nc.model;
 
-import com.github.aushacker.eagle2nc.xml.XPackage;
-
-import java.util.ArrayList;
-import java.util.Collection;
-
-/**
- * Wrapper for the XML Package type.
- *
- * @author Stephen Davies
- * @since April 2021
- */
-public class Package {
+public class ParseException extends Exception {
 
     /**
-     * Wrapped XML Package.
+     * Constructs a new exception with the specified cause.
+     *
+     * @param cause - the cause (which is saved for later retrieval by the Throwable.getCause() method).
+     *              (A null value is permitted, and indicates that the cause is nonexistent or unknown.)
      */
-    private XPackage pkg;
-
-    private Library library;
-
-    public Package(XPackage pkg, Library library) {
-        this.pkg = pkg;
-        this.library = library;
-    }
-
-    public String getName() {
-        return pkg.getName();
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder("Package(\"");
-        sb.append(getName());
-        sb.append("\"");
-
-        return sb.toString();
+    public ParseException(Throwable cause) {
+        super (cause);
     }
 }

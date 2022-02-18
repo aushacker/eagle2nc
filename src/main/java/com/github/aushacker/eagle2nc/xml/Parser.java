@@ -16,21 +16,20 @@
  * You should have received a copy of the GNU General Public License
  * along with eagle2nc. If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.github.aushacker.eagle2nc.xml;
 
 import java.io.File;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
 
 /**
  * Utility class to provide top level access to the
  * XML parser output.
  *
  * @author Stephen Davies
- * @since MArch 2019
+ * @since March 2019
  */
 public class Parser {
 

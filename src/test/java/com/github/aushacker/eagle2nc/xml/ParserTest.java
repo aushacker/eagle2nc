@@ -28,11 +28,11 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.github.aushacker.eagle2nc.xml.XEagle;
+//import javax.xml.parsers.DocumentBuilderFactory;
 
 /**
- * Integration test for all of the xml package.
- * Attempts to load the entire Arduino Mega board example.
+ * Integration test for the entire xml package.
+ * Attempts to load the Arduino Mega board example.
  *
  * @author Stephen Davies
  * @since October 2018

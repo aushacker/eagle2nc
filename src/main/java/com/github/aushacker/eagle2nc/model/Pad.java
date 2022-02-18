@@ -1,14 +1,14 @@
 /*
- * Copyright 2021 Stephen Davies
+ * Copyright 2022 Stephen Davies
  *
  * This file is part of eagle2nc.
  *
- * Eagle2nc is free software: you can redistribute it and/or modify
+ * eagle2nc is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Eagle2nc is distributed in the hope that it will be useful,
+ * eagle2nc is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -26,24 +26,30 @@ import java.awt.geom.Ellipse2D;
 import com.github.aushacker.eagle2nc.xml.XPad;
 
 /**
- * 
+ * Adapts an XPad for drilling. Currently only plated through hole (PTH)
+ * pads are supported.
+ * <p>
+ * Holes are located using absolute coordinate values.
+ *
  * @author Stephen Davies
- * @since April 2021
+ * @since February 2022
  */
 public class Pad implements DrillHole {
 
-    private XPad pad;
-
     private Area shape;
 
-    public Pad(XPad pad) {
-        this.pad = pad;
+    private XPad xPad;
+
+    public Pad(XPad xPad) {
+        this.xPad = xPad;
     }
 
-    @Override
     public double getDrill() {
-        // TODO Auto-generated method stub
-        return 0;
+        return xPad.getDrill();
+    }
+
+    public Ellipse2D.Double getHole() {
+        return DrillHole.holeShape(getX(), getY(), getDrill());
     }
 
     public Shape getShape() {
@@ -63,14 +69,16 @@ public class Pad implements DrillHole {
 
     @Override
     public double getX() {
-        // TODO Auto-generated method stub
-        return 0;
+        return xPad.getX();
     }
 
     @Override
     public double getY() {
-        // TODO Auto-generated method stub
-        return 0;
+        return xPad.getY();
     }
 
+    @Override
+    public String toString() {
+        return "Pad(" + getX() + ", " + getY() + ", " + getDrill() + ")";
+    }
 }

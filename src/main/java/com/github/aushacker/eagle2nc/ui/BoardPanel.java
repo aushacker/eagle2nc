@@ -35,7 +35,6 @@ import javax.swing.JPanel;
 
 import com.github.aushacker.eagle2nc.model.Board;
 import com.github.aushacker.eagle2nc.model.Layer;
-import com.github.aushacker.eagle2nc.model.Via;
 
 /**
  * @author Stephen Davies
@@ -54,7 +53,7 @@ public class BoardPanel extends JPanel {
         colors.put("via", new Color(197, 180, 73));
     }
 
-    private Board board;
+    private transient Board board;
 
     private void drawAxes(Graphics2D g) {
         g.setColor(Color.CYAN);
@@ -63,10 +62,10 @@ public class BoardPanel extends JPanel {
 
         // X axis
         g.draw(new Line2D.Double(-200, 0, 200, 0));
-        
+
         // Y axis
         g.draw(new Line2D.Double(0, -200, 0, 200));
-        
+
         g.setStroke(savedStroke);
     }
 
@@ -78,7 +77,7 @@ public class BoardPanel extends JPanel {
         Iterator<Point2D.Double> points = board.getDimensions().iterator();
         Point2D.Double start = points.next();
         Point2D.Double current = start;
-        
+
         while (points.hasNext()) {
             Point2D.Double next = points.next();
             g.draw(new Line2D.Double(current, next));
@@ -86,7 +85,7 @@ public class BoardPanel extends JPanel {
         }
 
         g.draw(new Line2D.Double(current, start));
-        
+
         g.setStroke(savedStroke);
     }
 
@@ -95,8 +94,9 @@ public class BoardPanel extends JPanel {
         g.setStroke(new BasicStroke(0.0f));
 
         g.setColor(colors.get("pad"));
+
         //TODO
-//        board.getPads().forEach(p -> g.fill(p.getShape()));
+        //board.getPads().forEach(p -> g.fill(p.getShape()));
 
         g.setStroke(savedStroke);
     }
@@ -111,14 +111,14 @@ public class BoardPanel extends JPanel {
                 s.getTraces().stream()
                     .filter(t -> t.getLayer() == Layer.TOP)
                     .forEach(t -> g.fill(t.getShape())));
-            
+
         g.setColor(colors.get("bottom"));
         board.getSignals()
             .forEach(s ->
                 s.getTraces().stream()
                     .filter(t -> t.getLayer() == Layer.BOTTOM)
                     .forEach(t -> g.fill(t.getShape())));
-            
+
         g.setStroke(savedStroke);
     }
 
@@ -135,7 +135,7 @@ public class BoardPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
+
         Graphics2D g2 = (Graphics2D) g;
         AffineTransform previous = g2.getTransform();
 
@@ -145,8 +145,7 @@ public class BoardPanel extends JPanel {
         drawAxes(g2);
         drawDimensions(g2);
         drawTraces(g2);
-        //TODO
-        //drawPads(g2);
+        drawPads(g2);
         drawVias(g2);
 
         g2.setTransform(previous);

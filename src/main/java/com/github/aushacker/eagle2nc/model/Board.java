@@ -28,7 +28,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 
 import com.github.aushacker.eagle2nc.xml.Parser;
 import com.github.aushacker.eagle2nc.xml.XEagle;
@@ -59,12 +59,12 @@ public class Board {
 
     private Collection<Signal> signals;
 
-    public Board(File f) {
+    public Board(File f) throws ParseException {
         try {
             this.xmlModel = Parser.parse(f);
         }
         catch (JAXBException e) {
-            throw new RuntimeException(e);
+            throw new ParseException(e);
         }
     }
 
@@ -94,13 +94,13 @@ public class Board {
             holes = new ArrayList<>();
 
             // Get top-level holes
-            xmlModel.getHoles()
+            getXmlModel().getHoles()
                 .forEach(xHole -> holes.add(new Hole(xHole)));
 
             // Get vias
-            xmlModel.getVias()
+            getXmlModel().getVias()
                 .forEach(xVia -> holes.add(new Via(xVia)));
-            
+
             // Get pads
             // TODO
         }
@@ -126,6 +126,9 @@ public class Board {
         if (pads == null) {
             initialisePads();
         }
+            // TODO
+//            xmlModel.getLibraries()
+//                .forEach(xLib -> pads.add(xLib.getName(), new Library(xLib)));
         return pads;
     }
 
@@ -134,15 +137,15 @@ public class Board {
             signals = new ArrayList<>();
             xmlModel.getSignals().forEach(xSignal -> signals.add(new Signal(xSignal)));
         }
-        
+
         return signals;
     }
 
     public Collection<Via> getVias() {
         LinkedList<Via> result = new LinkedList<>();
-        
-        getSignals().forEach(s -> s.getVias().forEach(v -> result.add(v)));
-        
+
+        getSignals().forEach(s -> s.getVias().forEach(result::add));
+
         return result;
     }
 
@@ -194,10 +197,8 @@ public class Board {
         // Back to start
         //dimensions.add(new Point2D.Double(first.getX1(), first.getY1()));
     }
-    
+
     private void initialisePads() {
         pads = new ArrayList<>();
-        
-        
     }
 }
