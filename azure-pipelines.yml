@@ -7,7 +7,8 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+#  vmImage: 'ubuntu-latest'
+  name: 'MyOCP'
 
 steps:
 - task: Maven@3
